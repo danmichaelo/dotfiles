@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svnroot/vim-latex/!svn/ver/1105/trunk/vimfiles/ftplugin
+END
+tex_latexSuite.vim
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svnroot/vim-latex/!svn/ver/1051/trunk/vimfiles/ftplugin/tex_latexSuite.vim
+END
+bib_latexSuite.vim
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svnroot/vim-latex/!svn/ver/997/trunk/vimfiles/ftplugin/bib_latexSuite.vim
+END
