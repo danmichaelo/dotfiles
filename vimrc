@@ -13,6 +13,9 @@
 " the vimrc file is re-sourced.
 autocmd!
 
+" add paths of plug-ins installed under ~/.vim/bundle to runtime path
+call pathogen#runtime_append_all_bundles()
+
 " Debugging tab-behaviour in MacVim/Terminal Vim:
 "map <special> <Tab> :echo "Got Tab"<CR>
 "map <special> <C-Tab> :echo "Got Control-Tab"<CR>

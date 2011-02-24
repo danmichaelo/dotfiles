@@ -1,1 +1,0 @@
-../../sub/vim-latex/vimfiles/plugin/filebrowser.vim

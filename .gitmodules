@@ -1,12 +1,12 @@
-[submodule "sub/vim-latex"]
-	path = sub/vim-latex
-	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
-[submodule "sub/command-t"]
-	path = sub/command-t
+[submodule "inc/vim-pathogen"]
+	path = inc/vim-pathogen
+	url = git://github.com/tpope/vim-pathogen.git
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
 	url = git://github.com/wincent/Command-T.git
-[submodule "sub/nerdtree"]
-	path = sub/nerdtree
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
-[submodule "sub/nerdcommenter"]
-	path = sub/nerdcommenter
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
