@@ -4,3 +4,6 @@
 [submodule "sub/command-t"]
 	path = sub/command-t
 	url = git://github.com/wincent/Command-T.git
+[submodule "sub/nerdtree"]
+	path = sub/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
