@@ -1,3 +1,6 @@
 [submodule "sub/vim-latex"]
 	path = sub/vim-latex
 	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
+[submodule "sub/command-t"]
+	path = sub/command-t
+	url = git://github.com/wincent/Command-T.git
