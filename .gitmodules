@@ -13,3 +13,6 @@
 [submodule "vim/bundle/vim-latex"]
 	path = vim/bundle/vim-latex
 	url = git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex
+[submodule "vim/bundle/vimchant"]
+	path = vim/bundle/vimchant
+	url = git://github.com/vim-scripts/Vimchant.git
