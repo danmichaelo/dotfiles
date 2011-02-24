@@ -1,5 +1,8 @@
+*.swp
 vim/view/
 vim/.VimballRecord
 vim/.netrwhist
 vim/.session
+sub/command-t/ruby/ext.bundle
+sub/command-t/ruby/vim
 

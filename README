@@ -3,4 +3,9 @@ cd
 git clone git://github.com/danmichaelo/dotfiles.git
 ln -s dotfiles/vimrc .vimrc
 ln -s dotfiles/vim .vim
+git submodule init
+git submodule update
+cd vim/ruby/command-t
+ruby extconf.rb
+make
 
