@@ -13,8 +13,6 @@
 " the vimrc file is re-sourced.
 autocmd!
 
-" add paths of plug-ins installed under ~/.vim/bundle to runtime path
-call pathogen#runtime_append_all_bundles()
 
 " Debugging tab-behaviour in MacVim/Terminal Vim:
 "map <special> <Tab> :echo "Got Tab"<CR>
@@ -22,11 +20,15 @@ call pathogen#runtime_append_all_bundles()
 "map <special> <S-Tab> :echo "Got Shift-Tab"<CR>
 "map <special> <M-Tab> :echo "Got Alt-Tab"<CR>
 
+" Use pathogen:
+filetype plugin indent on " load filetype plugins, auto indent settings 
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags() " not necessary to run every single time...
+
 " Basics {{{
     set nocompatible            " should be the first option to be set
     set encoding=utf-8
     let mapleader = ","         " has to be set before any mappings!
-    filetype plugin indent on   " load filetype plugins, auto indent settings 
     if (!has("gui_running"))
         syntax on 
     endif
@@ -37,7 +39,7 @@ call pathogen#runtime_append_all_bundles()
     set wildchar=<Tab>          " e.g. :b <tab> to show buffers, :e <Tab> to show files
     set wildmode=full
     if (has("gui_running")) 
-      set lines=46 columns=80   " resize window
+      "set lines=46 columns=80   " resize window
     endif
     set nostartofline           " preserve cursor position on e.g. buffer change
 " }}}
@@ -145,9 +147,11 @@ call pathogen#runtime_append_all_bundles()
    
     " Remap 'go to file' to open in new tab
     " nnoremap gf <C-W>gf
-   
-    " shift-tab -> escape from insert mode
-    imap <S-tab> <esc>
+
+    " Alternatives to <esc>... I used to have <s-tab>, but that was taken by
+    " snipmate, so now I'm testing <s-space>.
+    "imap <S-tab> <esc>
+    imap <S-space> <esc>
    
     " space -> toggle fold in normal mode
     nnoremap <silent> <space> :exe 'silent! normal! za'.(foldlevel('.')?'':'l')<cr>
@@ -261,7 +265,7 @@ call pathogen#runtime_append_all_bundles()
     au BufNewFile,BufRead *.as set filetype=actionscript
 
     " Load the closetag plugin for HTML files:
-    au Filetype html,xml,xsl,php source ~/.vim/scripts/closetag.vim 
+    "au Filetype html,xml,xsl,php source ~/.vim/scripts/closetag.vim 
    
 "}}}
 
@@ -359,7 +363,8 @@ call pathogen#runtime_append_all_bundles()
         if has("unix") && match(system("uname"),'Darwin') != -1
             " Debug: echo "Mac!"
             let g:Tex_ViewRule_pdf = 'open -a Skim.app' 
-            let g:Tex_CompileRule_pdf = 'pdflatex -file-line-error -interaction nonstopmode $* -synctex=1'
+            "let g:Tex_CompileRule_pdf = 'pdflatex -file-line-error -interaction nonstopmode $* -synctex=1'
+            let g:Tex_CompileRule_pdf = 'latexmk -pdf -silent $*'
         else
             " Debug: echo "Not a Mac!"
         endif
