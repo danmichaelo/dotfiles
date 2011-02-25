@@ -1,0 +1,7 @@
+set show-all-if-ambiguous on
+set visible-stats on
+set completion-ignore-case on
+set page-completions off
+"\M-s": menu-complete
+"\e[A": history-search-backward
+"\e[B": history-search-forward
