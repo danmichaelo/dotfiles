@@ -4,6 +4,8 @@
 *.bak
 *.temp
 *.swp
+*.pyc
+tags
 vim/view/
 vim/.netrwhist
 vim/.session

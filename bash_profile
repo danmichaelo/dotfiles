@@ -1,3 +1,4 @@
+#!/bin/bash
 # vi:textwidth=0 foldmethod=marker ft=sh
 #
 # This file is read by interactive *login* shells (i.e., not all interactive

@@ -1,3 +1,4 @@
+#!/bin/bash
 # vi:ft=sh
 #
 # This file is sourced on startup by all *interactive* bash shells that are
