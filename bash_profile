@@ -83,28 +83,35 @@ prepend_path_if_exists()
 # Paths:
 
 
-test -d "~/bin" && append_path PATH "~/bin"
-test -d "~/scripts" && append_path PATH "~/scripts"
-test -d "~/synced/scripts" && append_path PATH "~/synced/scripts"
+test -d "$HOME/bin" && append_path PATH "$HOME/bin"
+test -d "$HOME/scripts" && append_path PATH "$HOME/scripts"
+test -d "$HOME/synced/scripts" && append_path PATH "$HOME/synced/scripts"
 test -d "/opt/local/lib/gromacs/bin" && 
 	append_path PATH "/opt/local/lib/gromacs/bin"
-test -d "~/Documents/Studier/Master/scripts" && 
-	append_path PATH ~/Documents/Studier/Master/scripts &&
-	append_path PYTHONPATH ~/Documents/Studier/Master/scripts
+test -d "$HOME/Documents/Studier/Master/scripts" && 
+	append_path PATH "$HOME/Documents/Studier/Master/scripts" &&
+	append_path PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+test -d "/opt/openmpi" &&
+    prepend_path PATH /opt/openmpi/bin &&
+    append_path DYLD_LIBRARY_PATH /opt/openmpi/lib
+    append_path LD_LIBRARY_PATH /opt/openmpi/lib
+    append_path MANPATH /opt/openmpi/share/man
 test -d "/opt/local/bin" &&
 	prepend_path PATH /opt/local/bin:/opt/local/sbin # MacPorts
 test -d "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin" &&
 	append_path PATH "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin"
+test -d "/opt/espresso-4.2.1/bin" &&
+    append_path PATH "/opt/espresso-4.2.1/bin"
 
 
 test -d "/usr/local/lib/python2.7/site-packages" &&
 	append_path PYTHONPATH "/usr/local/lib/python2.7/site-packages"
 test -d "~/includes/python2-7" &&
 	append_path PYTHONPATH "~/includes/python2-7"
-test -d "~/code/python" &&
-	append_path PYTHONPATH "~/code/python"
-test -d "~/code/python/ase" &&
-	append_path PYTHONPATH "~/code/python/ase"
+test -d "$HOME/code/python" &&
+	append_path PYTHONPATH "$HOME/code/python"
+test -d "$HOME/code/python/ase" &&
+	append_path PYTHONPATH "$HOME/code/python/ase"
 
 
 test -d "/usr/local/man" &&
@@ -113,8 +120,14 @@ test -d "/opt/local/share/man" &&
 	append_path MANPATH "/opt/local/share/man" # MacPorts
 
 
+
 # ----------------------------------------------------------------------------------------
 # Various environment variables:
+
+test -d /opt/intel &&
+    . /opt/intel/bin/compilervars.sh intel64 &&
+    append_path DYLD_LIBRARY_PATH /opt/intel/mkl/lib
+    append_path LD_LIBRARY_PATH /opt/intel/mkl/lib
 
 if [ "$UNAME" == Darwin ]; then
 

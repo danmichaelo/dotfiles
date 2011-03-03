@@ -6,6 +6,7 @@
 "     http://www.vi-improved.org/vimrc.php
 "     http://ciaranm.wordpress.com/2008/05/15/my-vimrc/
 "     http://amix.dk/blog/post/19486
+"     https://github.com/nvie/vimrc/blob/master/vimrc
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -13,6 +14,8 @@
 " the vimrc file is re-sourced.
 autocmd!
 
+" Should be the first option:
+set nocompatible
 
 " Debugging tab-behaviour in MacVim/Terminal Vim:
 "map <special> <Tab> :echo "Got Tab"<CR>
@@ -20,15 +23,19 @@ autocmd!
 "map <special> <S-Tab> :echo "Got Shift-Tab"<CR>
 "map <special> <M-Tab> :echo "Got Alt-Tab"<CR>
 
-" Use pathogen:
-filetype plugin indent on " load filetype plugins, auto indent settings 
+
+" Use pathogen to easily modify the runtime path to include all plugins under
+" the ~/.vim/bundle directory
+filetype off                    " force reloading *after* pathogen loaded
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " not necessary to run every single time...
+filetype plugin indent on       " enable detection, plugins and indenting in one step
+
+" Change mapleader (this has to be done before setting any mappings!)
+let mapleader = "," 
 
 " Basics {{{
-    set nocompatible            " should be the first option to be set
     set encoding=utf-8
-    let mapleader = ","         " has to be set before any mappings!
     if (!has("gui_running"))
         syntax on 
     endif
@@ -146,12 +153,26 @@ call pathogen#helptags() " not necessary to run every single time...
     " < See h:map-modes > "
    
     " Remap 'go to file' to open in new tab
-    " nnoremap gf <C-W>gf
+    " nnoremap gf <C-W>g
+    "
+    " The <Esc> key... <S-Tab> works quite well, but collides
+    " with SnipMate, which I would prefer to avoid modifying.
+    " <C-Tab>, <M-Tab> doesn't work in all terminals. Neither
+    " does <S-Space>. Well, there is <Caps Lock>, the large and
+    " tempting key just laying there unused... too bad it's not 
+    " mappable in Vim...
+    " Ideally, I would like to avoid computer-specific solutions, since
+    " that makes life hard when using different computers, but since
+    " 99 % of my Vim usage is on my own machine (or through SSH), 
+    " I decided to go for a system-wide remapping of <Caps Lock> to 
+    " <Esc>  using the PCKeyboardHack pref pane. Doing the same on
+    " linux terminals is simple with xmodmap, and on windows it can be
+    " done with regedit.
 
     " Alternatives to <esc>... I used to have <s-tab>, but that was taken by
     " snipmate, so now I'm testing <s-space>.
     "imap <S-tab> <esc>
-    imap <S-space> <esc>
+    "imap <S-space> <esc>
    
     " space -> toggle fold in normal mode
     nnoremap <silent> <space> :exe 'silent! normal! za'.(foldlevel('.')?'':'l')<cr>
