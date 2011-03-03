@@ -21,9 +21,9 @@ umask 027
 
 # LC_COLLATE: Influences sorting order.
 
-UNAME="$(uname)"
-ME="$(whoami)"
-HOME=~
+export UNAME="$(uname)"
+export ME="$(whoami)"
+export HOME=~
 echo -e "$ME @ $(uname -npsr) \c"
 
 # Source programmable bash completion for completion of hostnames, etc.:
@@ -161,80 +161,6 @@ fi
 # Set preferred editor:
 export EDITOR=vim
 
-# ----------------------------------------------------------------------------------------
-# Shell settings
-
-HISTSIZE=9999
-unset HISTFILESIZE
-HISTCONTROL=ignoreboth 
-
-# Makes bash attempts to save all lines of a multiple-line 
-# command in the same history entry:
-command_oriented_history=1
-
-# Filenames ending with these are ignored while tab completion in bash
-export FIGNORE=.o:~:.BAK:.class:.swp
-
-# The noclobber option prevents you from overwriting existing files with 
-# the > operator. You can use >! to force the file to be written.
-set -o noclobber
-
-# From: http://www.ukuug.org/events/linux2003/papers/bash_tips/
-shopt -s histappend			        # append rather than overwrite the history
-shopt -s cdspell                    # Correct minor spelling errors on cd-ing
-shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH for 
-                                    # possible completions when completion is 
-                                    # attempted on an empty line
-
-
-
-# Interaction prompt:
-# 
-# export PS1="\w\$ "   		# Set default interaction prompt
-#
-# \[    This sequence should appear before a sequence of characters 
-#       that don't move the cursor (like color escape sequences). 
-#       This allows bash to calculate word wrapping correctly.
-# \]    This sequence should appear after a sequence of non-printing characters.
-# 
-# \e[30m\]  Color: Black - regular
-# \t        the current time in 24-hour HH:MM:SS format
-# \[\e[m\]  Reset color 
-# \w        the current working directory
-#
-
-# Bash shell executes the content of the PROMPT_COMMAND just before displaying
-# the PS1 variable
-function setXtermTitle {
-    RET=$?
-	history -a			# Append to history
-	if [ "${TERM}" = "xterm" -o "${TERM}" = "xterm-color" ]; then 
-		if [ -n "${XTITLE}" ]; then 
-			echo -ne "\033]0;${XTITLE}\007"
-		else 
-			WDIR=`echo ${PWD} | sed -e "s@${HOME}@\~@"`
-			echo -ne "\033]0;${USER}@${SHOSTNAME}:${WDIR}\007" 
-		fi
-	fi
-	#echo -n "[$(date +%k:%M)]"
-    RED='\e[0;31m'
-    GREEN='\e[0;32m'
-
-    #return value visualisation
-    #RET_SMILEY=`if [[ $RET = 0 ]]; then echo -ne "\[$GREEN\];)"; else echo -ne "\[$RED\];("; fi;`
-    #
-    #RET_VALUE='$(echo $RET)' #Ret value not colorized - you can modify it.
-    
-    if [[ $RET = 0 ]]; then
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \W\$ "
-    else
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W\$ "
-    fi
-    PS1="$IPROMPT"
-}
-
-export PROMPT_COMMAND='setXtermTitle'
-export PS2=" > "			# Set continuation interactive prompt
 
 
 
@@ -246,4 +172,4 @@ export PS2=" > "			# Set continuation interactive prompt
 #}
 
 #echo " done"
-echo
+#echo

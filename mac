@@ -51,9 +51,7 @@ export RSPTHOME=/opt/rspt629
 export GPAW_SETUP_PATH=/usr/share/gpaw-setups-0.5.3574
 
 # Computational Crystallography Toolbox (CCTBX)
-echo -e ".\c"
 #source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
-echo -e ".\c"
 export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
 
 test -d /opt/intel &&
