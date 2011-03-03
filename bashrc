@@ -79,17 +79,18 @@ a resource='source ~/.bashrc' # re-source, not resource :)
 a pl="ps -ef | grep $ME"
 
 # Dir listing
-a lsd='ls -F | grep /'      # List dirs only
-a lsl='ls -F | grep @'      # List symbolic links only
-a lsx='ls -F -s | grep \*'  # List executables only
-a ll='ls -ltrh'
-a la='ls -A'
-# -F:  show directories with a trailing '/', executable files with a trailing '*'
 if [ "$(ls --color 2>/dev/null)" != "" ]; then
-	alias ls='ls -F --color'  # GNU ls
+    export LS_OPTIONS="--color=auto $LS_OPTIONS" # GNU ls
 else
-	alias ls='ls -FG'	# FreeBSD ls
+    export LS_OPTIONS="-G $LS_OPTIONS" # FreeBSD ls
 fi
+LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
+a ls="ls $LS_OPTIONS"
+a lsd="ls  | grep /"      # List dirs only
+a lsl="ls -F | grep @"      # List symbolic links only
+a lsx="ls -F -s | grep \*"  # List executables only
+a ll="ls -ltrh"
+a la="ls -A"
 
 # Spring cleaning
 a vaspclean="rm slurm-* CHG CONTCAR EIGENVAL OSZICAR PCDAT XDATCAR vasprun.xml CHGCAR DOSCAR IBZKPT OUTCAR WAVECAR PROCAR  WAVEDER"

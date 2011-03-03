@@ -1,1 +1,17 @@
-synced/Xdefaults
+!*******************XDEFAULT CONFIG*****************
+!*
+!* Setup for all X11 apps
+!* Inspiration: http://www.seas.upenn.edu/~eecad/cadence/.Xdefaults
+!*
+!* Use the command "xrdb < $HOME/.Xdefaults" to reread in changes to
+!* .Xdefaults
+!*
+Xft.antialias: true
+xterm*colorMode: on
+XTerm.VT100*color255: on
+.BorderWidth: 8
+xterm*cursorColor: LimeGreen
+xterm*pointerColor: red
+xterm*foreground: LightGoldenrod1 
+xterm*background: grey20 
+XTerm*.LoginShell: true
