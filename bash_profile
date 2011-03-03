@@ -9,7 +9,15 @@
 #   Quantum Espresso assume that the local language is set to the standard, 
 #   i.e. "C":
 #export LANG=no
-#export LC_ALL=C
+export LC_ALL=C
+
+# The umask shell command changes the umask of the shell process, and all
+# processes subsequently started from the shell then inherit the new umask.
+# The effect is lost when these processes terminate, e.g. when the user logs
+# out. To set an umask permanently, the appropriate umask command can be added
+# to a login script.
+# default is umask 022. To remove read permission for others, we can set
+umask 027
 
 # LC_CTYPE: Character classification and case conversion
 # We set it to UTF-8 to, among other things, show special characters
@@ -82,10 +90,15 @@ prepend_path_if_exists()
 # ----------------------------------------------------------------------------------------
 # Paths:
 
-
+# General
 test -d "$HOME/bin" && append_path PATH "$HOME/bin"
 test -d "$HOME/scripts" && append_path PATH "$HOME/scripts"
 test -d "$HOME/synced/scripts" && append_path PATH "$HOME/synced/scripts"
+
+# NOTUR:
+test -d "$HOME/opt/bin" && append_path PATH "$HOME/opt/bin"
+
+# Mac:
 test -d "/opt/local/lib/gromacs/bin" && 
 	append_path PATH "/opt/local/lib/gromacs/bin"
 test -d "$HOME/Documents/Studier/Master/scripts" && 
@@ -207,13 +220,15 @@ fi
 #export SHOSTNAME=`hostname -s`
 
 if [ -f $HOME/.hostname ]; then
-	export SHOSTNAME='mac'
+	export SHOSTNAME=`cat .hostname`
 else
 	export SHOSTNAME=`uname`
 fi
 if [ -f ~/synced/bash_profile ]; then
     . ~/synced/bash_profile
 fi
+
+test -f .$SHOSTNAME && . .$SHOSTNAME
 
 ###############################################################################
 # Login shells should grab aliases from .bashrc 
