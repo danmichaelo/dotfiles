@@ -114,30 +114,3 @@ a 18bg='ssh bergen@login.domeneshop.no'
 exists octave && 
     a octave="octave -q"    # quiet startup
 
-if [ "$UNAME" == Darwin ]; then
-	# echo "on a mac, hopefully a sane one"
-    # perhaps a more sane test would be smart :)
-	alias mysql=mysql5
-	alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
-	alias vlc=/Applications/VLC.app/Contents/MacOS/VLC
-	alias pfo="open -a Path\ Finder"
-	alias math=/Applications/Mathematica.app/Contents/MacOS/MathKernel
-	alias bb=bbedit
-	alias mp=~/bin/mpost-pdf.pl
-	alias skim="open -a Skim.app"
-
-	# Snip for Mathematica batch execution.
-	# Usage: mma test.m
-	mma () { 
-		/Applications/Mathematica.app/Contents/MacOS/MathKernel -noprompt -run
-		"<<$1" ; 
-	}
-	
-	# Snip for showing man pages in Preview.
-	# Usage: manp <cmd>
-	manp() {
-		man -t "${1}" | open -f -a Preview
-	}
-
-fi
-
