@@ -1,0 +1,9 @@
+#!/bin/sh
+echo " { stallo } "
+
+alias sq="showq -u dmheggo"
+
+HOME=~
+prepend_path PATH "$HOME/opt/vim-7.3/bin"
+prepend_path PATH "$HOME/opt/ctags-5.8/bin"
+append_path PYTHONPATH "$HOME/python"

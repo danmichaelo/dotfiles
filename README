@@ -19,7 +19,7 @@ ln -s dotfiles/xinitrc .xinitrc
 ln -s dotfiles/Xdefaults .Xdefaults
 ln -s dotfiles/dir_colors .dir_colors
 
-# Computer-specific things ("mac", "titan", ...")
+# Computer-specific things ("mac", "titan", "stallo", ...)
 COMP="mac"
 cat "$COMP" > .hostname
 ln -s dotfiles/$COMP .$COMP
