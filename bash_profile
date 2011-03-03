@@ -38,6 +38,7 @@ echo -e "$ME @ $(uname -npsr) \c"
 test -f /opt/local/etc/bash_completion &&
     . /opt/local/etc/bash_completion
 
+
 ############################################################################
 # Path modification functions adapted from Fink's init.sh {{{
 
@@ -90,8 +91,8 @@ prepend_path_if_exists()
 # ----------------------------------------------------------------------------------------
 # Paths:
 
-# General
-test -d "$HOME/bin" && append_path PATH "$HOME/bin"
+
+test -d "$HOME/bin" && prepend_path PATH "$HOME/bin"
 test -d "$HOME/scripts" && append_path PATH "$HOME/scripts"
 test -d "$HOME/synced/scripts" && append_path PATH "$HOME/synced/scripts"
 
@@ -230,6 +231,12 @@ fi
 
 test -f .$SHOSTNAME && . .$SHOSTNAME
 
+if [ "$TERM" != "dumb" ]; then
+    #dircolors
+    eval `dircolors ~/.dir_colors`
+    #eval `dircolors`
+fi
+
 ###############################################################################
 # Login shells should grab aliases from .bashrc 
 ###############################################################################
@@ -254,6 +261,7 @@ fi
 # http://www.ibm.com/developerworks/linux/library/l-tip-prompt/
 #
 # 
+
 
 # Set preferred editor:
 export EDITOR=vim
