@@ -4,7 +4,7 @@ echo "{ .titan }"
 OLEM=~olem
 test -d "$OLEM/bin" && append_path PATH "$OLEM/bin"
 
-alias sq='squeue -u dmheggo -o "%.7i %.8j %.3t %.10M %.10l %.6D %.6C %R"'
+alias sq="squeue -u $USER -o '%.7i %.8j %.3t %.10M %.10l %.6D %.6C %R'"
 
 # Sync
 #cd synced
