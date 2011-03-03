@@ -1,0 +1,85 @@
+#/bin/sh
+################################################################################
+# Mac-specific things
+################################################################################
+echo "{ .mac }"
+
+# LC_CTYPE: Character classification and case conversion
+# We set it to UTF-8 to, among other things, show special characters
+# in the terminal. Unfortunately some badly designed code requires it to be 
+# set to "C". Therefore, if you run into mysterious errors, try setting 
+# it to "C".
+# Run 'locale' to check the current value.
+export LC_CTYPE=en_GB.UTF-8
+
+# Mac:
+test -d "/opt/local/lib/gromacs/bin" && 
+	append_path PATH "/opt/local/lib/gromacs/bin"
+test -d "$HOME/Documents/Studier/Master/scripts" && 
+	append_path PATH "$HOME/Documents/Studier/Master/scripts" &&
+	append_path PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+test -d "/opt/openmpi" &&
+    prepend_path PATH /opt/openmpi/bin &&
+    append_path DYLD_LIBRARY_PATH /opt/openmpi/lib
+    append_path LD_LIBRARY_PATH /opt/openmpi/lib
+    append_path MANPATH /opt/openmpi/share/man
+test -d "/opt/local/bin" &&
+	prepend_path PATH /opt/local/bin:/opt/local/sbin # MacPorts
+test -d "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin" &&
+	append_path PATH "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin"
+test -d "/opt/espresso-4.2.1/bin" &&
+    append_path PATH "/opt/espresso-4.2.1/bin"
+
+
+test -d "/usr/local/lib/python2.7/site-packages" &&
+	append_path PYTHONPATH "/usr/local/lib/python2.7/site-packages"
+test -d "~/includes/python2-7" &&
+	append_path PYTHONPATH "~/includes/python2-7"
+test -d "$HOME/code/python" &&
+	append_path PYTHONPATH "$HOME/code/python"
+test -d "$HOME/code/python/ase" &&
+	append_path PYTHONPATH "$HOME/code/python/ase"
+
+
+test -d "/usr/local/man" &&
+	append_path MANPATH "/usr/local/man"
+test -d "/opt/local/share/man" &&
+	append_path MANPATH "/opt/local/share/man" # MacPorts
+
+export DROPBOX=$HOME/Dropbox
+export RSPTHOME=/opt/rspt629
+export GPAW_SETUP_PATH=/usr/share/gpaw-setups-0.5.3574
+
+# Computational Crystallography Toolbox (CCTBX)
+echo -e ".\c"
+#source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
+echo -e ".\c"
+export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
+
+test -d /opt/intel &&
+    . /opt/intel/bin/compilervars.sh intel64 &&
+    append_path DYLD_LIBRARY_PATH /opt/intel/mkl/lib
+    append_path LD_LIBRARY_PATH /opt/intel/mkl/lib
+
+# Platon env:
+PWTDIR=~/tmp/
+
+# RIETAN VENUS env:
+RIETAN=/Applications/RIETAN_VENUS
+ORFFE=$RIETAN
+LST2CIF=$RIETAN
+PRIMA=/Applications/RIETAN_VENUS/
+ALBA=$PRIMA
+export RIETAN ORFFE LST2CIF PRIMA ALBA
+
+# BC: Quiet startup, load mathlib and extension for familiar function names:
+export BC_ENV_ARGS="-q -l $HOME/.bc/extensions.bc $HOME/.bc/bcrc"
+
+# QT env:
+export QTDIR=/opt/local/lib/qt3 # used by qtmake
+
+# XCrysDen env:
+XCRYSDEN_TOPDIR=/opt/XCrySDen-1.5.21-bin-semishared
+XCRYSDEN_SCRATCH=/Users/danmichael/xcrys_tmp
+export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
+#PATH="$XCRYSDEN_TOPDIR:$PATH:$XCRYSDEN_TOPDIR/scripts:$XCRYSDEN_TOPDIR/util"

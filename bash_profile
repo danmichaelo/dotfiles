@@ -19,14 +19,6 @@ export LC_ALL=C
 # default is umask 022. To remove read permission for others, we can set
 umask 027
 
-# LC_CTYPE: Character classification and case conversion
-# We set it to UTF-8 to, among other things, show special characters
-# in the terminal. Unfortunately some badly designed code requires it to be 
-# set to "C". Therefore, if you run into mysterious errors, try setting 
-# it to "C".
-# Run 'locale' to check the current value.
-export LC_CTYPE=en_GB.UTF-8
-
 # LC_COLLATE: Influences sorting order.
 
 UNAME="$(uname)"
@@ -38,8 +30,6 @@ echo -e "$ME @ $(uname -npsr) \c"
 test -f /opt/local/etc/bash_completion &&
     . /opt/local/etc/bash_completion
 
-
-############################################################################
 # Path modification functions adapted from Fink's init.sh {{{
 
 # List path entries of PATH or environment variable <var>.
@@ -84,106 +74,13 @@ prepend_path_if_exists()
 # }}} 
 
 
-############################################################################
-# Set up environment {{{
-
-
 # ----------------------------------------------------------------------------------------
 # Paths:
-
 
 test -d "$HOME/bin" && prepend_path PATH "$HOME/bin"
 test -d "$HOME/scripts" && append_path PATH "$HOME/scripts"
 test -d "$HOME/synced/scripts" && append_path PATH "$HOME/synced/scripts"
-
-# NOTUR:
 test -d "$HOME/opt/bin" && append_path PATH "$HOME/opt/bin"
-
-# Mac:
-test -d "/opt/local/lib/gromacs/bin" && 
-	append_path PATH "/opt/local/lib/gromacs/bin"
-test -d "$HOME/Documents/Studier/Master/scripts" && 
-	append_path PATH "$HOME/Documents/Studier/Master/scripts" &&
-	append_path PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
-test -d "/opt/openmpi" &&
-    prepend_path PATH /opt/openmpi/bin &&
-    append_path DYLD_LIBRARY_PATH /opt/openmpi/lib
-    append_path LD_LIBRARY_PATH /opt/openmpi/lib
-    append_path MANPATH /opt/openmpi/share/man
-test -d "/opt/local/bin" &&
-	prepend_path PATH /opt/local/bin:/opt/local/sbin # MacPorts
-test -d "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin" &&
-	append_path PATH "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin"
-test -d "/opt/espresso-4.2.1/bin" &&
-    append_path PATH "/opt/espresso-4.2.1/bin"
-
-
-test -d "/usr/local/lib/python2.7/site-packages" &&
-	append_path PYTHONPATH "/usr/local/lib/python2.7/site-packages"
-test -d "~/includes/python2-7" &&
-	append_path PYTHONPATH "~/includes/python2-7"
-test -d "$HOME/code/python" &&
-	append_path PYTHONPATH "$HOME/code/python"
-test -d "$HOME/code/python/ase" &&
-	append_path PYTHONPATH "$HOME/code/python/ase"
-
-
-test -d "/usr/local/man" &&
-	append_path MANPATH "/usr/local/man"
-test -d "/opt/local/share/man" &&
-	append_path MANPATH "/opt/local/share/man" # MacPorts
-
-
-
-# ----------------------------------------------------------------------------------------
-# Various environment variables:
-
-test -d /opt/intel &&
-    . /opt/intel/bin/compilervars.sh intel64 &&
-    append_path DYLD_LIBRARY_PATH /opt/intel/mkl/lib
-    append_path LD_LIBRARY_PATH /opt/intel/mkl/lib
-
-if [ "$UNAME" == Darwin ]; then
-
-	export DROPBOX=$HOME/Dropbox
-	export RSPTHOME=/opt/rspt629
-	export GPAW_SETUP_PATH=/usr/share/gpaw-setups-0.5.3574
-	
-	# Computational Crystallography Toolbox (CCTBX)
-	echo -e ".\c"
-	#source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
-	echo -e ".\c"
-	export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
-	
-	
-	# Platon env:
-	PWTDIR=~/tmp/
-	
-	# RIETAN VENUS env:
-	RIETAN=/Applications/RIETAN_VENUS
-	ORFFE=$RIETAN
-	LST2CIF=$RIETAN
-	PRIMA=/Applications/RIETAN_VENUS/
-	ALBA=$PRIMA
-	export RIETAN ORFFE LST2CIF PRIMA ALBA
-	
-	# BC: Quiet startup, load mathlib and extension for familiar function names:
-	export BC_ENV_ARGS="-q -l $HOME/.bc/extensions.bc $HOME/.bc/bcrc"
-	
-	# QT env:
-	export QTDIR=/opt/local/lib/qt3 # used by qtmake
-	
-	# XCrysDen env:
-	XCRYSDEN_TOPDIR=/opt/XCrySDen-1.5.21-bin-semishared
-	XCRYSDEN_SCRATCH=/Users/danmichael/xcrys_tmp
-	export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
-	#PATH="$XCRYSDEN_TOPDIR:$PATH:$XCRYSDEN_TOPDIR/scripts:$XCRYSDEN_TOPDIR/util"
-
-fi
-
-# }}}
-
-echo -e " \c"
 
 ###############################################################################
 # Build options {{{
@@ -225,10 +122,8 @@ if [ -f $HOME/.hostname ]; then
 else
 	export SHOSTNAME=`uname`
 fi
-if [ -f ~/synced/bash_profile ]; then
-    . ~/synced/bash_profile
-fi
 
+# Load machine-specific things
 test -f .$SHOSTNAME && . .$SHOSTNAME
 
 if [ "$TERM" != "dumb" ]; then
