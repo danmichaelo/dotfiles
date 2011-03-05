@@ -116,15 +116,14 @@ fi
 
 # Define window title:
 #export SHOSTNAME=`hostname -s`
-
 if [ -f $HOME/.hostname ]; then
-	export SHOSTNAME=`cat .hostname`
+	export SHOSTNAME=`cat $HOME/.hostname`
 else
 	export SHOSTNAME=`uname`
 fi
 
 # Load machine-specific things
-test -f .$SHOSTNAME && . .$SHOSTNAME
+test -f $HOME/.$SHOSTNAME && . $HOME/.$SHOSTNAME
 
 if [ "$TERM" != "dumb" ]; then
     #dircolors
@@ -135,8 +134,8 @@ fi
 ###############################################################################
 # Login shells should grab aliases from .bashrc 
 ###############################################################################
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+if [ -f $HOME/.bashrc ]; then
+    . $HOME/.bashrc
 fi
 
 #CCTBX:

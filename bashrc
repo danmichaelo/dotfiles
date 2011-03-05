@@ -33,11 +33,6 @@ case "$0" in
     *)  unset LOGIN ;;
 esac
 
-if [[ $- != *i* ]] ; then
-    # Shell is non-interactive (something like scp). We should exit now!
-    return
-fi
-
 test -z "$INTERACTIVE" && {
     # Shell is non-interactive (something like scp). We should exit now!
 	return
@@ -77,6 +72,10 @@ a mv='mv -i'                # prompt before overwriting an existing file
 a cp='cp -i'                # prompt before overwriting an existing file
 a resource='source ~/.bashrc' # re-source, not resource :)
 a pl="ps -ef | grep $ME"
+a ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
+a localip="ipconfig getifaddr en1"
+a httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+a grep='GREP_COLOR="1;32" LANG=C grep --color=auto'
 
 # Dir listing
 if [ "$(ls --color 2>/dev/null)" != "" ]; then
@@ -139,53 +138,7 @@ shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH f
                                     # possible completions when completion is 
                                     # attempted on an empty line
 
-
-
-# Interaction prompt:
-# 
-# export PS1="\w\$ "   		# Set default interaction prompt
-#
-# \[    This sequence should appear before a sequence of characters 
-#       that don't move the cursor (like color escape sequences). 
-#       This allows bash to calculate word wrapping correctly.
-# \]    This sequence should appear after a sequence of non-printing characters.
-# 
-# \e[30m\]  Color: Black - regular
-# \t        the current time in 24-hour HH:MM:SS format
-# \[\e[m\]  Reset color 
-# \w        the current working directory
-#
-
-# Bash shell executes the content of the PROMPT_COMMAND just before displaying
-# the PS1 variable
-function setXtermTitle {
-    RET=$?
-	history -a			# Append to history
-	if [ "${TERM}" = "xterm" -o "${TERM}" = "xterm-color" ]; then 
-		if [ -n "${XTITLE}" ]; then 
-			echo -ne "\033]0;${XTITLE}\007"
-		else 
-			WDIR=`echo ${PWD} | sed -e "s@${HOME}@\~@"`
-			echo -ne "\033]0;${USER}@${SHOSTNAME}:${WDIR}\007" 
-		fi
-	fi
-	#echo -n "[$(date +%k:%M)]"
-    RED='\e[0;31m'
-    GREEN='\e[0;32m'
-
-    #return value visualisation
-    #RET_SMILEY=`if [[ $RET = 0 ]]; then echo -ne "\[$GREEN\];)"; else echo -ne "\[$RED\];("; fi;`
-    #
-    #RET_VALUE='$(echo $RET)' #Ret value not colorized - you can modify it.
-    
-    if [[ $RET = 0 ]]; then
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \W\$ "
-    else
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W\$ "
-    fi
-    PS1="$IPROMPT"
-}
-
-export PROMPT_COMMAND='setXtermTitle'
-export PS2=" > "			# Set continuation interactive prompt
+if [ -f ~/.bash_prompt ]; then
+    source ~/.bash_prompt
+fi
 

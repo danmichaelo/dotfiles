@@ -87,6 +87,7 @@ let mapleader = ","
     " set ruler                 " show the cursor position all the time
     set laststatus=2            " show status line even if only one window
     "set scroll=10               " scroll only 10 lines at a time with C-d and C-u
+    set lcs=tab:>-,eol:<,nbsp:% " set hidden characters to show upon :set list
 " }}}
 
 " Colors, ... {{{

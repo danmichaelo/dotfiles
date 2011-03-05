@@ -1,0 +1,53 @@
+% Created: `strftime("%c")`
+\documentclass[twoside=false]{scrartcl} % paper=a4 is default
+\KOMAoptions{parskip=half}
+\usepackage[T1]{fontenc}                % contains correct guillements
+\usepackage[utf8]{inputenc}             % For typing int. char. directly
+\usepackage{microtype}                  % pdfTeX micro-typographic tuning
+\usepackage[greek,english]{babel}       % Localization            
+\usepackage[parfill]{parskip}           % Begin paragraphs with empty line    
+\usepackage[intlimits]{amsmath}         % AMS Math support
+\usepackage{amsthm,amssymb}             % 
+\usepackage{empheq,mathtools}           %
+\usepackage{dsfont}                     %
+\usepackage{mathrsfs}                   % Math script font => \mathscr 
+\usepackage{siunitx}                    % should load after amssymb
+\usepackage{fancybox}                   % should load after amssymb    
+\usepackage[usenames,dvipsnames]{color} % gives us 66 predefined colors
+\usepackage{graphicx}                   % the eXtended graphics package
+\DeclareGraphicsExtensions{.pdf,.png,.jpg} % default extension(s)
+
+% Floats:
+\usepackage{caption}
+\DeclareCaptionLabelFormat{figure-bold}{\textbf{#1\ #2}} 
+\captionsetup[figure]{labelformat=figure-bold,labelsep=colon,font=small} 
+\DeclareCaptionLabelFormat{table-bold}{\textbf{#1\ #2}} 
+\captionsetup[table]{labelformat=table-bold,labelsep=colon,font=small} 
+\usepackage{subfigure}                  % Load after caption !
+%\usepackage{threeparttable}            %
+\usepackage{float}                      % [H] option for floats: HERE!
+\setlength{\extrarowheight}{1pt}        % add some extra space in tables: 
+\usepackage{booktabs}                   % production quality tables
+
+% Bold vectors:
+\renewcommand{\vec}[1]{\boldsymbol{\mathrm{#1}}}
+
+%\titlehead{Titlehead} \subject{xxxx}
+\title{${1:Title}} 
+\author{Dan Michael O. Heggø} 
+%\date{`strftime("%B %e, %Y")`}
+%\thanks{foot} \publishers{Pub}    
+
+% Finally, load hyperref (should load at the very end):
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+bookmarksopen=true,bookmarksopenlevel=2,pdfusetitle=true,
+pdftitle=$1
+pdfdisplaydoctitle=true,unicode}
+
+\begin{document}
+    \maketitle
+
+    ${2}
+
+\end{document}
