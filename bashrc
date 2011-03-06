@@ -63,6 +63,8 @@ ff() {
 # Aliases
 alias a=alias
 
+a rsyncssh='rsync -vr --exclude=*.swp --compress -P --partial_dir=.rsync-partial --delay-updates -e ssh'
+
 a fme="finger | head -n 1; finger | grep $ME"
 a v=vim
 a m=less
