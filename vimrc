@@ -1,7 +1,9 @@
 " vi: foldmethod=marker
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .vimrc configuration file
-" Author: Dan Michael O. Heggø <dmheggo AT student.matnat.uio.no>
+" https://github.com/danmichaelo/dotfiles/blob/master/vimrc
+" author: dmheggo @ student.matnat.uio.no
+"
 " Some sources of inspiration: 
 "     http://www.vi-improved.org/vimrc.php
 "     http://ciaranm.wordpress.com/2008/05/15/my-vimrc/
@@ -10,14 +12,14 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Remove ALL auto-commands.  This avoids having the autocommands twice if
+" Remove all auto-commands to avoid having the autocommands twice if
 " the vimrc file is re-sourced.
 autocmd!
 
-" Should be the first option:
+" Should be set first
 set nocompatible
 
-" Debugging tab-behaviour in MacVim/Terminal Vim:
+" Testing tab-behaviour in MacVim/Terminal Vim (not all keys are picked up...)
 "map <special> <Tab> :echo "Got Tab"<CR>
 "map <special> <C-Tab> :echo "Got Control-Tab"<CR>
 "map <special> <S-Tab> :echo "Got Shift-Tab"<CR>
