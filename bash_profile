@@ -1,25 +1,16 @@
 #!/bin/bash
 # vi:textwidth=0 foldmethod=marker ft=sh
-#
-# This file is read by interactive *login* shells (i.e., not all interactive
-# shells), and by non-interactive shells started with the --login option.
-#
-# Basics
-#   export LC_ALL=no_NO.UTF-8
-#   Quantum Espresso assume that the local language is set to the standard, 
-#   i.e. "C":
+# Startup file for interactive bash login shells
+
+# LANG 
+# export LC_ALL=no_NO.UTF-8
 #export LANG=no
-export LC_ALL=C
-
-# The umask shell command changes the umask of the shell process, and all
-# processes subsequently started from the shell then inherit the new umask.
-# The effect is lost when these processes terminate, e.g. when the user logs
-# out. To set an umask permanently, the appropriate umask command can be added
-# to a login script.
-# default is umask 022. To remove read permission for others, we can set
-umask 027
-
+export LC_ALL=C     # some programs only work with LC_ALL=C
 # LC_COLLATE: Influences sorting order.
+
+# UMASK: 1=x, 2=w, 4=r (rwx=2+4+1=7)
+# umask 022   # turn off w for g,o (default)
+umask 027     # turn off w for g, rwx for o
 
 export UNAME="$(uname)"
 export ME="$(whoami)"
@@ -28,59 +19,18 @@ echo -e "$ME @ $(uname -npsr) \c"
 
 # Source programmable bash completion for completion of hostnames, etc.:
 test -f /opt/local/etc/bash_completion &&
-    . /opt/local/etc/bash_completion
+    source /opt/local/etc/bash_completion
 
-# Path modification functions adapted from Fink's init.sh {{{
-
-# List path entries of PATH or environment variable <var>.
-pls () { eval echo \$${1:-PATH} |tr : '\n'; }
-
-# add to end of path
-append_path()
-{
-    # First check if the PATH (1) is empty:
-    # if [ -n "$DYLD_LIBRARY_PATH" ]; then
-    if eval test -z \"\$$1\"; then
-        eval "export $1=\"$2\""
-    fi
-    
-    if ! eval test -z "\"\${$1##*:$2:*}\"" -o -z "\"\${$1%%*:$2}\"" -o -z "\"\${$1##$2:*}\"" -o -z "\"\${$1##$2}\""
-    then
-        eval "export $1=\"\$$1:$2\""
-    fi
-}
-
-# add to front of path
-prepend_path()
-{
-    if eval test -z \"\$$1\"; then
-        eval "export $1=\"$2\""
-    fi
-
-    if ! eval test -z "\"\${$1##*:$2:*}\"" -o -z "\"\${$1%%*:$2}\"" -o -z "\"\${$1##$2:*}\"" -o -z "\"\${$1##$2}\""
-    then
-        eval "export $1=\"$2:\$$1\""
-    fi
-}
-
-prepend_path_if_exists()
-{
-    if [ -d "$2" ]
-    then
-        prepend_path $1 $2
-    fi
-}
-
-# }}} 
-
+source .bash_functions      # Path functions
 
 # ----------------------------------------------------------------------------------------
 # Paths:
 
-test -d "$HOME/bin" && prepend_path PATH "$HOME/bin"
-test -d "$HOME/scripts" && append_path PATH "$HOME/scripts"
-test -d "$HOME/synced/scripts" && append_path PATH "$HOME/synced/scripts"
-test -d "$HOME/opt/bin" && append_path PATH "$HOME/opt/bin"
+prepend_path $HOME/bin
+append_path $HOME/scripts
+append_path $HOME/synced/scripts
+append_path $HOME/opt/bin
+
 
 ###############################################################################
 # Build options {{{

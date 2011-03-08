@@ -1,4 +1,5 @@
-#/bin/sh
+#!/bin/sh
+
 ################################################################################
 # Mac-specific things
 ################################################################################
@@ -12,39 +13,31 @@ echo "{ .mac }"
 # Run 'locale' to check the current value.
 export LC_CTYPE=en_GB.UTF-8
 
-# Mac:
-test -d "/opt/local/lib/gromacs/bin" && 
-	append_path PATH "/opt/local/lib/gromacs/bin"
-test -d "$HOME/Documents/Studier/Master/scripts" && 
-	append_path PATH "$HOME/Documents/Studier/Master/scripts" &&
-	append_path PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
-test -d "/opt/openmpi" &&
-    prepend_path PATH /opt/openmpi/bin &&
-    append_path DYLD_LIBRARY_PATH /opt/openmpi/lib
-    append_path LD_LIBRARY_PATH /opt/openmpi/lib
-    append_path MANPATH /opt/openmpi/share/man
-test -d "/opt/local/bin" &&
-	prepend_path PATH /opt/local/bin:/opt/local/sbin # MacPorts
-test -d "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin" &&
-	append_path PATH "/opt/local/Library/Frameworks/Python.framework/Versions/Current/bin"
-test -d "/opt/espresso-4.2.1/bin" &&
-    append_path PATH "/opt/espresso-4.2.1/bin"
 
+append_path /opt/local/lib/gromacs/bin
+append_path /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+append_path /opt/espresso-4.2.1/bin
 
-test -d "/usr/local/lib/python2.7/site-packages" &&
-	append_path PYTHONPATH "/usr/local/lib/python2.7/site-packages"
-test -d "~/includes/python2-7" &&
-	append_path PYTHONPATH "~/includes/python2-7"
-test -d "$HOME/code/python" &&
-	append_path PYTHONPATH "$HOME/code/python"
-test -d "$HOME/code/python/ase" &&
-	append_path PYTHONPATH "$HOME/code/python/ase"
+prepend_path /opt/openmpi/bin
+append_path DYLD_LIBRARY_PATH /opt/openmpi/lib
+append_path LD_LIBRARY_PATH /opt/openmpi/lib
+append_path MANPATH /opt/openmpi/share/man
 
+append_path "$HOME/Documents/Studier/Master/scripts"
+append_path PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
 
-test -d "/usr/local/man" &&
-	append_path MANPATH "/usr/local/man"
-test -d "/opt/local/share/man" &&
-	append_path MANPATH "/opt/local/share/man" # MacPorts
+append_path PYTHONPATH /usr/local/lib/python2.7/site-packages
+append_path PYTHONPATH $HOME/includes/python2-7
+append_path PYTHONPATH $HOME/code/python
+append_path PYTHONPATH $HOME/code/python/ase
+
+append_path MANPATH /usr/local/man
+
+# MacPorts
+prepend_path /opt/local/sbin
+prepend_path /opt/local/bin
+prepend_path MANPATH /opt/local/share/man
+
 
 export DROPBOX=$HOME/Dropbox
 export RSPTHOME=/opt/rspt629
