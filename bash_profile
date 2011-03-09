@@ -15,21 +15,23 @@ umask 027     # turn off w for g, rwx for o
 export UNAME="$(uname)"
 export ME="$(whoami)"
 export HOME=~
-echo -e "$ME @ $(uname -npsr) \c"
+
+source $HOME/.bash_functions      # Path functions
+
+echo -e "\033[0;31m $ME @ $(uname -npsr) \c"
 
 # Source programmable bash completion for completion of hostnames, etc.:
 test -f /opt/local/etc/bash_completion &&
     source /opt/local/etc/bash_completion
 
-source .bash_functions      # Path functions
 
 # ----------------------------------------------------------------------------------------
 # Paths:
 
-prepend_path $HOME/bin
-append_path $HOME/scripts
-append_path $HOME/synced/scripts
-append_path $HOME/opt/bin
+path_prepend $HOME/bin
+path_append $HOME/scripts
+path_append $HOME/synced/scripts
+path_append $HOME/opt/bin
 
 
 ###############################################################################
@@ -92,9 +94,9 @@ fi
 #if [ -f "/Users/danmichael/source/cctbx/cctbx_build/setpaths.sh" ]; then
 #   . "/Users/danmichael/source/cctbx/cctbx_build/setpaths.sh"
 #   export LIBTBX_BUILD="/Users/danmichael/source/cctbx/cctbx_build"
-#   append_path PYTHONPATH "/Users/danmichael/source/cctbx/cctbx_sources:/Users/danmichael/source/cctbx/cctbx_sources/clipper_adaptbx:/Users/danmichael/source/cctbx/cctbx_sources/boost_adaptbx:/Users/danmichael/source/cctbx/cctbx_sources/libtbx/pythonpath:/Users/danmichael/source/cctbx/cctbx_build/lib"
+#   path_append PYTHONPATH "/Users/danmichael/source/cctbx/cctbx_sources:/Users/danmichael/source/cctbx/cctbx_sources/clipper_adaptbx:/Users/danmichael/source/cctbx/cctbx_sources/boost_adaptbx:/Users/danmichael/source/cctbx/cctbx_sources/libtbx/pythonpath:/Users/danmichael/source/cctbx/cctbx_build/lib"
 
-#   prepend_path DYLD_LIBRARY_PATH "/Users/danmichael/source/cctbx/cctbx_build/lib"
+#   path_prepend DYLD_LIBRARY_PATH "/Users/danmichael/source/cctbx/cctbx_build/lib"
 #fi
 
 #
@@ -121,4 +123,4 @@ export EDITOR=vim
 #}
 
 #echo " done"
-#echo
+echo -e "$NORMAL$RESET"

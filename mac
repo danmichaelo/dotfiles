@@ -3,7 +3,7 @@
 ################################################################################
 # Mac-specific things
 ################################################################################
-echo "{ .mac }"
+echo -e "{ .mac }\c"
 
 # LC_CTYPE: Character classification and case conversion
 # We set it to UTF-8 to, among other things, show special characters
@@ -14,29 +14,29 @@ echo "{ .mac }"
 export LC_CTYPE=en_GB.UTF-8
 
 
-append_path /opt/local/lib/gromacs/bin
-append_path /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
-append_path /opt/espresso-4.2.1/bin
+path_append /opt/local/lib/gromacs/bin
+path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+path_append /opt/espresso-4.2.1/bin
 
-prepend_path /opt/openmpi/bin
-append_path DYLD_LIBRARY_PATH /opt/openmpi/lib
-append_path LD_LIBRARY_PATH /opt/openmpi/lib
-append_path MANPATH /opt/openmpi/share/man
+path_prepend /opt/openmpi/bin
+path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
+path_append LD_LIBRARY_PATH /opt/openmpi/lib
+path_append MANPATH /opt/openmpi/share/man
 
-append_path "$HOME/Documents/Studier/Master/scripts"
-append_path PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+path_append "$HOME/Documents/Studier/Master/scripts"
+path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
 
-append_path PYTHONPATH /usr/local/lib/python2.7/site-packages
-append_path PYTHONPATH $HOME/includes/python2-7
-append_path PYTHONPATH $HOME/code/python
-append_path PYTHONPATH $HOME/code/python/ase
+path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
+path_append PYTHONPATH $HOME/includes/python2-7
+path_append PYTHONPATH $HOME/code/python
+path_append PYTHONPATH $HOME/code/python/ase
 
-append_path MANPATH /usr/local/man
+path_append MANPATH /usr/local/man
 
 # MacPorts
-prepend_path /opt/local/sbin
-prepend_path /opt/local/bin
-prepend_path MANPATH /opt/local/share/man
+path_prepend /opt/local/sbin
+path_prepend /opt/local/bin
+path_prepend MANPATH /opt/local/share/man
 
 
 export DROPBOX=$HOME/Dropbox
@@ -49,8 +49,8 @@ export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
 
 test -d /opt/intel &&
     . /opt/intel/bin/compilervars.sh intel64 &&
-    append_path DYLD_LIBRARY_PATH /opt/intel/mkl/lib
-    append_path LD_LIBRARY_PATH /opt/intel/mkl/lib
+    path_append DYLD_LIBRARY_PATH /opt/intel/mkl/lib
+    path_append LD_LIBRARY_PATH /opt/intel/mkl/lib
 
 # Platon env:
 PWTDIR=~/tmp/
