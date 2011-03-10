@@ -12,6 +12,7 @@ cd
 ln -s dotfiles/bash_profile .profile
 ln -s dotfiles/bash_rc .bashrc
 ln -s dotfiles/bash_prompt .bash_prompt
+ln -s dotfiles/bashcompletion .bashcompletion
 ln -s dotfiles/vim .vim
 ln -s dotfiles/vimrc .vimrc
 ln -s dotfiles/bc .bc

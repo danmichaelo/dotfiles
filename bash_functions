@@ -40,7 +40,6 @@ path_append() {
     test ! -d "$DIR" && return # if non-existent
     if test -z "${!PATHVAR}"; then 
         # the path is empty
-        echo "is em"
         export $PATHVAR="$DIR"
     else
         path_remove $PATHVAR $DIR
