@@ -22,6 +22,7 @@ ln -s dotfiles/xinitrc .xinitrc
 ln -s dotfiles/Xdefaults .Xdefaults
 ln -s dotfiles/dir_colors .dir_colors
 ln -s dotfiles/tmux.conf .tmux.conf
+ln -s dotfiles/vmdrc .vmdrc
 
 # Computer-specific things ("mac", "titan", "stallo", ...)
 COMP="mac"
