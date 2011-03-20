@@ -26,6 +26,8 @@ after idle {menu tkcon on}
 display resize 400 400
 mol default style VDW 0.4 8
 
+menu main move 700 50
+
 # prepend local (autoloaded) plugins to the search path 
 set auto_path [concat $env(HOME)/vmd/plugins $auto_path] ;
 

@@ -10,6 +10,14 @@
 "     http://amix.dk/blog/post/19486
 "     https://github.com/nvie/vimrc/blob/master/vimrc
 "
+" Some mappings:
+"  ,l   Toggle tag list
+"  ,t   Command-T
+"  ,.   Close current buffer
+"  ,r   TeX forward-search with Skim
+"  ,ss  Toggle spell checking
+"  ,c   Insert timestamp
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Remove all auto-commands to avoid having the autocommands twice if
@@ -202,7 +210,7 @@ let mapleader = ","
     map <leader>b :FufBuffer<cr>
 
     " ,tt -> Toggle Tag List:
-    nmap <leader>t :TlistToggle<cr>
+    nmap <leader>l :TlistToggle<cr>
 
     " ,@ -> Close buffer:
     nmap <leader>. :bd<cr>

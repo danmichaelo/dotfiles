@@ -19,6 +19,7 @@ path_append /opt/local/lib/gromacs/bin
 path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 path_append /opt/espresso-4.2.1/bin
 path_append $HOME/code/python/ase/tools
+path_append /usr/local/cuda/bin
 
 path_prepend /opt/openmpi/bin
 path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
@@ -27,6 +28,7 @@ path_append MANPATH /opt/openmpi/share/man
 
 path_append "$HOME/Documents/Studier/Master/scripts"
 path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
 
 path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
 path_append PYTHONPATH $HOME/includes/python2-7
@@ -54,6 +56,14 @@ test -d /opt/intel &&
     path_append DYLD_LIBRARY_PATH /opt/intel/mkl/lib
     path_append LD_LIBRARY_PATH /opt/intel/mkl/lib
 
+#CULA
+export CULA_ROOT=/usr/local/cula
+export CULA_INC_PATH=$CULA_ROOT/include
+export CULA_BIN_PATH_32=$CULA_ROOT/bin
+export CULA_BIN_PATH_64=$CULA_ROOT/bin64
+export CULA_LIB_PATH_32=$CULA_ROOT/lib
+export CULA_LIB_PATH_64=$CULA_ROOT/lib64
+
 # Platon env:
 PWTDIR=~/tmp/
 
@@ -77,6 +87,8 @@ XCRYSDEN_SCRATCH=/Users/danmichael/xcrys_tmp
 export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
 #PATH="$XCRYSDEN_TOPDIR:$PATH:$XCRYSDEN_TOPDIR/scripts:$XCRYSDEN_TOPDIR/util"
 
+export VMDDIR=/Applications/VMD.app/Contents/vmd
+
 
 # Aliases:
 alias mysql=mysql5
@@ -87,6 +99,9 @@ alias math=/Applications/Mathematica.app/Contents/MacOS/MathKernel
 alias bb=bbedit
 alias mp=~/bin/mpost-pdf.pl
 alias skim="open -a Skim.app"
+alias tclsh="rlwrap tclsh"
+alias acrobat="open -a 'Adobe Acrobat Pro'"
+alias acroread="open -a 'Adobe Acrobat Pro'"
 
 # Snip for Mathematica batch execution.
 # Usage: mma test.m
