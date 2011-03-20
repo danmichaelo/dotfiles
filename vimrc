@@ -10,13 +10,24 @@
 "     http://amix.dk/blog/post/19486
 "     https://github.com/nvie/vimrc/blob/master/vimrc
 "
-" Some mappings:
-"  ,l   Toggle tag list
-"  ,t   Command-T
-"  ,.   Close current buffer
-"  ,r   TeX forward-search with Skim
-"  ,ss  Toggle spell checking
-"  ,c   Insert timestamp
+" Some useful mappings:
+"  ,l               Toggle TagList
+"  ,t               Command-T
+"  <S-left>         NerdTree
+"  ,b               FufBuffer
+"  ,.               Close current buffer
+"  ,r               TeX forward-search with Skim
+"  ,ss              Toggle spell checking
+"  ,c               Insert timestamp
+"  <left>, <right>  Previous / next tab
+"  <S-j>, <S-k>     Move a line of text
+"  <space>          toggle fold
+"  æ/å              <C-d>/<C-u> (move down/up)
+"  ø                :nohls 
+"  :CD              cd to current dir
+"  :w!!             sudo write
+"  <M-tab>          Tex_Completion
+"  <C-b>/<C-k>      \langle / \rangle (bra-ket)
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -212,7 +223,7 @@ let mapleader = ","
     " ,tt -> Toggle Tag List:
     nmap <leader>l :TlistToggle<cr>
 
-    " ,@ -> Close buffer:
+    " ,. -> Close buffer:
     nmap <leader>. :bd<cr>
 
     " :CD -> Switch to current dir
