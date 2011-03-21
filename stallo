@@ -1,9 +1,10 @@
 #!/bin/sh
 echo " { stallo } "
 
-alias sq="showq -u $USER"
+#alias sq="showq -u $USER"
+alias sq="showq | grep $USER" # More compact
 
 HOME=~
-prepend_path PATH "$HOME/opt/vim-7.3/bin"
-prepend_path PATH "$HOME/opt/ctags-5.8/bin"
-append_path PYTHONPATH "$HOME/python"
+path_prepend PATH "$HOME/opt/vim-7.3/bin"
+path_prepend PATH "$HOME/opt/ctags-5.8/bin"
+path_append PYTHONPATH "$HOME/python"
