@@ -9,10 +9,11 @@ ruby extconf.rb
 make
 
 cd
-ln -s dotfiles/bash_profile .profile
-ln -s dotfiles/bash_rc .bashrc
+ln -s dotfiles/bash_profile .bash_profile
+ln -s dotfiles/bashrc .bashrc
+ln -s dotfiles/bash_completion .bash_completion
 ln -s dotfiles/bash_prompt .bash_prompt
-ln -s dotfiles/bashcompletion .bashcompletion
+ln -s dotfiles/bash_functions .bash_functions
 ln -s dotfiles/vim .vim
 ln -s dotfiles/vimrc .vimrc
 ln -s dotfiles/bc .bc
@@ -26,6 +27,6 @@ ln -s dotfiles/vmdrc .vmdrc
 
 # Computer-specific things ("mac", "titan", "stallo", ...)
 COMP="mac"
-cat "$COMP" > .hostname
-ln -s dotfiles/$COMP .$COMP
+echo "$COMP" > .hostname
+ln -s "dotfiles/$COMP" ".$COMP"
 
