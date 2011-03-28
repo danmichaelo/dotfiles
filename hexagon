@@ -35,6 +35,6 @@ test -s ~/.alias && . ~/.alias
 
 path_append MODULEPATH $HOME/modulefiles
 module load ruby
-module load git
+module load git/1.7.4.2
 module load vim/7.3
 module load curl
