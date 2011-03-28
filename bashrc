@@ -21,6 +21,10 @@
 # and http://www.stereo.org.ua/2006/bashrc-ps1/
 # and https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
 
+# bring in system bashrc
+test -r /etc/bashrc &&
+      . /etc/bashrc
+
 # detect interactive shell
 case "$-" in
     *i*) INTERACTIVE=yes ;;
@@ -38,9 +42,6 @@ test -z "$INTERACTIVE" && {
 	return
 }
 
-# bring in system bashrc
-test -r /etc/bashrc &&
-      . /etc/bashrc
 
 UNAME="$(uname)"
 ME="$(whoami)"
