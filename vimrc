@@ -1,23 +1,44 @@
 " vi: foldmethod=marker
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .vimrc configuration file
-" Author: Dan Michael O. Heggø <dmheggo AT student.matnat.uio.no>
+" https://github.com/danmichaelo/dotfiles/blob/master/vimrc
+" author: dmheggo @ student.matnat.uio.no
+"
 " Some sources of inspiration: 
 "     http://www.vi-improved.org/vimrc.php
 "     http://ciaranm.wordpress.com/2008/05/15/my-vimrc/
 "     http://amix.dk/blog/post/19486
 "     https://github.com/nvie/vimrc/blob/master/vimrc
 "
+" Some useful mappings:
+"  ,l               Toggle TagList
+"  ,t               Command-T
+"  <S-left>         NerdTree
+"  ,b               FufBuffer
+"  ,.               Close current buffer
+"  ,r               TeX forward-search with Skim
+"  ,ss              Toggle spell checking
+"  ,c               Insert timestamp
+"  <left>, <right>  Previous / next tab
+"  <S-j>, <S-k>     Move a line of text
+"  <space>          toggle fold
+"  æ/å              <C-d>/<C-u> (move down/up)
+"  ø                :nohls 
+"  :CD              cd to current dir
+"  :w!!             sudo write
+"  <M-tab>          Tex_Completion
+"  <C-b>/<C-k>      \langle / \rangle (bra-ket)
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Remove ALL auto-commands.  This avoids having the autocommands twice if
+" Remove all auto-commands to avoid having the autocommands twice if
 " the vimrc file is re-sourced.
 autocmd!
 
-" Should be the first option:
+" Should be set first
 set nocompatible
 
-" Debugging tab-behaviour in MacVim/Terminal Vim:
+" Testing tab-behaviour in MacVim/Terminal Vim (not all keys are picked up...)
 "map <special> <Tab> :echo "Got Tab"<CR>
 "map <special> <C-Tab> :echo "Got Control-Tab"<CR>
 "map <special> <S-Tab> :echo "Got Shift-Tab"<CR>
@@ -200,9 +221,9 @@ let mapleader = ","
     map <leader>b :FufBuffer<cr>
 
     " ,tt -> Toggle Tag List:
-    nmap <leader>t :TlistToggle<cr>
+    nmap <leader>l :TlistToggle<cr>
 
-    " ,@ -> Close buffer:
+    " ,. -> Close buffer:
     nmap <leader>. :bd<cr>
 
     " :CD -> Switch to current dir
