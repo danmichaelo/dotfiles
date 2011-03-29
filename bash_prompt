@@ -37,9 +37,9 @@ function setXtermTitle {
     #RET_VALUE='$(echo $RET)' #Ret value not colorized - you can modify it.
     
     if [[ $RET = 0 ]]; then
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \W\$ "
+        IPROMPT="\[\e[32m\]\t\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
     else
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W\$ "
+       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W $(__git_ps1 " (%s)")\$ "
     fi
     PS1="$IPROMPT"
 }
