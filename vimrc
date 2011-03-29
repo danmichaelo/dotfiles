@@ -116,6 +116,8 @@ let mapleader = ","
       colorscheme desert   " looks OK with 16 colors
       set bg=dark
     endif
+    highlight clear Search
+    highlight Search term=underline cterm=underline guibg=Grey40 ctermfg=1 guifg=Red
 "" }}}
 
 " Statusline {{{
