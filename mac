@@ -1,9 +1,37 @@
 #!/bin/sh
+# vi:ft=sh
 
 ################################################################################
 # Mac-specific things
+# if [ "$UNAME" == Darwin ]; then
 ################################################################################
 echo -e "{ .mac }\c"
+
+###############################################################################
+# Build options {{{
+
+# For å linke mot originale systembibliotek, kan det noen ganger lønne seg å 
+# kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er 
+# fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC.
+
+export MACOSX_DEPLOYMENT_TARGET=10.6 
+#export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
+#export LDFLAGS='-O3 -arch i386 -arch x86_64 -arch ppc -bind_at_load' 
+#export CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc'
+
+# 22/3/2011:
+# https://github.com/b4winckler/macvim/pull/12
+# Xcode4 does not contain command line tools for ppc platform
+# we may have to set  ARCHFLAGS=x86_64
+	
+#export F77=g95
+#export FC=g95 
+#  CFLAGS=-m64 CXXFLAGS=-m64 FFLAGS=-m64 FCFLAGS=-m64
+
+# Print a reminder to self 
+echo -e "[$CFLAGS]\c"
+
+# }}}
 
 # LC_CTYPE: Character classification and case conversion
 # We set it to UTF-8 to, among other things, show special characters
