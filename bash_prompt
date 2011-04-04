@@ -42,7 +42,7 @@ function setXtermTitle {
     if [[ $RET = 0 ]]; then
         IPROMPT="\[\e[32m\]\t\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
     else
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W $(__git_ps1 " (%s)")\$ "
+       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
     fi
     PS1="$IPROMPT"
 }
