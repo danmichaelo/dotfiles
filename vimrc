@@ -355,6 +355,10 @@ let mapleader = ","
 
 " Plugin Settings {{{
 
+    " SnipMate {{{
+        let g:snips_author = 'Dan Michael O. Heggø'
+    "}}}
+
     " TagList Settings {{{
         "let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"
 

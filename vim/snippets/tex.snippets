@@ -4,24 +4,6 @@ snippet begin
 	\begin{${1:env}}
 		${2}
 	\end{$1}
-# Tabular
-snippet tab
-	\begin{table}[htb]
-	 \begin{center}
-	  \caption{${1:Legenda}}
-	  \label{tb:${2:nome}}
-	  \newcommand{\mc}[3]{\multicolumn{#1}{#2}{#3}}
-	  \newcommand{\mr}[3]{\multirow{#1}{#2}{#3}}
-	  \begin{tabular}{${2:ll}}
-	    \hline
-	     ${3} &  \\ \cline{2-3}
-	          &  \\ \hline
-	          &  \\
-	          &  \\ \hline
-	  \end{tabular}
-	 \end{center}
-	\end{table} 
-	${4}
 # Subfigure : uma sobre a outra
 snippet subfig
 	\begin{figure}[htp]
