@@ -28,9 +28,12 @@ mol default style VDW 0.4 8
 
 menu main move 700 50
 
+# PLUGINS 
+# http://physiology.med.cornell.edu/faculty/hweinstein/vmdplugins/installation.html
+
 # prepend local (autoloaded) plugins to the search path 
 set auto_path [concat $env(HOME)/vmd/plugins $auto_path] ;
 
-# Add third party plugins
+# Add menu for third party plugin 
 # vmd_install_extension draw_cubic_unitcell draw_cubic_unitcell "My Plugins/Trajectory path"
 

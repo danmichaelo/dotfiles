@@ -34,34 +34,6 @@ path_append $HOME/synced/scripts
 path_append $HOME/opt/bin
 
 
-###############################################################################
-# Build options {{{
-
-if [ "$UNAME" == Darwin ]; then
-
-	# Dette setter opp kompileringsmiljøet til å kompilere på samme måte som Apple
-	# har gjort for Snow Leopard, dvs. for tre prosessortyper: Intel 32-bits, Intel
-	# 64-bits og PowerPC. Hvorfor Apple har valgt å inkludere PowerPC i dette er
-	# litt underlig, men jeg tenker det har med å gjøre at de ikke opprinnelig hadde
-	# tenkt å fase ut PowerPC med Snow Leopard. Uansett, med disse besvergelsene før
-	# du kjører ./configure vil "ditt" program få samme fat binary som systemets
-	# innebygde biblioteker, og det øker sjansen for å linke mot bibliotekene med
-	# suksess. 
-	
-	export MACOSX_DEPLOYMENT_TARGET=10.6 
-	#export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
-	#export LDFLAGS='-O3 -arch i386 -arch x86_64 -arch ppc -bind_at_load' 
-	#export CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc'
-	# Print a reminder to self 
-	echo -e "[$CFLAGS]\c"
-	
-	#export F77=g95
-	#export FC=g95 
-	#  CFLAGS=-m64 CXXFLAGS=-m64 FFLAGS=-m64 FCFLAGS=-m64
-
-fi
-
-# }}}
 
 ###############################################################################
 # Shell behaviors
