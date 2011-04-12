@@ -12,7 +12,7 @@ real_dir() {
     while [ -L "$TARGET_FILE" ]
     do
         TARGET_FILE=`readlink $TARGET_FILE`
-        cd `dirname $TARGET_FILE`
+        cd `dirname $TARGET_FILE` > /dev/null
         TARGET_FILE=`basename $TARGET_FILE`
     done
 

@@ -21,8 +21,13 @@ source $HOME/.bash_functions      # Path functions
 echo -e "\033[0;31m $ME @ $(uname -npsr) \c"
 
 # Source programmable bash completion for completion of hostnames, etc.:
-test -f /opt/local/etc/bash_completion &&
+if [ -f /opt/local/etc/bash_completion ]; then 
     source /opt/local/etc/bash_completion
+elif [ -f /etc/bash_completion ]; then 
+    source /etc/bash_completion
+else
+    source $HOME/.bash_completion
+fi
 
 
 # ----------------------------------------------------------------------------------------
