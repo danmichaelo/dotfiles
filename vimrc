@@ -356,9 +356,12 @@ let mapleader = ","
 " Plugin Settings {{{
 
     " Automatic LaTex Plugin {{{
-        let g:atp_status_notification = 1
-        let g:atp_ProgressBar = 1
-        au BufReadPre *.tex let b:atp_TexCompiler="pdflatex"
+        "let g:atp_status_notification = 1
+        "let g:atp_ProgressBar = 1
+        "let g:atp_statusNotif = 1
+        "let g:atp_updatetime_insert = 2000							
+        "let g:atp_updatetime_normal = 1000
+        "au BufReadPre *.tex let b:atp_TexCompiler="pdflatex"
     " }}}
 
     " SnipMate {{{

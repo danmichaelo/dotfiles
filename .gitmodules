@@ -31,6 +31,3 @@
 [submodule "vim/bundle/tcl.vim"]
 	path = vim/bundle/tcl.vim
 	url = https://github.com/vim-scripts/tcl.vim--smithfield-indent.git
-[submodule "vim/bundle/AutomaticTexPlugin"]
-	path = vim/bundle/AutomaticTexPlugin
-	url = https://github.com/vim-scripts/AutomaticTexPlugin.git
