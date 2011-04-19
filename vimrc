@@ -355,6 +355,12 @@ let mapleader = ","
 
 " Plugin Settings {{{
 
+    " Automatic LaTex Plugin {{{
+        let g:atp_status_notification = 1
+        let g:atp_ProgressBar = 1
+        au BufReadPre *.tex let b:atp_TexCompiler="pdflatex"
+    " }}}
+
     " SnipMate {{{
         let g:snips_author = 'Dan Michael O. Heggø'
     "}}}
