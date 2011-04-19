@@ -36,4 +36,5 @@ set auto_path [concat $env(HOME)/vmd/plugins $auto_path] ;
 
 # Add menu for third party plugin 
 # vmd_install_extension draw_cubic_unitcell draw_cubic_unitcell "My Plugins/Trajectory path"
+vmd_install_extension crystallography_gui cryst_tk "Crystallography"
 
