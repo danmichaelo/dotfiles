@@ -24,6 +24,7 @@ ln -s dotfiles/Xdefaults .Xdefaults
 ln -s dotfiles/dir_colors .dir_colors
 ln -s dotfiles/tmux.conf .tmux.conf
 ln -s dotfiles/vmdrc .vmdrc
+ln -s dotfiles/aria2 .aria2
 
 # Computer-specific things ("mac", "titan", "stallo", ...)
 COMP="mac"
