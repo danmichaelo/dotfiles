@@ -3,6 +3,27 @@
 # Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
 # http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
 
+real_dir() {
+    CURDIR=`pwd`
+    TARGET_FILE=$1
+    cd `dirname $TARGET_FILE`
+    TARGET_FILE=`basename $TARGET_FILE`
+    # Iterate down a (possible) chain of symlinks
+    while [ -L "$TARGET_FILE" ]
+    do
+        TARGET_FILE=`readlink $TARGET_FILE`
+        cd `dirname $TARGET_FILE` > /dev/null
+        TARGET_FILE=`basename $TARGET_FILE`
+    done
+
+    # Compute the canonicalized name by finding the physical path 
+    # for the directory we're in and appending the target file.
+    PHYS_DIR=`pwd -P`
+    RESULT=$PHYS_DIR
+    cd $CURDIR
+    echo $RESULT
+}
+
 # List path entries of PATH or environment variable <var>.
 pls() { 
     test -z "$1" && PATHVAR='PATH' || PATHVAR=$1

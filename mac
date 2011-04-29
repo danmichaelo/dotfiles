@@ -116,6 +116,7 @@ export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
 #PATH="$XCRYSDEN_TOPDIR:$PATH:$XCRYSDEN_TOPDIR/scripts:$XCRYSDEN_TOPDIR/util"
 
 export VMDDIR=/Applications/VMD.app/Contents/vmd
+export VMDBABELBIN=/opt/local/bin/babel
 
 
 # Aliases:

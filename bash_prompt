@@ -12,7 +12,10 @@
 # \t        the current time in 24-hour HH:MM:SS format
 # \[\e[m\]  Reset color 
 # \w        the current working directory
-#
+
+export GIT_PS1_SHOWDIRTYSTATE=1 #... untagged(*) and staged(+) changes
+export GIT_PS1_SHOWSTASHSTATE=1 #... if something is stashed($)
+export GIT_PS1_SHOWUNTRACKEDFILES=1 #... untracked files(%)
 
 # Bash shell executes the content of the PROMPT_COMMAND just before displaying
 # the PS1 variable
@@ -37,9 +40,9 @@ function setXtermTitle {
     #RET_VALUE='$(echo $RET)' #Ret value not colorized - you can modify it.
     
     if [[ $RET = 0 ]]; then
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \W\$ "
+        IPROMPT="\[\e[32m\]\t\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
     else
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W\$ "
+       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
     fi
     PS1="$IPROMPT"
 }
