@@ -146,3 +146,6 @@ if [ -f ~/.bash_prompt ]; then
     source ~/.bash_prompt
 fi
 
+# Avoid stack overflow on the execution of the three Fortran programs
+# ulimit -s 64000
+
