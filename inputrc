@@ -3,7 +3,10 @@ set visible-stats on
 set completion-ignore-case on
 set page-completions off
 "\M-s": menu-complete
+
+# Up arrow
 "\e[A": history-search-backward
+# Down arrow
 "\e[B": history-search-forward
 
 # To get UTF-8 working correctly on MacOSX:

@@ -62,6 +62,7 @@ path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
 path_append PYTHONPATH $HOME/includes/python2-7
 path_append PYTHONPATH $HOME/code/python
 path_append PYTHONPATH $HOME/code/python/ase
+path_append PYTHONPATH $HOME/lib/python
 
 path_append MANPATH /usr/local/man
 
@@ -70,6 +71,7 @@ path_prepend /opt/local/sbin
 path_prepend /opt/local/bin
 path_prepend MANPATH /opt/local/share/man
 
+path_prepend /opt/ffmpeg/bin
 
 export DROPBOX=$HOME/Dropbox
 export RSPTHOME=/opt/rspt629
@@ -145,3 +147,9 @@ manp() {
     man -t "${1}" | open -f -a Preview
 }
 
+RIETAN=/Applications/RIETAN_VENUS
+ORFFE=$RIETAN
+LST2CIF=$RIETAN
+PRIMA=/Applications/RIETAN_VENUS/
+ALBA=$PRIMA
+export RIETAN ORFFE LST2CIF PRIMA ALBA
