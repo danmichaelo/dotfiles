@@ -31,3 +31,6 @@
 [submodule "vim/bundle/tcl.vim"]
 	path = vim/bundle/tcl.vim
 	url = https://github.com/vim-scripts/tcl.vim--smithfield-indent.git
+[submodule "vim/bundle/outliner"]
+	path = vim/bundle/outliner
+	url = https://github.com/steeef/TVO--The-Vim-Outliner.git
