@@ -147,3 +147,9 @@ manp() {
     man -t "${1}" | open -f -a Preview
 }
 
+RIETAN=/Applications/RIETAN_VENUS
+ORFFE=$RIETAN
+LST2CIF=$RIETAN
+PRIMA=/Applications/RIETAN_VENUS/
+ALBA=$PRIMA
+export RIETAN ORFFE LST2CIF PRIMA ALBA
