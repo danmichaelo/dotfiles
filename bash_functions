@@ -3,6 +3,11 @@
 # Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
 # http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
 
+if [ "$BASH_FUNCTIONS_LOADED" == 1 ]; then 
+    return
+fi;
+export BASH_FUNCTIONS_LOADED=1
+
 real_dir() {
     CURDIR=`pwd`
     TARGET_FILE=$1
