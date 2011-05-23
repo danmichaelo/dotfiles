@@ -153,3 +153,6 @@ LST2CIF=$RIETAN
 PRIMA=/Applications/RIETAN_VENUS/
 ALBA=$PRIMA
 export RIETAN ORFFE LST2CIF PRIMA ALBA
+
+export CPAN=ftp://ftp.uninett.no/pub/languages/perl/CPAN
+
