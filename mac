@@ -48,6 +48,7 @@ path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 path_append /opt/espresso-4.2.1/bin
 path_append $HOME/code/python/ase/tools
 path_append /usr/local/cuda/bin
+path_append /opt/p4vasp/bin
 
 path_prepend /opt/openmpi/bin
 path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
@@ -63,6 +64,7 @@ path_append PYTHONPATH $HOME/includes/python2-7
 path_append PYTHONPATH $HOME/code/python
 path_append PYTHONPATH $HOME/code/python/ase
 path_append PYTHONPATH $HOME/lib/python
+path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
 path_append MANPATH /usr/local/man
 
