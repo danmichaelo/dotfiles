@@ -260,11 +260,16 @@ let mapleader = ","
     map <c-s> :source ~/.vim/.session <cr>
 
     " Automaticly save current viewpoint for tex files:
-    set viewoptions=folds,cursor
+    " disabled because: resets the cursor, and closes folds.
+    " may work better without Vim-LaTeX
+    "set viewoptions=folds,cursor
     "au BufWinLeave *.tex mkview
     "au BufWinEnter *.tex silent loadview
+    
     "au BufUnload *.tex mkview
     "au BufEnter *.tex silent loadview <CR><SPACE>
+    "au BufWinLeave * mkview
+    "au BufWinEnter * silent! loadview
 
     " Reeeally geeky: map arrow keys into something useful :) 
     " Comment: No, I can't handle it!
