@@ -2,6 +2,9 @@
 # vi:textwidth=0 foldmethod=marker ft=sh
 # Startup file for interactive bash login shells
 
+# Play a welcome sound
+#(afplay -v 0.1 $HOME/Music/soundeffects/welcome.wav &)
+
 # LANG 
 # export LC_ALL=no_NO.UTF-8
 #export LANG=no

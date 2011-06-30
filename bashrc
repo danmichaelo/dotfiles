@@ -95,6 +95,9 @@ a lsx="ls -F -s | grep \*"  # List executables only
 a ll="ls -ltrh"
 a la="ls -A"
 
+# Play a sound, hollywood style :) Extremely irritating after a while
+#alias ls="(afplay -v 0.5 $HOME/Music/soundeffects/select9.wav &); ls"
+
 # Spring cleaning
 a vaspclean="rm slurm-* CHG CONTCAR EIGENVAL OSZICAR PCDAT XDATCAR vasprun.xml CHGCAR DOSCAR IBZKPT OUTCAR WAVECAR PROCAR  WAVEDER"
 

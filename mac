@@ -106,6 +106,7 @@ LST2CIF=$RIETAN
 PRIMA=/Applications/RIETAN_VENUS/
 ALBA=$PRIMA
 export RIETAN ORFFE LST2CIF PRIMA ALBA
+path_append $RIETAN
 
 # BC: Quiet startup, load mathlib and extension for familiar function names:
 export BC_ENV_ARGS="-q -l $HOME/.bc/extensions.bc $HOME/.bc/bcrc"
@@ -157,4 +158,5 @@ ALBA=$PRIMA
 export RIETAN ORFFE LST2CIF PRIMA ALBA
 
 export CPAN=ftp://ftp.uninett.no/pub/languages/perl/CPAN
+
 

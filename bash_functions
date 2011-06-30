@@ -4,9 +4,9 @@
 # http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
 
 if [ "$BASH_FUNCTIONS_LOADED" == 1 ]; then 
+    echo "R"
     return
 fi;
-export BASH_FUNCTIONS_LOADED=1
 
 real_dir() {
     CURDIR=`pwd`
@@ -137,3 +137,4 @@ BRIGHT_WHITE="\[$ESC[${BRIGHT};${FG_WHITE}m\]"
 
 
 
+export BASH_FUNCTIONS_LOADED=1
