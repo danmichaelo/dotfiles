@@ -314,6 +314,11 @@ let mapleader = ","
     " Use .as for ActionScript files, not Atlas files.
     au BufNewFile,BufRead *.as set filetype=actionscript
 
+    " Load wikimedia markup for .wiki files
+    autocmd BufRead,BufNewFile *.wiki            setfiletype Wikipedia
+    autocmd BufRead,BufNewFile *.wikipedia.org*  setfiletype Wikipedia
+    
+
     " Load the closetag plugin for HTML files:
     "au Filetype html,xml,xsl,php source ~/.vim/scripts/closetag.vim 
    
