@@ -103,4 +103,11 @@ export EDITOR=vim
 #}
 
 #echo " done"
+
+if [ SHOSTNAME == "mac" ]; then
+    # Set PATH for GUI apps as well on Mac:
+    launchctl setenv PATH $PATH
+    # There's no need to reboot (though you will need to restart an app if you want it to pick up the changed environment.)
+fi
+
 echo -e "$NORMAL$RESET"
