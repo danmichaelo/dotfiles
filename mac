@@ -14,7 +14,7 @@ echo -e "{ .mac }\c"
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er 
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC.
 
-export MACOSX_DEPLOYMENT_TARGET=10.6 
+export MACOSX_DEPLOYMENT_TARGET=10.7
 #export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
 #export LDFLAGS='-O3 -arch i386 -arch x86_64 -arch ppc -bind_at_load' 
 #export CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc'
@@ -46,7 +46,7 @@ umask 022
 path_append /opt/local/lib/gromacs/bin
 path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
 path_append /opt/espresso-4.2.1/bin
-path_append $HOME/code/python/ase/tools
+path_append $HOME/source/python/ase/tools
 path_append /usr/local/cuda/bin
 path_append /opt/p4vasp/bin
 
@@ -62,7 +62,6 @@ path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/C
 path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
 path_append PYTHONPATH $HOME/includes/python2-7
 path_append PYTHONPATH $HOME/code/python
-path_append PYTHONPATH $HOME/code/python/ase
 path_append PYTHONPATH $HOME/lib/python
 path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
@@ -75,9 +74,15 @@ path_prepend MANPATH /opt/local/share/man
 
 path_prepend /opt/ffmpeg/bin
 
+# TexLive
+path_append /usr/texbin
+
 export DROPBOX=$HOME/Dropbox
 export RSPTHOME=/opt/rspt629
-export GPAW_SETUP_PATH=/usr/share/gpaw-setups-0.5.3574
+
+# Unfortunately, GPAW doesn't work with NumPy 1.6
+# https://trac.fysik.dtu.dk/projects/gpaw/ticket/226
+export GPAW_SETUP_PATH=${HOME}/lib/gpaw-setups/gpaw-setups-0.8.7929
 
 # Computational Crystallography Toolbox (CCTBX)
 #source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
