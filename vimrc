@@ -365,6 +365,12 @@ let mapleader = ","
 
 " Plugin Settings {{{
 
+    " Gundo {{{
+    
+        nnoremap <leader>g :GundoToggle<CR>
+
+    " }}}
+
     " Automatic LaTex Plugin {{{
         "let g:atp_status_notification = 1
         "let g:atp_ProgressBar = 1
