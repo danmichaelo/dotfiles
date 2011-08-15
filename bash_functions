@@ -28,6 +28,7 @@ real_dir() {
     cd $CURDIR
     echo $RESULT
 }
+export -f real_dir
 
 # List path entries of PATH or environment variable <var>.
 pls() { 
