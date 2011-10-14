@@ -43,6 +43,3 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
-[submodule "vim/bundle/ctags"]
-	path = vim/bundle/ctags
-	url = https://github.com/vim-scripts/ctags.vim
