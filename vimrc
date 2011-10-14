@@ -129,8 +129,13 @@ let mapleader = ","
 
     " %Y: type of file in buffer (h:fileformat)
     " ff: fileformat (unix,mac,dos)
+    set statusline+=(%Y,%{&ff},%{&fenc}): 
+
+    " display current tag/function using ctags / taglist:
+    set statusline+=\ %{Tlist_Get_Tagname_By_Line()}()
+
     " %=: Separation point between left and right aligned items
-    set statusline+=(%Y,%{&ff},%{&fenc})=%=
+    set statusline+=%=
 
     " %v: virtual column number
     " %l: line number
