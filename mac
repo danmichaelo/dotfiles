@@ -61,7 +61,7 @@ path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/C
 
 path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
 path_append PYTHONPATH $HOME/includes/python2-7
-path_append PYTHONPATH $HOME/code/python
+#path_append PYTHONPATH $HOME/code/python
 path_append PYTHONPATH $HOME/lib/python
 path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
@@ -71,8 +71,6 @@ path_append MANPATH /usr/local/man
 path_prepend /opt/local/sbin
 path_prepend /opt/local/bin
 path_prepend MANPATH /opt/local/share/man
-
-path_prepend /opt/ffmpeg/bin
 
 # TexLive
 path_append /usr/texbin
