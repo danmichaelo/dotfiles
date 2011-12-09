@@ -97,7 +97,9 @@ let mapleader = ","
       set winaltkeys=no         " prevent Alt key from focusing menu (Windows) 
     endif
     set hidden                  " keep changes to buffer without writing them to file upon buffer change
-    set cursorline              " indicate the cursor line
+    if (has("gui_running"))
+      set cursorline              " indicate the cursor line
+    endif
     set number                  " show linenumber
     "set lazyredraw             " faster macros
     set shortmess+=a            " abbrev. of messages (avoids 'hit enter')
