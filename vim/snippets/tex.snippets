@@ -2,25 +2,24 @@
 # Subfigure : uma sobre a outra
 snippet subfig
 	\begin{figure}[htp]
-	  \begin{center}
-	    \subfigure[]{\label{fig:${1:nomea}}
-	     \includegraphics[width=${2:12cm}]{${3:fig/arquivo}}} ${4:\\}
-	    \subfigure[]{\label{fig:${5:nomeb}}
-	     \includegraphics[width=${6:12cm}]{${7:fig/arquivo}}}
-	   \end{center}
-	    \caption{${8:Legenda}}
-	  \label{fig:${9:nome}}
+	  \centering
+	    \subfloat[${1}]{
+		  \label{fig:${2}}
+	      \includegraphics[width=6cm]{${3}}
+		}
+	    \subfloat[${4}]{
+		  \label{fig:${5}}
+	      \includegraphics[width=6cm]{${6}}
+		}
+	  \caption{${7:Legenda}}
+	  \label{fig:${8:nome}}
 	\end{figure}
-	${10}
-# More one subfig
-snippet sfigadd
-	    \subfigure[]{\label{fig:${1:nomea}}
-	     \includegraphics[width=${2:12cm}]{${3:fig/arquivo}}} ${4:\\}
+	${9}
 # Figure
 snippet fig
 	\begin{figure}[htp]
 	  \centering
-	  \includegraphics[width=${1:12cm}]{${2:fig/arquivo}}
+	  \includegraphics[width=${1:12cm}]{${2}}
 	  \caption{${3:Legenda}}
 	  \label{fig:${4:nome}}
 	\end{figure}
