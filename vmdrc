@@ -47,3 +47,27 @@ color Element P red
 color Labels Atoms black
 color Labels Bonds blue
 
+mol color Element
+mol representation 2 0 DynamicBonds 2.500000 0.100000 6.000000
+mol representation Polyhedra 2.500000
+mol representation CPK 0.1 0.2 10.0 6.0  ;# sphere scale, bond radius, sphere res, bond res
+
+proc save_viewpoint {} {
+  global viewpoints
+  if [info exists viewpoints] {unset viewpoints} 
+  # get the current matricies
+  foreach mol [molinfo list] {
+    set viewpoints($mol) [molinfo $mol get {center_matrix rotate_matrix scale_matrix global_matrix}]
+  }
+}
+proc restore_viewpoint {} { 
+  global viewpoints
+  foreach mol [molinfo list] {
+    puts "Trying $mol"
+    if [info exists viewpoints($mol)] {
+      molinfo $mol set {center_matrix rotate_matrix scale_matrix global_matrix} $viewpoints($mol)
+    }
+  }
+}
+user add key q "save_viewpoint"
+user add key w "restore_viewpoint"
