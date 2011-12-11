@@ -24,7 +24,6 @@ display projection orthographic ;
 after idle {menu tkcon on}
 
 display resize 400 400
-mol default style VDW 0.4 8
 
 menu main move 700 50
 
@@ -47,10 +46,6 @@ color Element P red
 color Labels Atoms black
 color Labels Bonds blue
 
-mol color Element
-mol representation 2 0 DynamicBonds 2.500000 0.100000 6.000000
-mol representation Polyhedra 2.500000
-mol representation CPK 0.1 0.2 10.0 6.0  ;# sphere scale, bond radius, sphere res, bond res
 
 proc save_viewpoint {} {
   global viewpoints
@@ -71,3 +66,9 @@ proc restore_viewpoint {} {
 }
 user add key q "save_viewpoint"
 user add key w "restore_viewpoint"
+
+#mol representation DynamicBonds 2.500000 0.100000 6.000000
+#mol representation Polyhedra 2.500000
+#mol representation CPK 0.4 0.3 10.0 6.0  ;# sphere scale, bond radius, sphere res, bond res
+mol default style CPK
+mol default color Element
