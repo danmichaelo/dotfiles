@@ -43,3 +43,6 @@
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule "vim/bundle/ipython"]
+	path = vim/bundle/ipython
+	url = https://github.com/ivanov/vim-ipython.git
