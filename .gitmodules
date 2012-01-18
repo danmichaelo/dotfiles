@@ -28,15 +28,9 @@
 [submodule "vim/bundle/l9"]
 	path = vim/bundle/l9
 	url = git://github.com/vim-scripts/L9.git
-[submodule "vim/bundle/tcl.vim"]
-	path = vim/bundle/tcl.vim
-	url = https://github.com/vim-scripts/tcl.vim--smithfield-indent.git
 [submodule "vim/bundle/outliner"]
 	path = vim/bundle/outliner
 	url = git://github.com/vim-scripts/TVO--The-Vim-Outliner-with-asciidoc-supp.git
-[submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown.git
 [submodule "vim/bundle/gundo"]
 	path = vim/bundle/gundo
 	url = git://github.com/sjl/gundo.vim.git
@@ -46,3 +40,9 @@
 [submodule "vim/bundle/utl.vim"]
     path = vim/bundle/utl.vim
     url = git://github.com/vim-scripts/utl.vim.git
+[submodule "vim/bundle/tcl.vim"]
+	path = vim/bundle/tcl.vim
+	url = git://github.com/vim-scripts/tcl.vim--smithfield-indent.git
+[submodule "vim/bundle/vim-markdown"]
+	path = vim/bundle/vim-markdown
+	url = git://github.com/plasticboy/vim-markdown.git
