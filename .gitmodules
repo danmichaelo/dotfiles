@@ -33,7 +33,7 @@
 	url = https://github.com/vim-scripts/tcl.vim--smithfield-indent.git
 [submodule "vim/bundle/outliner"]
 	path = vim/bundle/outliner
-	url = https://github.com/steeef/TVO--The-Vim-Outliner.git
+	url = git://github.com/vim-scripts/TVO--The-Vim-Outliner-with-asciidoc-supp.git
 [submodule "vim/bundle/vim-markdown"]
 	path = vim/bundle/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
@@ -42,4 +42,7 @@
 	url = git://github.com/sjl/gundo.vim.git
 [submodule "vim/bundle/ipython"]
 	path = vim/bundle/ipython
-	url = git://github.com/ivanov/vim-ipython.git
+    url = git://github.com/ivanov/vim-ipython.git
+[submodule "vim/bundle/utl.vim"]
+    path = vim/bundle/utl.vim
+    url = git://github.com/vim-scripts/utl.vim.git
