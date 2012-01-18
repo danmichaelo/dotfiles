@@ -40,9 +40,9 @@
 [submodule "vim/bundle/vim-markdown"]
 	path = vim/bundle/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "vim/bundle/gundo"]
-	path = vim/bundle/gundo
-	url = http://github.com/sjl/gundo.vim.git
 [submodule "vim/bundle/ipython"]
 	path = vim/bundle/ipython
 	url = https://github.com/ivanov/vim-ipython.git
+[submodule "vim/bundle/gundo"]
+	path = vim/bundle/gundo
+	url = git://github.com/sjl/gundo.vim.git
