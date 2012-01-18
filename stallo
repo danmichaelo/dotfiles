@@ -2,9 +2,15 @@
 echo " { stallo } "
 
 #alias sq="showq -u $USER"
-alias sq="showq | grep $USER" # More compact
+alias sq="echo \"JOBNAME            USERNAME      STATE  PROC   REMAINING            STARTTIME\"; showq | grep $USER" # More compact
 
 HOME=~
 path_prepend PATH "$HOME/opt/vim-7.3/bin"
 path_prepend PATH "$HOME/opt/ctags-5.8/bin"
-path_append PYTHONPATH "$HOME/python"
+path_append PYTHONPATH "$HOME/lib/python"
+
+path_append PYTHONPATH "$HOME/source/ase"
+path_append PATH "$HOME/source/ase/tools"
+
+module load python
+
