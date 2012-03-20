@@ -1,7 +1,7 @@
 ##!/bin/bash
 ## vi:textwidth=0 foldmethod=marker ft=sh
 
-echo "Yo!"
+#echo "Yo!"
 source .bashrc
 
 
