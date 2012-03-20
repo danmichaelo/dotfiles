@@ -2,7 +2,7 @@
 ## vi:textwidth=0 foldmethod=marker ft=sh
 
 #echo "Yo!"
-source .bashrc
+source $HOME/.bashrc
 
 
 ## Play a welcome sound

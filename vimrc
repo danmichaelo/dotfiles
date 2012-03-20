@@ -230,7 +230,7 @@ let mapleader = ","
     map <leader>b :FufBuffer<cr>
 
     " ,tt -> Toggle Tag List:
-    nmap <leader>l :TlistToggle<cr>
+    nmap <leader>m :TlistToggle<cr>
 
     " ,. -> Close buffer:
     nmap <leader>. :bd<cr>
