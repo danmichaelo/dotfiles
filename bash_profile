@@ -1,6 +1,9 @@
 ##!/bin/bash
 ## vi:textwidth=0 foldmethod=marker ft=sh
-## Startup file for interactive bash login shells
+
+echo "Yo!"
+source .bashrc
+
 
 ## Play a welcome sound
 ##(afplay -v 0.1 $HOME/Music/soundeffects/welcome.wav &)

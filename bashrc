@@ -21,6 +21,11 @@
 # and http://www.stereo.org.ua/2006/bashrc-ps1/
 # and https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
 
+test -n "$BASHRC_LOADED" && {
+	return
+}
+BASHRC_LOADED=1
+
 # bring in system bashrc
 test -r /etc/bashrc &&
       . /etc/bashrc
