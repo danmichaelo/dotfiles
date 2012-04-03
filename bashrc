@@ -225,14 +225,6 @@ a localip="ipconfig getifaddr en1"
 a httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 a grep='GREP_COLOR="1;32" LANG=C grep --color=auto'
 
-# Dir listing
-if [ "$(ls --color 2>/dev/null)" != "" ]; then
-    export LS_OPTIONS="--color=auto $LS_OPTIONS" # GNU ls
-else
-    export LS_OPTIONS="-G $LS_OPTIONS" # FreeBSD ls
-fi
-LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
-a ls="ls $LS_OPTIONS"
 a lsd="ls  | grep /"      # List dirs only
 a lsl="ls -F | grep @"      # List symbolic links only
 a lsx="ls -F -s | grep \*"  # List executables only
@@ -395,5 +387,14 @@ if [ SHOSTNAME == "mac" ]; then
     launchctl setenv PATH $PATH
     # There's no need to reboot (though you will need to restart an app if you want it to pick up the changed environment.)
 fi
+
+# Dir listing
+if [ "$(ls --color 2>/dev/null)" != "" ]; then
+    export LS_OPTIONS="--color=auto $LS_OPTIONS" # GNU ls
+else
+    export LS_OPTIONS="-G $LS_OPTIONS" # FreeBSD ls
+fi
+LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
+a ls="ls $LS_OPTIONS"
 
 echo -e "$NORMAL$RESET"
