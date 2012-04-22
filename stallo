@@ -1,4 +1,13 @@
 #!/bin/sh
+
+# ========================= NON-INTERACTIVE STUFF ==============================
+
+test -z "$INTERACTIVE" && {
+    # Shell is non-interactive (something like scp). We should exit now!
+	return
+}
+# =========================== INTERACTIVE STUFF ================================
+
 echo " { stallo } "
 
 #alias sq="showq -u $USER"
@@ -13,4 +22,3 @@ path_append PYTHONPATH "$HOME/source/ase"
 path_append PATH "$HOME/source/ase/tools"
 
 module load python
-

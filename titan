@@ -1,4 +1,12 @@
 #!/bin/sh
+
+# ========================= NON-INTERACTIVE STUFF ==============================
+
+test -z "$INTERACTIVE" && {
+    # Shell is non-interactive (something like scp). We should exit now!
+	return
+}
+# =========================== INTERACTIVE STUFF ================================
 echo "{ .titan }"
 
 OLEM=~olem

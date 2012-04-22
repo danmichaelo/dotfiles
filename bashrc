@@ -24,62 +24,7 @@
 test -n "$BASHRC_LOADED" && {
 	return
 }
-BASHRC_LOADED=1
-
-# bring in system bashrc
-test -r /etc/bashrc &&
-      . /etc/bashrc
-
-# detect interactive shell
-case "$-" in
-    *i*) INTERACTIVE=yes ;;
-    *)   unset INTERACTIVE ;;
-esac
-
-# detect login shell
-case "$0" in
-    -*) LOGIN=yes ;;
-    *)  unset LOGIN ;;
-esac
-
-test -z "$INTERACTIVE" && {
-    # Shell is non-interactive (something like scp). We should exit now!
-	return
-}
-#echo -e "[H]\c"
-
-UNAME="$(uname)"
-ME="$(whoami)"
-
-# Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
-# http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
-
-#if [ "$BASH_FUNCTIONS_LOADED" == 1 ]; then 
-#    echo "R"
-#    return
-#fi;
-
-real_dir() {
-    CURDIR=`pwd`
-    TARGET_FILE=$1
-    cd `dirname $TARGET_FILE`
-    TARGET_FILE=`basename $TARGET_FILE`
-    # Iterate down a (possible) chain of symlinks
-    while [ -L "$TARGET_FILE" ]
-    do
-        TARGET_FILE=`readlink $TARGET_FILE`
-        cd `dirname $TARGET_FILE` > /dev/null
-        TARGET_FILE=`basename $TARGET_FILE`
-    done
-
-    # Compute the canonicalized name by finding the physical path 
-    # for the directory we're in and appending the target file.
-    PHYS_DIR=`pwd -P`
-    RESULT=$PHYS_DIR
-    cd $CURDIR
-    echo $RESULT
-}
-export -f real_dir
+export BASHRC_LOADED=1
 
 # List path entries of PATH or environment variable <var>.
 pls() { 
@@ -125,6 +70,71 @@ path_append() {
     fi
 }
 export -f path_append 
+
+# bring in system bashrc
+test -r /etc/bashrc &&
+      . /etc/bashrc
+
+# detect interactive shell
+case "$-" in
+    *i*) export INTERACTIVE=yes ;;
+    *)   unset INTERACTIVE ;;
+esac
+
+# detect login shell
+case "$0" in
+    -*) export LOGIN=yes ;;
+    *)  unset LOGIN ;;
+esac
+
+if [ -f $HOME/.hostname ]; then
+	export SHOSTNAME=`cat $HOME/.hostname`
+else
+	export SHOSTNAME=`uname`
+fi
+
+# Load machine-specific things
+test -f $HOME/.$SHOSTNAME && . $HOME/.$SHOSTNAME
+
+test -z "$INTERACTIVE" && {
+    # Shell is non-interactive (something like scp). We should exit now!
+	return
+}
+#echo -e "[H]\c"
+
+UNAME="$(uname)"
+ME="$(whoami)"
+
+# Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
+# http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
+
+#if [ "$BASH_FUNCTIONS_LOADED" == 1 ]; then 
+#    echo "R"
+#    return
+#fi;
+
+real_dir() {
+    CURDIR=`pwd`
+    TARGET_FILE=$1
+    cd `dirname $TARGET_FILE`
+    TARGET_FILE=`basename $TARGET_FILE`
+    # Iterate down a (possible) chain of symlinks
+    while [ -L "$TARGET_FILE" ]
+    do
+        TARGET_FILE=`readlink $TARGET_FILE`
+        cd `dirname $TARGET_FILE` > /dev/null
+        TARGET_FILE=`basename $TARGET_FILE`
+    done
+
+    # Compute the canonicalized name by finding the physical path 
+    # for the directory we're in and appending the target file.
+    PHYS_DIR=`pwd -P`
+    RESULT=$PHYS_DIR
+    cd $CURDIR
+    echo $RESULT
+}
+export -f real_dir
+
 
 
 # Colors
@@ -336,14 +346,6 @@ path_append $HOME/opt/bin
 
 # Define window title:
 #export SHOSTNAME=`hostname -s`
-if [ -f $HOME/.hostname ]; then
-	export SHOSTNAME=`cat $HOME/.hostname`
-else
-	export SHOSTNAME=`uname`
-fi
-
-# Load machine-specific things
-test -f $HOME/.$SHOSTNAME && . $HOME/.$SHOSTNAME
 
 if [ "$TERM" != "dumb" ]; then
     #dircolors

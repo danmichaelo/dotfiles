@@ -410,7 +410,7 @@ let mapleader = ","
         "let tlist_tex_settings = 'latex;b:bibitem;c:command;l:label'
        
         " Tex language:
-        " Defined in ~/.vim/ftplugin/latex-suite/main.vim on line 881
+        " Defined in ~/.vim/bundle/vim-latex/ftplugin/latex-suite/main.vim on line 885
 
     "}}}
 
