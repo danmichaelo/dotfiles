@@ -46,6 +46,7 @@ function setXtermTitle {
     fi
     PS1="$IPROMPT"
 }
+export -f setXtermTitle  # export function
 
 export PROMPT_COMMAND='setXtermTitle'
 export PS2=" > "			# Set continuation interactive prompt

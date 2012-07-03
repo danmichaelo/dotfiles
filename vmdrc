@@ -1,51 +1,53 @@
-# Bring main menu back
-menu main on ;
 
-# Show representations dialog
-# menu graphics on ; 
+set auto_path [concat "{$env(HOME)/vmd/plugins}" $auto_path] ;
 
-# Start the TkConsole on
-# after idle {menu tkcon on}
+if { [llength [menu list]] == 0 } {
+    puts " .vmdrc) Seems like we have no display"
 
-user add key g "display resetview"
-user add key 4 "display resize 400 400"
-user add key 5 "display resize 500 500"
-user add key 6 "display resize 600 600"
-user add key 7 "display resize 700 700"
-user add key 8 "display resize 800 800"
+} else {
+    puts ".vmdrc) Seems like we have a display"
 
-# Turn off axes
-axes location off ;
+    # Bring main menu back
+    menu main on ;
 
-# Set display to orthographic
-display projection orthographic ;
+    # Show representations dialog
+    # menu graphics on ; 
 
-# Start the TkConsole on
-after idle {menu tkcon on}
+    # Start the TkConsole on
+    # after idle {menu tkcon on}
 
-display resize 400 400
+    user add key g "display resetview"
+    user add key 4 "display resize 400 400"
+    user add key 5 "display resize 500 500"
+    user add key 6 "display resize 600 600"
+    user add key 7 "display resize 700 700"
+    user add key 8 "display resize 800 800"
 
-menu main move 700 50
+    # Turn off axes
+    axes location off ;
 
-# PLUGINS 
-# http://physiology.med.cornell.edu/faculty/hweinstein/vmdplugins/installation.html
+    # Set display to orthographic
 
-# prepend local (autoloaded) plugins to the search path 
-set auto_path [concat $env(HOME)/vmd/plugins $auto_path] ;
+    # Start the TkConsole on
+    #after idle {menu tkcon on}
 
-# Add menu for third party plugin 
-# vmd_install_extension draw_cubic_unitcell draw_cubic_unitcell "My Plugins/Trajectory path"
-vmd_install_extension crystallography_gui cryst_tk "Crystallography"
-vmd_install_extension ProgressIndicator ProgressIndicator_tk "ProgressIndicator"
+    display resize 400 400
 
+    menu main move 700 50
 
-display rendermode GLSL
-color Display Background white
-color Element Si silver
-color Element P red
-color Labels Atoms black
-color Labels Bonds blue
+    # PLUGINS 
+    # http://physiology.med.cornell.edu/faculty/hweinstein/vmdplugins/installation.html
 
+    # prepend local (autoloaded) plugins to the search path 
+
+    # Add menu for third party plugin 
+    # vmd_install_extension draw_cubic_unitcell draw_cubic_unitcell "My Plugins/Trajectory path"
+    vmd_install_extension crystallography_gui cryst_tk "Crystallography"
+    vmd_install_extension statusIndicator statusIndicator_tk "Status Indicator"
+
+    display rendermode GLSL
+
+}
 
 proc save_viewpoint {} {
   global viewpoints
@@ -70,5 +72,12 @@ user add key w "restore_viewpoint"
 #mol representation DynamicBonds 2.500000 0.100000 6.000000
 #mol representation Polyhedra 2.500000
 #mol representation CPK 0.4 0.3 10.0 6.0  ;# sphere scale, bond radius, sphere res, bond res
+
+display projection orthographic ;
 mol default style CPK
 mol default color Element
+color Display Background white
+color Element Si silver
+color Element P red
+color Labels Atoms black
+color Labels Bonds blue

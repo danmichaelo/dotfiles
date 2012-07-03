@@ -21,59 +21,11 @@
 # and http://www.stereo.org.ua/2006/bashrc-ps1/
 # and https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
 
-test -n "$BASHRC_LOADED" && {
-	return
+test -z "$SUBSHELL" && {
+    # bring in system bashrc
+    test -r /etc/bashrc &&
+          . /etc/bashrc
 }
-export BASHRC_LOADED=1
-
-# List path entries of PATH or environment variable <var>.
-pls() { 
-    test -z "$1" && PATHVAR='PATH' || PATHVAR=$1
-    echo ${!PATHVAR} | tr ':' '\n'
-}
-export -f pls
-
-path_remove() {
-    NEWPATH=$(echo ${!1} | tr ':' '\n' | grep -v "$2" | paste -d: -s -)
-    export $1=$NEWPATH
-}
-export -f path_remove 
-
-path_prepend() {
-    # Example: path_prepend PATH /opt/local/bin
-    # If just one argument is given, 'PATH' is taken as the variable
-    PATHVAR="$1" DIR="$2"
-    test -z "$2" && PATHVAR="PATH" && DIR="$1"
-    test ! -d "$DIR" && return # if non-existent
-    if test -z "${!PATHVAR}"; then 
-        # the path is empty
-        export $PATHVAR="$DIR"
-    else
-        path_remove $PATHVAR $DIR
-        export $PATHVAR="$DIR:${!PATHVAR}"
-    fi 
-}
-export -f path_prepend 
-
-path_append() {
-    # Example: path_append MANPATH ~/man
-    # If just one argument is given, 'PATH' is taken as the variable
-    PATHVAR="$1" DIR="$2"
-    test -z "$2" && PATHVAR="PATH" && DIR="$1"
-    test ! -d "$DIR" && return # if non-existent
-    if test -z "${!PATHVAR}"; then 
-        # the path is empty
-        export $PATHVAR="$DIR"
-    else
-        path_remove $PATHVAR $DIR
-        export $PATHVAR="${!PATHVAR}:$DIR"
-    fi
-}
-export -f path_append 
-
-# bring in system bashrc
-test -r /etc/bashrc &&
-      . /etc/bashrc
 
 # detect interactive shell
 case "$-" in
@@ -93,13 +45,76 @@ else
 	export SHOSTNAME=`uname`
 fi
 
+################################################################################
+# Paths:
+
+# List path entries of PATH or environment variable <var>.
+
+test -z "$SUBSHELL" && {
+
+    pls() { 
+        test -z "$1" && PATHVAR='PATH' || PATHVAR=$1
+        echo ${!PATHVAR} | tr ':' '\n'
+    }
+    export -f pls
+
+    path_remove() {
+        NEWPATH=$(echo ${!1} | tr ':' '\n' | grep -v "$2" | paste -d: -s -)
+        export $1=$NEWPATH
+    }
+    export -f path_remove 
+
+    path_prepend() {
+        # Example: path_prepend PATH /opt/local/bin
+        # If just one argument is given, 'PATH' is taken as the variable
+        PATHVAR="$1" DIR="$2"
+        test -z "$2" && PATHVAR="PATH" && DIR="$1"
+        test ! -d "$DIR" && return # if non-existent
+        if test -z "${!PATHVAR}"; then 
+            # the path is empty
+            export $PATHVAR="$DIR"
+        else
+            path_remove $PATHVAR $DIR
+            export $PATHVAR="$DIR:${!PATHVAR}"
+        fi 
+    }
+    export -f path_prepend 
+
+    path_append() {
+        # Example: path_append MANPATH ~/man
+        # If just one argument is given, 'PATH' is taken as the variable
+        PATHVAR="$1" DIR="$2"
+        test -z "$2" && PATHVAR="PATH" && DIR="$1"
+        test ! -d "$DIR" && return # if non-existent
+        if test -z "${!PATHVAR}"; then 
+            # the path is empty
+            export $PATHVAR="$DIR"
+        else
+            path_remove $PATHVAR $DIR
+            export $PATHVAR="${!PATHVAR}:$DIR"
+        fi
+    }
+    export -f path_append 
+}
+
 # Load machine-specific things
 test -f $HOME/.$SHOSTNAME && . $HOME/.$SHOSTNAME
+
+if [ -z "$SUBSHELL" ]; then
+    path_prepend $HOME/bin
+    path_append $HOME/scripts
+    path_append $HOME/synced/scripts
+    path_append $HOME/opt/bin
+fi
 
 test -z "$INTERACTIVE" && {
     # Shell is non-interactive (something like scp). We should exit now!
 	return
 }
+
+################################################################################
+# Interactive-only below: 
+
 #echo -e "[H]\c"
 
 UNAME="$(uname)"
@@ -113,29 +128,30 @@ ME="$(whoami)"
 #    return
 #fi;
 
-real_dir() {
-    CURDIR=`pwd`
-    TARGET_FILE=$1
-    cd `dirname $TARGET_FILE`
-    TARGET_FILE=`basename $TARGET_FILE`
-    # Iterate down a (possible) chain of symlinks
-    while [ -L "$TARGET_FILE" ]
-    do
-        TARGET_FILE=`readlink $TARGET_FILE`
-        cd `dirname $TARGET_FILE` > /dev/null
+test -z "$SUBSHELL" && {
+    real_dir() {
+        CURDIR=`pwd`
+        TARGET_FILE=$1
+        cd `dirname $TARGET_FILE`
         TARGET_FILE=`basename $TARGET_FILE`
-    done
+        # Iterate down a (possible) chain of symlinks
+        while [ -L "$TARGET_FILE" ]
+        do
+            TARGET_FILE=`readlink $TARGET_FILE`
+            cd `dirname $TARGET_FILE` > /dev/null
+            TARGET_FILE=`basename $TARGET_FILE`
+        done
 
-    # Compute the canonicalized name by finding the physical path 
-    # for the directory we're in and appending the target file.
-    PHYS_DIR=`pwd -P`
-    RESULT=$PHYS_DIR
-    cd $CURDIR
-    echo $RESULT
+        # Compute the canonicalized name by finding the physical path 
+        # for the directory we're in and appending the target file.
+        PHYS_DIR=`pwd -P`
+        RESULT=$PHYS_DIR
+        cd $CURDIR
+        echo $RESULT
+    }
+    export -f real_dir
+
 }
-export -f real_dir
-
-
 
 # Colors
 
@@ -291,9 +307,11 @@ shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH f
                                     # possible completions when completion is 
                                     # attempted on an empty line
 
-if [ -f ~/.bash_prompt ]; then
-    source ~/.bash_prompt
-fi
+test -z "$SUBSHELL" && {
+    if [ -f ~/.bash_prompt ]; then
+        source ~/.bash_prompt
+    fi
+}
 
 # Avoid stack overflow on the execution of the three Fortran programs
 # ulimit -s 64000
@@ -306,7 +324,7 @@ fi
 # LANG 
 # export LC_ALL=no_NO.UTF-8
 #export LANG=no
-export LC_ALL=C     # some programs only work with LC_ALL=C
+#export LC_ALL=C     # some programs only work with LC_ALL=C
 # LC_COLLATE: Influences sorting order.
 
 # UMASK: 1=x, 2=w, 4=r (rwx=2+4+1=7)
@@ -320,26 +338,20 @@ export HOME=~
 #source $HOME/.bash_functions      # Path functions
 
 echo -e "\033[0;31m $ME @ $(uname -npsr) \c"
+test -n "$SUBSHELL" && {
+    echo -e " [subshell] \c"
+}
 
 # Source programmable bash completion for completion of hostnames, etc.:
-if [ -f /opt/local/etc/bash_completion ]; then 
-    source /opt/local/etc/bash_completion
-elif [ -f /etc/bash_completion ]; then 
-    source /etc/bash_completion
-else
-    source $HOME/.bash_completion
-fi
-
-
-# ----------------------------------------------------------------------------------------
-# Paths:
-
-path_prepend $HOME/bin
-path_append $HOME/scripts
-path_append $HOME/synced/scripts
-path_append $HOME/opt/bin
-
-
+test -z "$SUBSHELL" && {
+    if [ -f /opt/local/etc/bash_completion ]; then 
+        source /opt/local/etc/bash_completion
+    elif [ -f /etc/bash_completion ]; then 
+        source /etc/bash_completion
+    else
+        source $HOME/.bash_completion
+    fi
+}
 
 ###############################################################################
 # Shell behaviors
@@ -399,4 +411,5 @@ fi
 LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
 a ls="ls $LS_OPTIONS"
 
+export SUBSHELL=1
 echo -e "$NORMAL$RESET"

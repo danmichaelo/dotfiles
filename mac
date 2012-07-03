@@ -9,45 +9,63 @@
 # ========================= NON-INTERACTIVE STUFF ==============================
 # (Keep this to a minimum to speed up e.g. MacVim startup)
 
-path_append /opt/local/lib/gromacs/bin
-path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
-path_append /opt/espresso/bin
-path_append $HOME/source/python/ase/tools
-path_append /usr/local/cuda/bin
-path_append /opt/p4vasp/bin
+test -z "$SUBSHELL" && {
+    # Don't add to subshells
+    path_append /opt/local/lib/gromacs/bin
+    path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+    path_append /opt/espresso/bin
+    path_append $HOME/source/python/ase/tools
+    path_append /usr/local/cuda/bin
+    path_append /opt/p4vasp/bin
 
-path_prepend /opt/openmpi/bin
-path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
-path_append LD_LIBRARY_PATH /opt/openmpi/lib
-path_append MANPATH /opt/openmpi/share/man
+    path_prepend /opt/openmpi/bin
+    path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
+    path_append LD_LIBRARY_PATH /opt/openmpi/lib
+    path_append MANPATH /opt/openmpi/share/man
 
-path_append "$HOME/Documents/Studier/Master/scripts"
-path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
-path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
+    path_append "$HOME/Documents/Studier/Master/scripts"
+    path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+    path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
 
-path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
-path_append PYTHONPATH $HOME/includes/python2-7
-#path_append PYTHONPATH $HOME/code/python
-path_append PYTHONPATH $HOME/lib/python
-path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
+    path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
+    path_append PYTHONPATH $HOME/includes/python2-7
+    #path_append PYTHONPATH $HOME/code/python
+    path_append PYTHONPATH $HOME/lib/python
+    path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
-path_append MANPATH /usr/local/man
+    path_prepend PERL5LIB $HOME/lib/perl
 
-# MacPorts
-path_prepend /opt/local/sbin
-path_prepend /opt/local/bin
-path_prepend MANPATH /opt/local/share/man
-#path_prepend DYLD_LIBRARY_PATH /opt/local/lib
-#path_prepend LD_LIBRARY_PATH /opt/local/lib
+    path_append MANPATH /usr/local/man
 
-# TexLive
-path_append /usr/texbin
+    # MacPorts
+    path_prepend /opt/local/sbin
+    path_prepend /opt/local/bin
+    path_prepend MANPATH /opt/local/share/man
+    #path_prepend DYLD_LIBRARY_PATH /opt/local/lib
+    #path_prepend LD_LIBRARY_PATH /opt/local/lib
+
+    # TexLive
+    path_append /usr/texbin
+}
 
 test -z "$INTERACTIVE" && {
     # Shell is non-interactive (something like scp). We should exit now!
 	return
 }
 # =========================== INTERACTIVE STUFF ================================
+
+# Aliases:
+alias mysql=mysql5
+alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
+alias vlc=/Applications/VLC.app/Contents/MacOS/VLC
+alias pfo="open -a Path\ Finder"
+alias math=/Applications/Mathematica.app/Contents/MacOS/MathKernel
+alias bb=bbedit
+alias mp=~/bin/mpost-pdf.pl
+alias skim="open -a Skim.app"
+alias tclsh="rlwrap tclsh"
+alias acrobat="open -a 'Adobe Acrobat Pro'"
+alias acroread="open -a 'Adobe Acrobat Pro'"
 
 # Build options {{{
 
@@ -79,43 +97,8 @@ export MACOSX_DEPLOYMENT_TARGET=10.7
 # it to "C".
 # Run 'locale' to check the current value.
 #export LC_CTYPE=en_GB.UTF-8
-export LC_ALL="en_US.UTF-8"
+
 umask 022
-
-echo -e "{ mac }\c"
-# Print a reminder to self 
-echo -e "[$CFLAGS]\c"
-
-export VMDDIR=/Applications/VMD.app/Contents/vmd
-export VMDBABELBIN=/opt/local/bin/babel
-
-# XCrysDen env:
-#------------------------------------------------------------------------
-# this is for XCRYSDEN 1.5.25; added by XCRYSDEN installation on
-# Fri Jan 20 15:05:47 CET 2012
-#------------------------------------------------------------------------
-XCRYSDEN_TOPDIR=/opt/XCrySDen-1.5.24-src
-#/opt/XCrySDen-1.5.24-bin-shared
-#/Users/danmichael/Downloads/XCrySDen-1.5.24-bin-semishared
-XCRYSDEN_SCRATCH=/Users/danmichael/tmp/xcrys
-export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
-
-path_prepend $XCRYSDEN_TOPDIR
-path_append $XCRYSDEN_TOPDIR/scripts
-path_append $XCRYSDEN_TOPDIR/util
-
-# Aliases:
-alias mysql=mysql5
-alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
-alias vlc=/Applications/VLC.app/Contents/MacOS/VLC
-alias pfo="open -a Path\ Finder"
-alias math=/Applications/Mathematica.app/Contents/MacOS/MathKernel
-alias bb=bbedit
-alias mp=~/bin/mpost-pdf.pl
-alias skim="open -a Skim.app"
-alias tclsh="rlwrap tclsh"
-alias acrobat="open -a 'Adobe Acrobat Pro'"
-alias acroread="open -a 'Adobe Acrobat Pro'"
 
 # Snip for Mathematica batch execution.
 # Usage: mma test.m
@@ -130,54 +113,82 @@ manp() {
     man -t "${1}" | open -f -a Preview
 }
 
-RIETAN=/Applications/RIETAN_VENUS
-ORFFE=$RIETAN
-LST2CIF=$RIETAN
-PRIMA=/Applications/RIETAN_VENUS/
-ALBA=$PRIMA
-export RIETAN ORFFE LST2CIF PRIMA ALBA
+test -z "$SUBSHELL" && {
+    export LC_ALL="en_US.UTF-8"
 
-export CPAN=ftp://ftp.uninett.no/pub/languages/perl/CPAN
+    echo -e "{ mac }\c"
+    # Print a reminder to self 
+    echo -e "[$CFLAGS]\c"
 
-export DROPBOX=$HOME/Dropbox
-export RSPTHOME=/opt/rspt629
+    export VMDDIR=/Applications/VMD.app/Contents/vmd
+    export VMDBABELBIN=/opt/local/bin/babel
 
-# Unfortunately, GPAW doesn't work with NumPy 1.6
-# https://trac.fysik.dtu.dk/projects/gpaw/ticket/226
-export GPAW_SETUP_PATH=${HOME}/lib/gpaw-setups/gpaw-setups-0.8.7929
+    # XCrysDen env:
+    #------------------------------------------------------------------------
+    # this is for XCRYSDEN 1.5.25; added by XCRYSDEN installation on
+    # Fri Jan 20 15:05:47 CET 2012
+    #------------------------------------------------------------------------
+    XCRYSDEN_TOPDIR=/opt/XCrySDen-1.5.24-src
+    #/opt/XCrySDen-1.5.24-bin-shared
+    #/Users/danmichael/Downloads/XCrySDen-1.5.24-bin-semishared
+    XCRYSDEN_SCRATCH=/Users/danmichael/tmp/xcrys
+    export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
 
-# Computational Crystallography Toolbox (CCTBX)
-#source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
-export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
+    path_prepend $XCRYSDEN_TOPDIR
+    path_append $XCRYSDEN_TOPDIR/scripts
+    path_append $XCRYSDEN_TOPDIR/util
 
-test -d /opt/intel &&
-    . /opt/intel/bin/compilervars.sh intel64 &&
-    path_append DYLD_LIBRARY_PATH /opt/intel/mkl/lib
-    path_append LD_LIBRARY_PATH /opt/intel/mkl/lib
+    RIETAN=/Applications/RIETAN_VENUS
+    ORFFE=$RIETAN
+    LST2CIF=$RIETAN
+    PRIMA=/Applications/RIETAN_VENUS/
+    ALBA=$PRIMA
+    export RIETAN ORFFE LST2CIF PRIMA ALBA
 
-#CULA
-export CULA_ROOT=/usr/local/cula
-export CULA_INC_PATH=$CULA_ROOT/include
-export CULA_BIN_PATH_32=$CULA_ROOT/bin
-export CULA_BIN_PATH_64=$CULA_ROOT/bin64
-export CULA_LIB_PATH_32=$CULA_ROOT/lib
-export CULA_LIB_PATH_64=$CULA_ROOT/lib64
+    export CPAN=ftp://ftp.uninett.no/pub/languages/perl/CPAN
 
-# Platon env:
-PWTDIR=~/tmp/
+    export DROPBOX=$HOME/Dropbox
+    export RSPTHOME=/opt/rspt629
 
-# RIETAN VENUS env:
-RIETAN=/Applications/RIETAN_VENUS
-ORFFE=$RIETAN
-LST2CIF=$RIETAN
-PRIMA=/Applications/RIETAN_VENUS/
-ALBA=$PRIMA
-export RIETAN ORFFE LST2CIF PRIMA ALBA
-path_append $RIETAN
+    # Unfortunately, GPAW doesn't work with NumPy 1.6
+    # https://trac.fysik.dtu.dk/projects/gpaw/ticket/226
+    export GPAW_SETUP_PATH=${HOME}/lib/gpaw-setups/gpaw-setups-0.8.7929
 
-# BC: Quiet startup, load mathlib and extension for familiar function names:
-export BC_ENV_ARGS="-q -l $HOME/.bc/extensions.bc $HOME/.bc/bcrc"
+    # Computational Crystallography Toolbox (CCTBX)
+    #source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
+    export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
 
-# QT env:
-export QTDIR=/opt/local/lib/qt3 # used by qtmake
+    test -d /opt/intel &&
+        . /opt/intel/bin/compilervars.sh intel64 &&
+        path_append DYLD_LIBRARY_PATH /opt/intel/mkl/lib
+        path_append LD_LIBRARY_PATH /opt/intel/mkl/lib
 
+    #CULA
+    export CULA_ROOT=/usr/local/cula
+    export CULA_INC_PATH=$CULA_ROOT/include
+    export CULA_BIN_PATH_32=$CULA_ROOT/bin
+    export CULA_BIN_PATH_64=$CULA_ROOT/bin64
+    export CULA_LIB_PATH_32=$CULA_ROOT/lib
+    export CULA_LIB_PATH_64=$CULA_ROOT/lib64
+
+    # Platon env:
+    PWTDIR=~/tmp/
+
+    # RIETAN VENUS env:
+    RIETAN=/Applications/RIETAN_VENUS
+    ORFFE=$RIETAN
+    LST2CIF=$RIETAN
+    PRIMA=/Applications/RIETAN_VENUS/
+    ALBA=$PRIMA
+    export RIETAN ORFFE LST2CIF PRIMA ALBA
+    path_append $RIETAN
+
+    # BC: Quiet startup, load mathlib and extension for familiar function names:
+    export BC_ENV_ARGS="-q -l $HOME/.bc/extensions.bc $HOME/.bc/bcrc"
+
+    # QT env:
+    export QTDIR=/opt/local/lib/qt3 # used by qtmake
+
+    export PYWIKIBOT2_DIR=/Users/danmichael/code/python/wikipedia/pywikipediabot
+
+}
