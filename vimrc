@@ -83,13 +83,14 @@ let mapleader = ","
     set expandtab               " more portable to use spaces for indenting
     set softtabstop=4           " makes backspace delete 4 spaces at once
     set autoindent              " indent at the same level of the previous line
-    set smartindent            " do we need it?
+    set smartindent             " do we need it?
     "set textwidth=77           " hard wrap at this column
     set ignorecase              " needed for smartcase
     set smartcase               " ignore case unless upper-case letters entered
     set incsearch               " incremental searching (I love-hate this..)
     set hls                     " Highlight search results
-    set pastetoggle=<F2>        " Toggles paste mode
+    set pastetoggle=<C-l>p      " Toggles paste mode
+    nnoremap <Leader>p :set invpaste<CR>
 " }}}
 
 " Vim UI {{{
@@ -178,6 +179,64 @@ let mapleader = ","
     " %2*     Switch to User2 highlight
     " %-3.3n  Buffer number
     " %P      Percentage through the file
+    " set statusline"
+    " Horizontal scrollbar
+    " https://groups.google.com/forum/?fromgroups=#!msg/vim_use/6bO-QKWj9_4/2cdqygSqcMgJ
+    " https://github.com/goerz/vimrc/blob/master/vimrc
+    function ShowFileFormatFlag(var)
+      if ( a:var == 'dos' )
+        return ' [dos]'
+      elseif ( a:var == 'mac' )
+        return ' [mac]'
+      else
+        return ''
+      endif
+    endfunction
+    if has("gui_running")
+        " In gvim, we can do with a fairly simple status line
+        "set stl=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")}%M%R%H%W]\ %y\ [%l/%L,%v]\ [%p%%]
+    else
+        " In a regular console, I want to emulate a scroll bar
+        func! STL()
+            let stl_encodinginfo = '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",B":"")}'
+            let stl = '%f ['.stl_encodinginfo.'%M%R%H%W]%{ShowFileFormatFlag(&fileformat)} %y [%4l/%4L,%2.v]'
+            let takenwidth = len(bufname(winbufnr(winnr()))) + len(&filetype) + 3 * &readonly
+                        \ + len((&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",B":""))
+                        \ + len(ShowFileFormatFlag(&fileformat))
+                        \ + 2 * ((&modified) || (!&modifiable)) + 2*len(line('$')) + 20
+                        \ + g:stl_extraspace
+            let barWidth = &columns - takenwidth
+            let barWidth = barWidth < 3 ? 3 : barWidth
+
+            if line('$') > 1
+                let progress = (line('.')-1) * (barWidth-1) / (line('$')-1)
+            else
+                let progress = barWidth/2
+            endif
+
+            if barWidth <=6
+                let bar = '[%p%%]'
+            else
+                let bar = ' [%0*%'.barWidth.'.'.barWidth.'('.repeat('-',progress ).'%2*0%0*'.repeat('-',barWidth - progress - 1).'%0*%)%<]'
+            endif
+
+            return stl.bar
+        endfun
+        "hi def link User1 Grey40
+        "hi def link User2 Red
+        highlight User2 guibg=Red ctermbg=Red ctermfg=Red guifg=Red
+        
+
+        let stl_extraspace = 0 " You can set this global variable in order to limit the
+        " space of the statusline. This is useful in case you
+        " have several windows open with vertical splits
+
+        set stl=%!STL()       " (when starting in console mode)
+    endif
+    " I also want special formatting of the scroll bar
+    set highlight+=sr
+    set highlight+=Sr
+    set laststatus=2
 	
 " }}}
 
