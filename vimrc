@@ -209,23 +209,26 @@ let mapleader = ","
             let barWidth = barWidth < 3 ? 3 : barWidth
 
             if line('$') > 1
-                let progress = (line('.')-1) * (barWidth-1) / (line('$')-1)
+                "let progress = (line('.')-1) * (barWidth-1) / (line('$')-1)
+                " more like a normal progressbar: but this will only be
+                " approximate with line break enabled, due to different
+                " counting between line() and winheight()
+                let progress = (line('w0')-1) * (barWidth-6) / ((line('$')-1) - winheight(0))
             else
                 let progress = barWidth/2
             endif
 
-            if barWidth <=6
+            if barWidth <=12
                 let bar = '[%p%%]'
             else
-                let bar = ' [%0*%'.barWidth.'.'.barWidth.'('.repeat('-',progress ).'%2*0%0*'.repeat('-',barWidth - progress - 1).'%0*%)%<]'
+                let bar = ' [%0*%'.barWidth.'.'.barWidth.'('.repeat('-',progress ).'%2*      %0*'.repeat('-',barWidth - progress - 6).'%0*%)%<]'
             endif
 
             return stl.bar
         endfun
         "hi def link User1 Grey40
         "hi def link User2 Red
-        highlight User2 guibg=Red ctermbg=Red ctermfg=Red guifg=Red
-        
+        highlight User2 ctermbg=Black
 
         let stl_extraspace = 0 " You can set this global variable in order to limit the
         " space of the statusline. This is useful in case you
