@@ -97,6 +97,12 @@ test -z "$SUBSHELL" && {
     export -f path_append 
 }
 
+#test -n "$INTERACTIVE" && {
+#    # UMASK: 1=x, 2=w, 4=r (rwx=2+4+1=7)
+#    # umask 022   # turn off w for g,o (default)
+#    umask 027   # turn off w for g, rwx for o (useful on shared computers)
+#}
+
 # Load machine-specific things
 test -f $HOME/.$SHOSTNAME && . $HOME/.$SHOSTNAME
 
@@ -327,9 +333,6 @@ test -z "$SUBSHELL" && {
 #export LC_ALL=C     # some programs only work with LC_ALL=C
 # LC_COLLATE: Influences sorting order.
 
-# UMASK: 1=x, 2=w, 4=r (rwx=2+4+1=7)
-# umask 022   # turn off w for g,o (default)
-umask 027     # turn off w for g, rwx for o
 
 export UNAME="$(uname)"
 export ME="$(whoami)"
