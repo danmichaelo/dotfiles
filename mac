@@ -1,4 +1,4 @@
-#!/bin/sh
+
 # vi:ft=sh
 
 ################################################################################
@@ -19,8 +19,12 @@ test -z "$SUBSHELL" && {
     path_append /opt/p4vasp/bin
 
     path_prepend /opt/openmpi/bin
-    path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
-    path_append LD_LIBRARY_PATH /opt/openmpi/lib
+    #path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
+    #path_append LD_LIBRARY_PATH /opt/openmpi/lib
+
+    path_append MANPATH /usr/share/man
+    path_append MANPATH /usr/local/man
+    path_append MANPATH /opt/X11/share/man
     path_append MANPATH /opt/openmpi/share/man
 
     path_append "$HOME/Documents/Studier/Master/scripts"
@@ -31,11 +35,11 @@ test -z "$SUBSHELL" && {
     path_append PYTHONPATH $HOME/includes/python2-7
     #path_append PYTHONPATH $HOME/code/python
     path_append PYTHONPATH $HOME/lib/python
+    path_append PYTHONPATH $HOME/lib/python2.7/site-packages
     path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
     path_prepend PERL5LIB $HOME/lib/perl
 
-    path_append MANPATH /usr/local/man
 
     # MacPorts
     path_prepend /opt/local/sbin
@@ -66,14 +70,22 @@ alias skim="open -a Skim.app"
 alias tclsh="rlwrap tclsh"
 alias acrobat="open -a 'Adobe Acrobat Pro'"
 alias acroread="open -a 'Adobe Acrobat Pro'"
+alias wget="wget --content-disposition" # filename from Content-Disposition
+alias grep="grep --color"
 
 # Build options {{{
+
+# clang supports the -arch parameter, which macports gcc does not support
+# make scripts for mac may therefore expect -arch to be supported, so
+# defaulting to clang may be a good idea
+export CC=clang
+export CXX=clang
 
 # For å linke mot originale systembibliotek, kan det noen ganger lønne seg å 
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er 
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC.
 
-export MACOSX_DEPLOYMENT_TARGET=10.7
+export MACOSX_DEPLOYMENT_TARGET=10.8
 #export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
 #export LDFLAGS='-O3 -arch i386 -arch x86_64 -arch ppc -bind_at_load' 
 #export CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc'
@@ -98,6 +110,8 @@ export MACOSX_DEPLOYMENT_TARGET=10.7
 # Run 'locale' to check the current value.
 #export LC_CTYPE=en_GB.UTF-8
 
+
+# umask 022   # turn off w for g,o (default)
 umask 022
 
 # Snip for Mathematica batch execution.
@@ -125,12 +139,9 @@ test -z "$SUBSHELL" && {
 
     # XCrysDen env:
     #------------------------------------------------------------------------
-    # this is for XCRYSDEN 1.5.25; added by XCRYSDEN installation on
-    # Fri Jan 20 15:05:47 CET 2012
+    # this is for XCRYSDEN 1.5.53; 
     #------------------------------------------------------------------------
-    XCRYSDEN_TOPDIR=/opt/XCrySDen-1.5.24-src
-    #/opt/XCrySDen-1.5.24-bin-shared
-    #/Users/danmichael/Downloads/XCrySDen-1.5.24-bin-semishared
+    XCRYSDEN_TOPDIR=/opt/xcrysden-1.5.53
     XCRYSDEN_SCRATCH=/Users/danmichael/tmp/xcrys
     export XCRYSDEN_TOPDIR XCRYSDEN_SCRATCH
 
@@ -158,10 +169,10 @@ test -z "$SUBSHELL" && {
     #source ~/code/python/_modules/cctbx/cctbx_build/setpaths.sh   # This is relatively time-consuming...
     export LIBTBX_BUILD="/Users/danmichael/code/python/_modules/cctbx/cctbx_build"
 
-    test -d /opt/intel &&
-        . /opt/intel/bin/compilervars.sh intel64 &&
-        path_append DYLD_LIBRARY_PATH /opt/intel/mkl/lib
-        path_append LD_LIBRARY_PATH /opt/intel/mkl/lib
+    #test -d /opt/intel &&
+    #    . /opt/intel/bin/compilervars.sh intel64 &&
+    #    path_append LD_LIBRARY_PATH /opt/intel/mkl/lib
+        #path_append DYLD_LIBRARY_PATH /opt/intel/mkl/lib
 
     #CULA
     export CULA_ROOT=/usr/local/cula
