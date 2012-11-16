@@ -29,6 +29,8 @@ test -z "$SUBSHELL" && {
 
     path_append "$HOME/Documents/Studier/Master/scripts"
     path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+    path_append "$HOME/code/python/oppvasp/scripts"
+    path_append PYTHONPATH "$HOME/code/python/oppvasp/scripts"
     path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
 
     path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
@@ -47,6 +49,7 @@ test -z "$SUBSHELL" && {
     path_prepend MANPATH /opt/local/share/man
     #path_prepend DYLD_LIBRARY_PATH /opt/local/lib
     #path_prepend LD_LIBRARY_PATH /opt/local/lib
+    #path_prepend /opt/local/lib
 
     # TexLive
     path_append /usr/texbin
@@ -86,6 +89,8 @@ export CXX=clang
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC.
 
 export MACOSX_DEPLOYMENT_TARGET=10.8
+export CFLAGS=-I/opt/local/include 
+export LDFLAGS=-L/opt/local/lib
 #export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
 #export LDFLAGS='-O3 -arch i386 -arch x86_64 -arch ppc -bind_at_load' 
 #export CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc'
@@ -202,4 +207,8 @@ test -z "$SUBSHELL" && {
 
     export PYWIKIBOT2_DIR=/Users/danmichael/code/python/wikipedia/pywikipediabot
 
+}
+
+quit () {
+    osascript -e "tell app \"$1\" to quit"
 }

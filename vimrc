@@ -91,6 +91,8 @@ let mapleader = ","
     set hls                     " Highlight search results
     set pastetoggle=<C-l>p      " Toggles paste mode
     nnoremap <Leader>p :set invpaste<CR>
+    set formatprg=par           " http://vimcasts.org/episodes/formatting-text-with-par/
+
 " }}}
 
 " Vim UI {{{
@@ -194,47 +196,47 @@ let mapleader = ","
     endfunction
     if has("gui_running")
         " In gvim, we can do with a fairly simple status line
-        "set stl=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")}%M%R%H%W]\ %y\ [%l/%L,%v]\ [%p%%]
+        set stl=%f\ [%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")}%M%R%H%W]\ %y\ [%l/%L,%v]\ [%p%%]
     else
         " In a regular console, I want to emulate a scroll bar
-        func! STL()
-            let stl_encodinginfo = '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",B":"")}'
-            let stl = '%f ['.stl_encodinginfo.'%M%R%H%W]%{ShowFileFormatFlag(&fileformat)} %y [%4l/%4L,%2.v]'
-            let takenwidth = len(bufname(winbufnr(winnr()))) + len(&filetype) + 3 * &readonly
-                        \ + len((&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",B":""))
-                        \ + len(ShowFileFormatFlag(&fileformat))
-                        \ + 2 * ((&modified) || (!&modifiable)) + 2*len(line('$')) + 20
-                        \ + g:stl_extraspace
-            let barWidth = &columns - takenwidth
-            let barWidth = barWidth < 3 ? 3 : barWidth
+        "func! STL()
+        "    let stl_encodinginfo = '%{(&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",B":"")}'
+        "    let stl = '%f ['.stl_encodinginfo.'%M%R%H%W]%{ShowFileFormatFlag(&fileformat)} %y [%4l/%4L,%2.v]'
+        "    let takenwidth = len(bufname(winbufnr(winnr()))) + len(&filetype) + 3 * &readonly
+        "                \ + len((&fenc==""?&enc:&fenc).((exists("+bomb") && &bomb)?",B":""))
+        "                \ + len(ShowFileFormatFlag(&fileformat))
+        "                \ + 2 * ((&modified) || (!&modifiable)) + 2*len(line('$')) + 20
+        "                \ + g:stl_extraspace
+        "    let barWidth = &columns - takenwidth
+        "    let barWidth = barWidth < 3 ? 3 : barWidth
 
-            if line('$') > 1
-                "let progress = (line('.')-1) * (barWidth-1) / (line('$')-1)
-                " more like a normal progressbar: but this will only be
-                " approximate with line break enabled, due to different
-                " counting between line() and winheight()
-                let progress = (line('w0')-1) * (barWidth-6) / ((line('$')-1) - winheight(0))
-            else
-                let progress = barWidth/2
-            endif
+        "    if line('$') > 1
+        "        "let progress = (line('.')-1) * (barWidth-1) / (line('$')-1)
+        "        " more like a normal progressbar: but this will only be
+        "        " approximate with line break enabled, due to different
+        "        " counting between line() and winheight()
+        "        let progress = (line('w0')-1) * (barWidth-6) / ((line('$')-1) - winheight(0))
+        "    else
+        "        let progress = barWidth/2
+        "    endif
 
-            if barWidth <=12
-                let bar = '[%p%%]'
-            else
-                let bar = ' [%0*%'.barWidth.'.'.barWidth.'('.repeat('-',progress ).'%2*      %0*'.repeat('-',barWidth - progress - 6).'%0*%)%<]'
-            endif
+        "    if barWidth <=12
+        "        let bar = '[%p%%]'
+        "    else
+        "        let bar = ' [%0*%'.barWidth.'.'.barWidth.'('.repeat('-',progress ).'%2*      %0*'.repeat('-',barWidth - progress - 6).'%0*%)%<]'
+        "    endif
 
-            return stl.bar
-        endfun
+        "    return stl.bar
+        "endfun
         "hi def link User1 Grey40
         "hi def link User2 Red
-        highlight User2 ctermbg=Black
+        "highlight User2 ctermbg=Black
 
-        let stl_extraspace = 0 " You can set this global variable in order to limit the
+        "let stl_extraspace = 0 " You can set this global variable in order to limit the
         " space of the statusline. This is useful in case you
         " have several windows open with vertical splits
 
-        set stl=%!STL()       " (when starting in console mode)
+        "set stl=%!STL()       " (when starting in console mode)
     endif
     " I also want special formatting of the scroll bar
     set highlight+=sr
@@ -612,3 +614,11 @@ endif
     endfun
 
 " }}}
+
+command! -nargs=* Hardcopy call DoMyPrint('<args>')
+function DoMyPrint(args)
+  let colorsave=g:colors_name
+  color print
+  exec 'hardcopy '.a:args
+  exec 'color '.colorsave
+endfunction
