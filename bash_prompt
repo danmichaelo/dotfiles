@@ -39,12 +39,23 @@ function setXtermTitle {
     #
     #RET_VALUE='$(echo $RET)' #Ret value not colorized - you can modify it.
     
-    if [[ $RET = 0 ]]; then
-        IPROMPT="\[\e[32m\]\t\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
-    else
-       IPROMPT="\[\e[32m\]\t\[\e[0m\] \[\e[4;31m\][$RET]\[\e[0m\] \W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")\$ "
+    IPROMPT="\[\e[32m\]\t\[\e[0m\] "
+    if [[ $RET != 0 ]]; then
+        IPROMPT="$IPROMPT\[\e[4;31m\][$RET]\[\e[0m\] "
     fi
-    PS1="$IPROMPT"
+    if type "__git_ps1" > /dev/null 2>&1; then
+        IPROMPT="$IPROMPT\W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")"
+    fi
+
+    # http://superuser.com/a/313172
+    # \e]2; is the escape sequence to print things in the titlebar.
+    # The format below will allow Terminal.app to open new
+    # tabs in the same working directory, apparently reading
+    # the information from the titlebar
+    IPROMPT="$IPROMPT\[\e]2;\u@\H \w\a\]"
+
+
+    PS1="$IPROMPT\$ "
 }
 export -f setXtermTitle  # export function
 
