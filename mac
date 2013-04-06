@@ -12,7 +12,7 @@
 test -z "$SUBSHELL" && {
     # Don't add to subshells
     path_append /opt/local/lib/gromacs/bin
-    path_append /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+    path_prepend /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
     path_append /opt/espresso/bin
     path_append $HOME/source/python/ase/tools
     path_append /usr/local/cuda/bin
