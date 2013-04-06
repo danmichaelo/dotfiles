@@ -27,6 +27,7 @@ test -z "$SUBSHELL" && {
           . /etc/bashrc
 }
 
+
 # detect interactive shell
 case "$-" in
     *i*) export INTERACTIVE=yes ;;
@@ -44,6 +45,7 @@ if [ -f $HOME/.hostname ]; then
 else
 	export SHOSTNAME=`uname`
 fi
+
 
 ################################################################################
 # Paths:
@@ -121,44 +123,6 @@ test -z "$INTERACTIVE" && {
 ################################################################################
 # Interactive-only below: 
 
-#echo -e "[H]\c"
-
-UNAME="$(uname)"
-ME="$(whoami)"
-
-# Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
-# http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
-
-#if [ "$BASH_FUNCTIONS_LOADED" == 1 ]; then 
-#    echo "R"
-#    return
-#fi;
-
-test -z "$SUBSHELL" && {
-    real_dir() {
-        CURDIR=`pwd`
-        TARGET_FILE=$1
-        cd `dirname $TARGET_FILE`
-        TARGET_FILE=`basename $TARGET_FILE`
-        # Iterate down a (possible) chain of symlinks
-        while [ -L "$TARGET_FILE" ]
-        do
-            TARGET_FILE=`readlink $TARGET_FILE`
-            cd `dirname $TARGET_FILE` > /dev/null
-            TARGET_FILE=`basename $TARGET_FILE`
-        done
-
-        # Compute the canonicalized name by finding the physical path 
-        # for the directory we're in and appending the target file.
-        PHYS_DIR=`pwd -P`
-        RESULT=$PHYS_DIR
-        cd $CURDIR
-        echo $RESULT
-    }
-    export -f real_dir
-
-}
-
 # Colors
 
 DULL=0
@@ -218,6 +182,57 @@ BRIGHT_BLUE="\[$ESC[${BRIGHT};${FG_BLUE}m\]"
 BRIGHT_VIOLET="\[$ESC[${BRIGHT};${FG_VIOLET}m\]"
 BRIGHT_CYAN="\[$ESC[${BRIGHT};${FG_CYAN}m\]"
 BRIGHT_WHITE="\[$ESC[${BRIGHT};${FG_WHITE}m\]"
+
+# Check for interactive bash and that we haven't already been sourced.
+
+# Check for recent enough version of bash.
+bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
+if [ $bmajor -gt 4 ] || [ $bmajor -eq 4 -a $bminor -ge 1 ]; then
+    echo -e " $GREEN(Bash $bmajor.$bminor)$RESET"
+else
+    echo -e " $RED(WARNING: Bash $bmajor.$bminor)$RESET"
+fi
+
+
+
+#echo -e "[H]\c"
+
+UNAME="$(uname)"
+ME="$(whoami)"
+
+# Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
+# http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
+
+#if [ "$BASH_FUNCTIONS_LOADED" == 1 ]; then 
+#    echo "R"
+#    return
+#fi;
+
+test -z "$SUBSHELL" && {
+    real_dir() {
+        CURDIR=`pwd`
+        TARGET_FILE=$1
+        cd `dirname $TARGET_FILE`
+        TARGET_FILE=`basename $TARGET_FILE`
+        # Iterate down a (possible) chain of symlinks
+        while [ -L "$TARGET_FILE" ]
+        do
+            TARGET_FILE=`readlink $TARGET_FILE`
+            cd `dirname $TARGET_FILE` > /dev/null
+            TARGET_FILE=`basename $TARGET_FILE`
+        done
+
+        # Compute the canonicalized name by finding the physical path 
+        # for the directory we're in and appending the target file.
+        PHYS_DIR=`pwd -P`
+        RESULT=$PHYS_DIR
+        cd $CURDIR
+        echo $RESULT
+    }
+    export -f real_dir
+
+}
+
 
 
 #export BASH_FUNCTIONS_LOADED=1
