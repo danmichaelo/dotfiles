@@ -33,6 +33,7 @@ function setXtermTitle {
 	#echo -n "[$(date +%k:%M)]"
     RED='\e[0;31m'
     GREEN='\e[0;32m'
+    BLUE='\e[0;34m'
 
     #return value visualisation
     #RET_SMILEY=`if [[ $RET = 0 ]]; then echo -ne "\[$GREEN\];)"; else echo -ne "\[$RED\];("; fi;`
@@ -45,6 +46,10 @@ function setXtermTitle {
     fi
     if type "__git_ps1" > /dev/null 2>&1; then
         IPROMPT="$IPROMPT\W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")"
+    fi
+    if [[ $VIRTUAL_ENV != "" ]]; then
+        # Strip out the path and just leave the env name
+        IPROMPT="$IPROMPT\W\[${BLUE}\](${VIRTUAL_ENV##*/})\[\e[0m\]"
     fi
 
     # http://superuser.com/a/313172
