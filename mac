@@ -53,6 +53,9 @@ test -z "$SUBSHELL" && {
     # TexLive
     path_append /usr/texbin
 
+    # RVM
+    path_append "$HOME/rvm/bin"
+
     # Android SDK
     path_append "$HOME/adt-bundle-mac-x86_64-20130514/sdk/platform-tools"
     path_append "$HOME/adt-bundle-mac-x86_64-20130514/sdk/tools"
@@ -210,6 +213,9 @@ test -z "$SUBSHELL" && {
     export QTDIR=/opt/local/lib/qt3 # used by qtmake
 
     export PYWIKIBOT2_DIR=/Users/danmichael/code/python/wikipedia/pywikipediabot
+
+    #RVM:
+    source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell sess
 
 }
 
