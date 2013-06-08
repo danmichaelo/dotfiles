@@ -49,7 +49,7 @@ function setXtermTitle {
     fi
     if [[ $VIRTUAL_ENV != "" ]]; then
         # Strip out the path and just leave the env name
-        IPROMPT="$IPROMPT\W\[${BLUE}\](${VIRTUAL_ENV##*/})\[\e[0m\]"
+        IPROMPT="$IPROMPT\[${BLUE}\]{${VIRTUAL_ENV##*/}}\[\e[0m\]"
     fi
 
     # http://superuser.com/a/313172
