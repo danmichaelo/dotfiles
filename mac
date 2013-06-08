@@ -11,14 +11,14 @@
 
 test -z "$SUBSHELL" && {
     # Don't add to subshells
-    path_append /opt/local/lib/gromacs/bin
+    #path_append /opt/local/lib/gromacs/bin
     path_prepend /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
-    path_append /opt/espresso/bin
-    path_append $HOME/source/python/ase/tools
-    path_append /usr/local/cuda/bin
-    path_append /opt/p4vasp/bin
+    #path_append /opt/espresso/bin
+    #path_append $HOME/source/python/ase/tools
+    #path_append /usr/local/cuda/bin
+    #path_append /opt/p4vasp/bin
 
-    path_prepend /opt/openmpi/bin
+    #path_prepend /opt/openmpi/bin
     #path_append DYLD_LIBRARY_PATH /opt/openmpi/lib
     #path_append LD_LIBRARY_PATH /opt/openmpi/lib
 
@@ -33,15 +33,14 @@ test -z "$SUBSHELL" && {
     path_append PYTHONPATH "$HOME/code/python/oppvasp/scripts"
     path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
 
-    path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
-    path_append PYTHONPATH $HOME/includes/python2-7
+    #path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
+    #path_append PYTHONPATH "$HOME/includes/python2.7"
     #path_append PYTHONPATH $HOME/code/python
     path_append PYTHONPATH $HOME/lib/python
     path_append PYTHONPATH $HOME/lib/python2.7/site-packages
     path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
     path_prepend PERL5LIB $HOME/lib/perl
-
 
     # MacPorts
     path_prepend /opt/local/sbin
@@ -53,6 +52,11 @@ test -z "$SUBSHELL" && {
 
     # TexLive
     path_append /usr/texbin
+
+    # Android SDK
+    path_append "$HOME/adt-bundle-mac-x86_64-20130514/sdk/platform-tools"
+    path_append "$HOME/adt-bundle-mac-x86_64-20130514/sdk/tools"
+    export ANDROID_HOME="$HOME/adt-bundle-mac-x86_64-20130514/sdk"
 }
 
 test -z "$INTERACTIVE" && {
