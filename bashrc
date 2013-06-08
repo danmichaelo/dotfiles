@@ -21,6 +21,13 @@
 # and http://www.stereo.org.ua/2006/bashrc-ps1/
 # and https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
 
+
+REAL_HOME=$HOME
+test -n "$SUDO_USER" && {
+    REAL_HOME=/home/$SUDO_USER
+}
+export REAL_HOME
+
 test -z "$SUBSHELL" && {
     # bring in system bashrc
     test -r /etc/bashrc &&
@@ -40,8 +47,8 @@ case "$0" in
     *)  unset LOGIN ;;
 esac
 
-if [ -f $HOME/.hostname ]; then
-	export SHOSTNAME=`cat $HOME/.hostname`
+if [ -f $REAL_HOME/.hostname ]; then
+	export SHOSTNAME=`cat $REAL_HOME/.hostname`
 else
 	export SHOSTNAME=`uname`
 fi
@@ -107,13 +114,13 @@ test -z "$SUBSHELL" && {
 #}
 
 # Load machine-specific things
-test -f $HOME/.$SHOSTNAME && . $HOME/.$SHOSTNAME
+test -f $REAL_HOME/.$SHOSTNAME && . $REAL_HOME/.$SHOSTNAME
 
 if [ -z "$SUBSHELL" ]; then
-    path_prepend $HOME/bin
-    path_append $HOME/scripts
-    path_append $HOME/synced/scripts
-    path_append $HOME/opt/bin
+    path_prepend $REAL_HOME/bin
+    path_append $REAL_HOME/scripts
+    path_append $REAL_HOME/synced/scripts
+    path_append $REAL_HOME/opt/bin
 fi
 
 test -z "$INTERACTIVE" && {
@@ -257,7 +264,7 @@ ff() {
 alias a=alias
 
 a rsyncssh="rsync -e ssh --progress --compress --recursive --human-readable --checksum --exclude=*.swp --exclude=WAVECAR --exclude=CHG"
-a rsyncsshpartial="rsyncssh --partial-dir=$HOME/.rsync-partial --delay-updates"
+a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-updates"
 
 a fme="finger | head -n 1; finger | grep $ME"
 a v=vim
@@ -330,8 +337,8 @@ shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH f
                                     # attempted on an empty line
 
 test -z "$SUBSHELL" && {
-    if [ -f ~/.bash_prompt ]; then
-        source ~/.bash_prompt
+    if [ -f $REAL_HOME/.bash_prompt ]; then
+        source $REAL_HOME/.bash_prompt
     fi
 }
 
@@ -352,7 +359,7 @@ test -z "$SUBSHELL" && {
 
 export UNAME="$(uname)"
 export ME="$(whoami)"
-export HOME=~
+#export HOME=~
 
 #source $HOME/.bash_functions      # Path functions
 
@@ -368,7 +375,7 @@ test -z "$SUBSHELL" && {
     elif [ -f /etc/bash_completion ]; then 
         source /etc/bash_completion
     else
-        source $HOME/.bash_completion
+        source $REAL_HOME/.bash_completion
     fi
 }
 
@@ -380,7 +387,7 @@ test -z "$SUBSHELL" && {
 
 if [ "$TERM" != "dumb" ]; then
     #dircolors
-    eval `dircolors ~/.dir_colors`
+    eval `dircolors $REAL_HOME/.dir_colors`
     #eval `dircolors`
 fi
 
