@@ -46,6 +46,7 @@ else
 	export SHOSTNAME=`uname`
 fi
 
+umask 002 # turn off w for o only
 
 ################################################################################
 # Paths:
