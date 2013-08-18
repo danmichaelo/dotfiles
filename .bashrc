@@ -21,6 +21,7 @@
 # and http://www.stereo.org.ua/2006/bashrc-ps1/
 # and https://github.com/rtomayko/dotfiles/blob/rtomayko/.bashrc
 
+unalias -a
 
 REAL_HOME=$HOME
 test -n "$SUDO_USER" && {
@@ -278,6 +279,7 @@ a pl="ps -ef | grep $ME"
 a ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
 a localip="ipconfig getifaddr en1"
 a httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
 a grep='GREP_COLOR="1;32" LANG=C grep --color=auto'
 
 a lsd="ls  | grep /"      # List dirs only
@@ -431,12 +433,12 @@ fi
 
 # Dir listing
 if [ "$(ls --color 2>/dev/null)" != "" ]; then
-    export LS_OPTIONS="--color=auto $LS_OPTIONS" # GNU ls
+    export LS_OPTIONS="--color=auto" # GNU ls
 else
-    export LS_OPTIONS="-G $LS_OPTIONS" # FreeBSD ls
+    export LS_OPTIONS="-G" # FreeBSD ls
 fi
 LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
-a ls="ls $LS_OPTIONS"
+alias ls="ls $LS_OPTIONS"
 
 export SUBSHELL=1
 echo -e "$NORMAL$RESET"

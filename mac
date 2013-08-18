@@ -1,6 +1,8 @@
 
 # vi:ft=sh
 
+SHELL=/opt/local/bin/bash
+
 ################################################################################
 # Mac-specific things
 # if [ "$UNAME" == Darwin ]; then
