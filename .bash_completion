@@ -24,9 +24,8 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 if type real_dir >/dev/null 2>&1; then
-    BCDIR=`real_dir $BASH_SOURCE`  # real_dir defined in .bash_functions
-    source "$BCDIR/bash_completion.d/aria2c"
-    source "$BCDIR/bash_completion.d/git-completion.bash"
+    source "$HOME/.bash_completion.d/aria2c"
+    source "$HOME/.bash_completion.d/git-completion.bash"
     typeset -fx __git_ps1 # export function to subshells
     typeset -fx __gitdir # export function to subshells
 fi

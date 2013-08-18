@@ -48,9 +48,9 @@ case "$0" in
 esac
 
 if [ -f $REAL_HOME/.hostname ]; then
-	export SHOSTNAME=`cat $REAL_HOME/.hostname`
+    export SHOSTNAME=`cat $REAL_HOME/.hostname`
 else
-	export SHOSTNAME=`uname`
+    export SHOSTNAME=`uname`
 fi
 
 umask 002 # turn off w for o only
@@ -114,7 +114,7 @@ test -z "$SUBSHELL" && {
 #}
 
 # Load machine-specific things
-test -f $REAL_HOME/.$SHOSTNAME && . $REAL_HOME/.$SHOSTNAME
+test -f $REAL_HOME/.dotfiles/$SHOSTNAME && . $REAL_HOME/.dotfiles/$SHOSTNAME
 
 if [ -z "$SUBSHELL" ]; then
     path_prepend $REAL_HOME/bin
@@ -125,7 +125,7 @@ fi
 
 test -z "$INTERACTIVE" && {
     # Shell is non-interactive (something like scp). We should exit now!
-	return
+    return
 }
 
 ################################################################################
@@ -246,18 +246,18 @@ test -z "$SUBSHELL" && {
 #export BASH_FUNCTIONS_LOADED=1
 
 exists () {
-	if [[ "$(type $1 2>/dev/null)" == "" ]]; then
-		# command not found
-		return 1
-	else
-		# command found
-		return 0
-	fi
+    if [[ "$(type $1 2>/dev/null)" == "" ]]; then
+        # command not found
+        return 1
+    else
+        # command found
+        return 0
+    fi
 }
 
 # Find a file with a pattern in name:
 ff() { 
-	find . -type f -iname '*'$*'*' ; 
+    find . -type f -iname '*'$*'*' ; 
 }
 
 # Aliases
@@ -314,7 +314,7 @@ exists octave &&
 # ----------------------------------------------------------------------------------------
 # Shell settings
 
-HISTIGNORE="rm"  # prevent accidental deletes
+HISTIGNORE="rm *"  # prevent accidental deletes
 HISTSIZE=9999
 unset HISTFILESIZE
 HISTCONTROL=ignoreboth 
@@ -331,7 +331,7 @@ export FIGNORE=.o:~:.BAK:.class:.swp
 set -o noclobber
 
 # From: http://www.ukuug.org/events/linux2003/papers/bash_tips/
-shopt -s histappend			        # append rather than overwrite the history
+shopt -s histappend                 # append rather than overwrite the history
 shopt -s cdspell                    # Correct minor spelling errors on cd-ing
 shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH for 
                                     # possible completions when completion is 
@@ -415,7 +415,7 @@ fi
 export EDITOR=vim
 
 #test -n "$INTERACTIVE" -a -n "$LOGIN" && {
-	# Interactive login shell. Let's say hello
+    # Interactive login shell. Let's say hello
     #uname -npsr
     #uptime
     #echo "$ME @ $(uname -npsr)"
