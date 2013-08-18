@@ -1,33 +1,5 @@
 
-cd
-git clone git://github.com/danmichaelo/dotfiles.git
-git submodule init
-git submodule update
+Use (don't run this without checking what the script does!)
 
-cd vim/bundle/command-t/ruby/command-t
-ruby extconf.rb
-make
-
-cd
-ln -s dotfiles/bash_profile .bash_profile
-ln -s dotfiles/bashrc .bashrc
-ln -s dotfiles/bash_completion .bash_completion
-ln -s dotfiles/bash_prompt .bash_prompt
-ln -s dotfiles/bash_functions .bash_functions
-ln -s dotfiles/vim .vim
-ln -s dotfiles/vimrc .vimrc
-ln -s dotfiles/bc .bc
-ln -s dotfiles/latexmkrc .latexmkrc
-ln -s dotfiles/inputrc .inputrc
-ln -s dotfiles/xinitrc .xinitrc
-ln -s dotfiles/Xdefaults .Xdefaults
-ln -s dotfiles/dir_colors .dir_colors
-ln -s dotfiles/tmux.conf .tmux.conf
-ln -s dotfiles/vmdrc .vmdrc
-ln -s dotfiles/aria2 .aria2
-
-# Computer-specific things ("mac", "titan", "stallo", ...)
-COMP="mac"
-echo "$COMP" > .hostname
-ln -s "dotfiles/$COMP" ".$COMP"
-
+	cd
+	bash < <( curl https://raw.github.com/danmichaelo/dotfiles/master/bootstrap.sh )
