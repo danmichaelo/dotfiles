@@ -54,11 +54,6 @@ install() {
     fi
   done
 
-  pushd .vim/bundle/command-t/ruby/command-t
-  ruby extconf.rb
-  make
-  popd
-
 }
 
 in_array() {
@@ -82,7 +77,7 @@ exclude_non_dotfiles() {
 #-----------------------------------------------------------------------------
 
 backupdir="$HOME/.dotfiles-backup/$(date "+%Y%m%d%H%M.%S")"
-dependencies=(git vim xmllint ruby)
+dependencies=(git vim xmllint)
 excluded=(. .. .git .gitignore)
 
 #-----------------------------------------------------------------------------
