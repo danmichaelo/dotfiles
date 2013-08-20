@@ -279,6 +279,7 @@ a pl="ps -ef | grep $ME"
 a ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
 a localip="ipconfig getifaddr en1"
 a httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+a art="php artisan"
 
 a grep='GREP_COLOR="1;32" LANG=C grep --color=auto'
 
