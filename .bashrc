@@ -122,6 +122,7 @@ if [ -z "$SUBSHELL" ]; then
     path_append $REAL_HOME/scripts
     path_append $REAL_HOME/synced/scripts
     path_append $REAL_HOME/opt/bin
+    path_append $REAL_HOME/.composer/vendor/bin
 fi
 
 test -z "$INTERACTIVE" && {
