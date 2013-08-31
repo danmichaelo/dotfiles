@@ -268,6 +268,13 @@ alias a=alias
 a rsyncssh="rsync -e ssh --progress --compress --recursive --human-readable --checksum --exclude=*.swp --exclude=WAVECAR --exclude=CHG"
 a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-updates"
 
+a gs="git status"
+a gc="git commit"
+a gl="git log"
+
+a gun="git reset HEAD"
+a ga="git add"
+
 a fme="finger | head -n 1; finger | grep $ME"
 a v=vim
 a m=less
@@ -340,6 +347,7 @@ shopt -s cdspell                    # Correct minor spelling errors on cd-ing
 shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH for 
                                     # possible completions when completion is 
                                     # attempted on an empty line
+shopt -s extglob                    # allow for stuff like negative wildards
 
 test -z "$SUBSHELL" && {
     if [ -f $REAL_HOME/.bash_prompt ]; then
