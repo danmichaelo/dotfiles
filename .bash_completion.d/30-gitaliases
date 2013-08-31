@@ -1,0 +1,3 @@
+__git_complete gu _git_add
+__git_complete ga _git_add
+
