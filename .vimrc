@@ -120,6 +120,7 @@ let mapleader = ","
 " Colors, ... {{{
     if (!has("gui_running"))
       colorscheme desert   " looks OK with 16 colors
+      "colorscheme Tomorrow
       set bg=dark
     endif
     highlight clear Search
