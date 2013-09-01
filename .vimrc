@@ -349,7 +349,17 @@ let mapleader = ","
     "map <down> <c-f>
     "map <left> <ESC>:NERDTreeToggle<RETURN>
     "map <right> <ESC>:Tlist<RETURN>
-    "
+    
+    " Append modeline after last line in buffer.
+    " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+    " files.
+    function! AppendModeline()
+       let l:modeline = printf("{# -*- coding: utf-8; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim: set fenc=utf-8 et sw=4 ts=4 sts=4: #}")
+                 let l:modeline = substitute(&commentstring, "%s", l:modeline,
+                 "")
+       call append(line("$"), l:modeline)
+    endfunction
+    nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
    
 " }}}
 
