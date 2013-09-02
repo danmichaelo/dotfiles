@@ -269,6 +269,7 @@ a rsyncssh="rsync -e ssh --progress --compress --recursive --human-readable --ch
 a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-updates"
 
 a gs="git status"
+a gd="git diff"
 a gc="git commit"
 a gl="git log"
 a gps="git push"
