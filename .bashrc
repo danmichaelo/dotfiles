@@ -455,3 +455,7 @@ alias ls="ls $LS_OPTIONS"
 
 export SUBSHELL=1
 echo -e "$NORMAL$RESET"
+
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
