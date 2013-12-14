@@ -15,6 +15,7 @@ test -z "$SUBSHELL" && {
     # Don't add to subshells
     #path_append /opt/local/lib/gromacs/bin
     path_prepend /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
+    path_append /Users/danmichael/pear/bin
     #path_append /opt/espresso/bin
     #path_append $HOME/source/python/ase/tools
     #path_append /usr/local/cuda/bin
@@ -59,9 +60,9 @@ test -z "$SUBSHELL" && {
     path_append "$HOME/rvm/bin"
 
     # Android SDK
-    path_append "$HOME/adt-bundle-mac-x86_64-20130514/sdk/platform-tools"
-    path_append "$HOME/adt-bundle-mac-x86_64-20130514/sdk/tools"
-    export ANDROID_HOME="$HOME/adt-bundle-mac-x86_64-20130514/sdk"
+    path_append "$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk/platform-tools"
+    path_append "$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk/tools"
+    export ANDROID_HOME="$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk"
 }
 
 test -z "$INTERACTIVE" && {
@@ -71,7 +72,7 @@ test -z "$INTERACTIVE" && {
 # =========================== INTERACTIVE STUFF ================================
 
 # Aliases:
-alias mysql=mysql5
+#alias mysql=mysql5
 alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
 alias vlc=/Applications/VLC.app/Contents/MacOS/VLC
 alias pfo="open -a Path\ Finder"
@@ -144,6 +145,8 @@ manp() {
 test -z "$SUBSHELL" && {
     export LC_ALL="en_US.UTF-8"
 
+    ssh-add .ssh/id_rsa.github
+
     echo -e "{ mac }\c"
     # Print a reminder to self 
     echo -e "[$CFLAGS]\c"
@@ -213,8 +216,6 @@ test -z "$SUBSHELL" && {
 
     # QT env:
     export QTDIR=/opt/local/lib/qt3 # used by qtmake
-
-    export PYWIKIBOT2_DIR=/Users/danmichael/code/python/wikipedia/pywikipediabot
 
     #RVM:
     source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell sess
