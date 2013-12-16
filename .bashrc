@@ -309,6 +309,12 @@ a vaspclean="rm slurm-* CHG CONTCAR EIGENVAL OSZICAR PCDAT XDATCAR vasprun.xml C
 # maui load (titan only?)
 a load="showstats | grep 'Current Active'"
 
+# Debian / Ubuntu and friends #
+alias apt-get="sudo apt-get"
+
+# update on one command
+alias update="sudo apt-get update -y && sudo apt-get upgrade -y"
+
 # VASP specific
 a cpu="grep 'Total CPU time'"
 a elapsed="grep 'Elapsed Time  '"
