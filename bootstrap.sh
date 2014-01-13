@@ -78,7 +78,7 @@ exclude_non_dotfiles() {
 
 backupdir="$HOME/.dotfiles-backup/$(date "+%Y%m%d%H%M.%S")"
 dependencies=(git vim xmllint)
-excluded=(. .. .git .gitignore)
+excluded=(. .. .git)
 
 #-----------------------------------------------------------------------------
 # Dependencies
