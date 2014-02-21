@@ -38,6 +38,9 @@ autocmd!
 " Should be set first
 set nocompatible
 
+" Directory for swap files
+set directory=~/tmp,/var/tmp,/tmp,.
+
 " Testing tab-behaviour in MacVim/Terminal Vim (not all keys are picked up...)
 "map <special> <Tab> :echo "Got Tab"<CR>
 "map <special> <C-Tab> :echo "Got Control-Tab"<CR>
