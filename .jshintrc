@@ -1,0 +1,8 @@
+{
+    "globals": [
+        "angular",
+        "$"
+    ],
+
+    "browser": true
+}
