@@ -63,6 +63,9 @@ test -z "$SUBSHELL" && {
     path_append "$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk/platform-tools"
     path_append "$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk/tools"
     export ANDROID_HOME="$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk"
+
+    # Tomcat
+    export CATALINA_HOME="$HOME/dev/apache-tomcat-8.0.3"
 }
 
 test -z "$INTERACTIVE" && {
