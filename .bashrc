@@ -328,6 +328,10 @@ a stallo='ssh stallo.uit.no'
 a hexagon='ssh hexagon.bccs.uib.no'
 a 18bg='ssh bergen@login.domeneshop.no'
 
+
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote(sys.argv[1])"'
+alias urldecode='python -c "import sys, urllib as ul; print ul.unquote(sys.argv[1])"'
+
 exists octave && 
     a octave="octave -q"    # quiet startup
 
