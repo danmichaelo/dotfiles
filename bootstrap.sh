@@ -49,7 +49,7 @@ install() {
     in_array $file "${excluded[@]}"
     should_install=$?
     if [ $should_install -gt 0 ]; then
-      rm -rf "$HOME/$file"
+      rm -rf "$HOME/$file" 2>/dev/null
       cp -Rf "$file" "$HOME/$file"
     fi
   done
