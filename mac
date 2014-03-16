@@ -222,11 +222,6 @@ test -z "$SUBSHELL" && {
     # QT env:
     export QTDIR=/opt/local/lib/qt3 # used by qtmake
 
-    #RVM:
-    source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell sess
-
-    #NVM:
-    [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
 }
 
 quit () {
