@@ -68,6 +68,10 @@ test -z "$SUBSHELL" && {
     export CATALINA_HOME="$HOME/dev/apache-tomcat-8.0.3"
     export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
     $CATALINA_HOME/bin/setclasspath.sh
+    
+    # Stardog
+    export STARDOG_HOME=/Users/danmichael/dev/stardog-2.1.1
+    path_append "$STARDOG_HOME/bin"
 }
 
 test -z "$INTERACTIVE" && {
@@ -103,7 +107,7 @@ export CXX=clang
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er 
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC.
 
-export MACOSX_DEPLOYMENT_TARGET=10.8
+export MACOSX_DEPLOYMENT_TARGET=10.9
 export CFLAGS=-I/opt/local/include 
 export LDFLAGS=-L/opt/local/lib
 #export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
@@ -221,6 +225,7 @@ test -z "$SUBSHELL" && {
 
     # QT env:
     export QTDIR=/opt/local/lib/qt3 # used by qtmake
+
 
 }
 
