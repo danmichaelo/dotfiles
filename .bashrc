@@ -466,10 +466,9 @@ alias ls="ls $LS_OPTIONS"
 export SUBSHELL=1
 echo -e "$NORMAL$RESET"
 
-
-# RVM for Ruby:
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
-
 # NVM for Node:
 [[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
+
+# RVM for Ruby:
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
