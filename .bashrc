@@ -338,7 +338,7 @@ exists octave &&
 # ----------------------------------------------------------------------------------------
 # Shell settings
 
-HISTIGNORE="rm *"  # prevent accidental deletes
+HISTIGNORE="rm \*:rm -rf *:rm -r *"  # prevent accidental deletes
 HISTSIZE=9999
 unset HISTFILESIZE
 HISTCONTROL=ignoreboth 
