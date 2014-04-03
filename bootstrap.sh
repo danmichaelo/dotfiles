@@ -140,7 +140,7 @@ else
   install
 fi
 
-notice Configuring mongo-hacker
+notice "Configuring mongo-hacker"
 pushd $HOME/.dotfiles/mongo-hacker
 rm $HOME/.mongorc.js
 make
