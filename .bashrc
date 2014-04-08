@@ -467,8 +467,8 @@ export SUBSHELL=1
 echo -e "$NORMAL$RESET"
 
 # NVM for Node:
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh
+if [[ -s $HOME/.nvm/nvm.sh ]]; then . $HOME/.nvm/nvm.sh ; fi
 
 # RVM for Ruby:
-[[ -s $HOME/.rvm/scripts/rvm ]] && . $HOME/.rvm/scripts/rvm
+if [[ -s $HOME/.rvm/scripts/rvm ]]; then . $HOME/.rvm/scripts/rvm ; fi
 
