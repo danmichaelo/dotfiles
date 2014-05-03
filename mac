@@ -16,6 +16,11 @@ test -z "$SUBSHELL" && {
     #path_append /opt/local/lib/gromacs/bin
     path_prepend /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
     path_append /Users/danmichael/pear/bin
+    path_append /Users/danmichael/node_modules/.bin
+
+    # Run things on a per-repo basis:
+    path_prepend ./node_modules/.bin
+
     #path_append /opt/espresso/bin
     #path_append $HOME/source/python/ase/tools
     #path_append /usr/local/cuda/bin
@@ -154,7 +159,7 @@ manp() {
 test -z "$SUBSHELL" && {
     export LC_ALL="en_US.UTF-8"
 
-    ssh-add .ssh/id_rsa.github
+    #ssh-add .ssh/id_rsa.github
 
     echo -e "{ mac }\c"
     # Print a reminder to self 
