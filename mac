@@ -17,6 +17,7 @@ test -z "$SUBSHELL" && {
     path_prepend /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin
     path_append /Users/danmichael/pear/bin
     path_append /Users/danmichael/node_modules/.bin
+    path_append /opt/local/libexec/perl5.18/sitebin
 
     # Run things on a per-repo basis:
     path_prepend ./node_modules/.bin
@@ -64,14 +65,21 @@ test -z "$SUBSHELL" && {
     # RVM
     path_append "$HOME/rvm/bin"
 
+    # JAVA
+    export JAVA_HOME="`/usr/libexec/java_home -v 1.7`"
+
     # Android SDK
-    path_append "$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk/platform-tools"
-    path_append "$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk/tools"
-    export ANDROID_HOME="$HOME/dev/adt-bundle-mac-x86_64-20131030/sdk"
+    path_append "$HOME/dev/adt-bundle-mac-x86_64-20140321/sdk/platform-tools"
+    path_append "$HOME/dev/adt-bundle-mac-x86_64-20140321/sdk/tools"
+    export ANDROID_HOME="$HOME/dev/adt-bundle-mac-x86_64-20140321/sdk"
+
+    # Apache Maven
+    export M2_HOME="$HOME/dev/apache-maven-3.2.1"
+    export M2="$M2_HOME/bin"
+    path_append "$M2"
 
     # Tomcat
     export CATALINA_HOME="$HOME/dev/apache-tomcat-8.0.3"
-    export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
     $CATALINA_HOME/bin/setclasspath.sh
     
     # Stardog
@@ -231,6 +239,14 @@ test -z "$SUBSHELL" && {
     # QT env:
     export QTDIR=/opt/local/lib/qt3 # used by qtmake
 
+    export JENAROOT="$HOME/dev/apache-jena-2.11.2"
+    echo "$JENAROOT"
+    path_append "$JENAROOT/bin"
+
+    # Python virtualenvwrapper
+    export WORKON_HOME=~/.virtualenvs
+    . /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin/virtualenvwrapper.sh
+    workon env1
 
 }
 
