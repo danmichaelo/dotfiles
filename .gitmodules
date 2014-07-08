@@ -18,7 +18,7 @@
 	url = git://github.com/msanders/snipmate.vim.git
 [submodule "inc/vim-latex"]
 	path = inc/vim-latex
-	url = git://github.com/danmichaelo/vim-latex.git
+	url = git://github.com/jcf/vim-latex.git
 [submodule ".vim/bundle/fuzzyfinder"]
 	path = .vim/bundle/fuzzyfinder
 	url = git://github.com/vim-scripts/FuzzyFinder.git
