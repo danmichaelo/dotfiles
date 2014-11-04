@@ -1,1 +1,10 @@
-path_prepend /usr/local/php53/bin/
+#path_prepend /usr/local/php53/bin/
+export CFLAGS="-O2 -m64"
+
+test -n "$LOGIN" && {
+    echo "Setting newgrp ub"
+    newgrp ub
+}
+
+source /data/csv2rdf4lod-automation/my-csv2rdf4lod-source-me.sh # http://purl.org/twc/id/software/csv2rdf4lod
+
