@@ -271,6 +271,7 @@ a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-upda
 a gs="git status"
 a gd="git diff"
 a gc="git commit"
+a gch="git checkout"
 a gl="git log"
 a gps="git push"
 a gpl="git pull"
