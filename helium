@@ -1,0 +1,4 @@
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle/jre/bin/java
+export JENAROOT=/opt/apache-jena-2.12.1
+export PATH=$JENAROOT/bin:$PATH
+
