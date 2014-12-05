@@ -1,6 +1,11 @@
 #path_prepend /usr/local/php53/bin/
 export CFLAGS="-O2 -m64"
 
+test -z "$INTERACTIVE" && {
+    # Shell is non-interactive (something like scp). We should exit now!
+    return
+}
+
 test -n "$LOGIN" && {
     echo "Setting newgrp ub"
     newgrp ub
