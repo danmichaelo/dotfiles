@@ -1,7 +1,7 @@
 
 # vi:ft=sh
 
-SHELL=/opt/local/bin/bash
+SHELL=/usr/local/bin/bash
 
 ################################################################################
 # Mac-specific things
@@ -52,12 +52,21 @@ test -z "$SUBSHELL" && {
     path_prepend PERL5LIB $HOME/lib/perl
 
     # MacPorts
-    path_prepend /opt/local/sbin
-    path_prepend /opt/local/bin
-    path_prepend MANPATH /opt/local/share/man
+    # path_prepend /opt/local/sbin
+    # path_prepend /opt/local/bin
+    # path_prepend MANPATH /opt/local/share/man
     #path_prepend DYLD_LIBRARY_PATH /opt/local/lib
     #path_prepend LD_LIBRARY_PATH /opt/local/lib
     #path_prepend /opt/local/lib
+
+    # Homebrew
+    path_prepend /usr/local/bin
+    path_prepend /usr/local/opt/coreutils/libexec/gnubin
+
+    # Homebrew/Perlbrew
+    # http://polymake.org/doku.php/howto/mac_homebrew
+    source ~/perl5/perlbrew/etc/bashrc
+    export PERL5LIB=$HOME/perl5/lib/perl5:$HOME/perl5${PERL5LIB+:$PERL5LIB} 
 
     # TexLive
     path_append /usr/texbin
@@ -92,6 +101,10 @@ test -z "$SUBSHELL" && {
 
     # GRADLE
     export GRADLE_HOME=/opt/local/share/java/gradle
+
+    # Various
+    path_append "$HOME/bin"
+
 }
 
 test -z "$INTERACTIVE" && {
@@ -256,8 +269,8 @@ test -z "$SUBSHELL" && {
 
     # Python virtualenvwrapper
     export WORKON_HOME=~/.virtualenvs
-    . /opt/local/Library/Frameworks/Python.framework/Versions/Current/bin/virtualenvwrapper.sh
-    workon env2
+    . /usr/local/bin/virtualenvwrapper.sh
+    # workon env2
 
 }
 

@@ -20,6 +20,15 @@ c_list() { $echo  "  \033[1;32m✔\033[0m $1"; }
 # Error list item
 e_list() { $echo  "  \033[1;31m✖\033[0m $1"; }
 
+
+ask_yes_or_no() {
+    read -p "$1 ([y]es or [N]o): "
+    case $(echo $REPLY | tr '[A-Z]' '[a-z]') in
+        y|yes) echo "yes" ;;
+        *)     echo "no" ;;
+    esac
+}
+
 # Check for dependency
 dep() {
   type -p $1 &> /dev/null
@@ -49,8 +58,29 @@ install() {
     in_array $file "${excluded[@]}"
     should_install=$?
     if [ $should_install -gt 0 ]; then
-      rm -rf "$HOME/$file" 2>/dev/null
-      cp -Rf "$file" "$HOME/$file"
+
+      if [ -h "$HOME/$file" ]; then
+        rm -rf "$HOME/$file" 2>/dev/null
+      fi
+
+      if [ -f "$HOME/$file" ]; then
+        if [[ "yes" == $(ask_yes_or_no "$file is a regular file. Remove?") ]]; then
+            rm -rf "$HOME/$file" 2>/dev/null
+        fi
+      fi
+
+      if [ -d "$HOME/$file" ]; then
+        if [[ "yes" == $(ask_yes_or_no "$file is a directory. Remove?") ]]; then
+            rm -rf "$HOME/$file" 2>/dev/null
+        fi
+      fi
+
+      if [ ! -e "$HOME/$file" ]; then
+        c_list "$file"
+        ln -s "$HOME/.dotfiles/$file" "$HOME/$file"
+      else
+        e_list "$file"
+      fi
     fi
   done
 
@@ -78,7 +108,7 @@ exclude_non_dotfiles() {
 
 backupdir="$HOME/.dotfiles-backup/$(date "+%Y%m%d%H%M.%S")"
 dependencies=(git vim xmllint)
-excluded=(. .. .git)
+excluded=(. .. .git .gitmodules)
 
 #-----------------------------------------------------------------------------
 # Dependencies
@@ -113,15 +143,6 @@ if [ -d $HOME/.dotfiles ]; then
   git submodule init
   git submodule update
 
-  exclude_non_dotfiles
-
-  # Backup
-  notice "Backup up old files ($backupdir)"
-  backup
-
-  # Install
-  notice "Installing"
-  install
 else
   # Clone Repo
   notice "Downloading"
@@ -129,16 +150,13 @@ else
 
   pushd $HOME/.dotfiles
 
-  exclude_non_dotfiles
-
-  # Backup
-  notice "Backup up old files ($backupdir)"
-  backup
-
-  # Install
-  notice "Installing"
-  install
 fi
+
+exclude_non_dotfiles
+
+# Install
+notice "Linking"
+install
 
 notice "Configuring mongo-hacker"
 pushd $HOME/.dotfiles/mongo-hacker

@@ -2,7 +2,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " .vimrc configuration file
 " https://github.com/danmichaelo/dotfiles/blob/master/vimrc
-" author: dmheggo @ student.matnat.uio.no
 "
 " Some sources of inspiration: 
 "     http://www.vi-improved.org/vimrc.php
@@ -26,7 +25,7 @@
 "  ø                :nohls 
 "  :CD              cd to current dir
 "  :w!!             sudo write
-"  <M-tab>          Tex_Completion
+"  (DISABLED) <M-tab>          Tex_Completion
 "  <C-b>/<C-k>      \langle / \rangle (bra-ket)
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -35,29 +34,52 @@
 " the vimrc file is re-sourced.
 autocmd!
 
-" Should be set first
-set nocompatible
+set nocompatible         " be iMproved, required
+filetype off             " required
 
-" Directory for swap files
-set directory=~/tmp,/var/tmp,/tmp,.
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Keep Plugin commands between vundle#begin/end.
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" From github:
+Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'airblade/vim-gitgutter'
+
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Testing tab-behaviour in MacVim/Terminal Vim (not all keys are picked up...)
 "map <special> <Tab> :echo "Got Tab"<CR>
 "map <special> <C-Tab> :echo "Got Control-Tab"<CR>
 "map <special> <S-Tab> :echo "Got Shift-Tab"<CR>
 "map <special> <M-Tab> :echo "Got Alt-Tab"<CR>
-
-
-" Use pathogen to easily modify the runtime path to include all plugins under
-" the ~/.vim/bundle directory
-filetype off                    " force reloading *after* pathogen loaded
-call pathogen#infect()
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags() " not necessary to run every single time...
-filetype plugin indent on       " enable detection, plugins and indenting in one step
+" Directory for swap files
+set directory=~/tmp,/var/tmp,/tmp,.
 
 " Change mapleader (this has to be done before setting any mappings!)
 let mapleader = "," 
+
+" Use neocomplete
+let g:neocomplete#enable_at_startup = 1
 
 " Basics {{{
     set encoding=utf-8
@@ -164,7 +186,7 @@ let mapleader = ","
                     \ endif
    
         "au BufEnter -MiniBufExplorer- setlocal statusline=%f 
-   	
+    
         fun! <SID>FixMiniBufExplorerTitle()
             if "-MiniBufExplorer-" == bufname("%")
                 setlocal statusline=%2*%-3.3n\ %0*\[MiniBufExplorer\]
@@ -246,7 +268,7 @@ let mapleader = ","
     set highlight+=sr
     set highlight+=Sr
     set laststatus=2
-	
+    
 " }}}
 
 " General Mappings {{{
@@ -387,7 +409,7 @@ let mapleader = ","
     nmap <buffer><leader>la :w<cr><leader>ll``
 
     " Map Alt-Tab to Vim-Latex autocomplete cite/ref (former <F9>):
-    autocmd FileType tex imap <buffer> <M-TAB> <Plug>Tex_Completion
+    " autocmd FileType tex imap <buffer> <M-TAB> <Plug>Tex_Completion
 
 "}}}
 
@@ -461,7 +483,7 @@ let mapleader = ","
         "let g:atp_status_notification = 1
         "let g:atp_ProgressBar = 1
         "let g:atp_statusNotif = 1
-        "let g:atp_updatetime_insert = 2000							
+        "let g:atp_updatetime_insert = 2000                         
         "let g:atp_updatetime_normal = 1000
         "au BufReadPre *.tex let b:atp_TexCompiler="pdflatex"
     " }}}
