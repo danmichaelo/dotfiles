@@ -1,4 +1,3 @@
-
 # vi:ft=sh
 
 SHELL=/usr/local/bin/bash
@@ -10,6 +9,8 @@ SHELL=/usr/local/bin/bash
 
 # ========================= NON-INTERACTIVE STUFF ==============================
 # (Keep this to a minimum to speed up e.g. MacVim startup)
+
+export LC_ALL="en_US.UTF-8"
 
 test -z "$SUBSHELL" && {
     # Don't add to subshells
@@ -186,7 +187,6 @@ manp() {
 }
 
 test -z "$SUBSHELL" && {
-    export LC_ALL="en_US.UTF-8"
 
     #ssh-add .ssh/id_rsa.github
 

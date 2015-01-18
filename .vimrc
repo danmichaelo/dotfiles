@@ -51,6 +51,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'lervag/vim-latex'
 
 Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
@@ -77,6 +78,7 @@ set directory=~/tmp,/var/tmp,/tmp,.
 
 " Change mapleader (this has to be done before setting any mappings!)
 let mapleader = "," 
+let maplocalleader = "," 
 
 " Use neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -401,12 +403,12 @@ let g:neocomplete#enable_at_startup = 1
     " defined in snippets
 
     " Map \lz to write-compile-view
-    nmap <buffer><leader>lz :w<cr><leader>ll<leader>lv<cr>
+    " nmap <buffer><leader>lz :w<cr><leader>ll<leader>lv<cr>
    
     " When compiling the file, the cursor doesn't stay where it was, but
     " jumps to the beginnig of line. Pressing `` will move the cursor back.
     " Let's map \la to save, compile with \ll and return the cursor with ``:
-    nmap <buffer><leader>la :w<cr><leader>ll``
+    " nmap <buffer><leader>la :w<cr><leader>ll``
 
     " Map Alt-Tab to Vim-Latex autocomplete cite/ref (former <F9>):
     " autocmd FileType tex imap <buffer> <M-TAB> <Plug>Tex_Completion
@@ -473,11 +475,10 @@ let g:neocomplete#enable_at_startup = 1
 
 " Plugin Settings {{{
 
-    " Gundo {{{
-    
-        nnoremap <leader>g :GundoToggle<CR>
-
-    " }}}
+    " Vim-Latex {{{
+        let g:latex_view_general_viewer = 'skim-displayline'
+        let g:latex_view_general_options = '1'
+    "}}}
 
     " Automatic LaTex Plugin {{{
         "let g:atp_status_notification = 1
