@@ -76,7 +76,7 @@ install() {
       fi
 
       if [ ! -e "$HOME/$file" ]; then
-        c_list "$file"
+        # c_list "$file"
         ln -s "$HOME/.dotfiles/$file" "$HOME/$file"
       else
         e_list "$file"
@@ -152,15 +152,28 @@ else
 
 fi
 
+if [ ! -d $HOME/.dotfiles/.vim/bundle ]; then
+
+ mkdir -p .vim/bundle 
+ git clone git://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
+
+ install # link .dotfiles including .vim files
+
+ vim +BundleInstall +qall
+
+fi
+
 exclude_non_dotfiles
 
 # Install
 notice "Linking"
 install
 
+vim +BundleInstall +qall
+
 notice "Configuring mongo-hacker"
 pushd $HOME/.dotfiles/mongo-hacker
-rm $HOME/.mongorc.js
+rm -f $HOME/.mongorc.js
 make
 popd
 

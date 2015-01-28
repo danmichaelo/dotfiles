@@ -51,9 +51,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'lervag/vim-latex'
+Plugin 'vim-latex/vim-latex'
+"Plugin 'lervag/vim-latex'
+"Plugin 'tomtom/tbibtools'
 
-Plugin 'git://git.wincent.com/command-t.git'
+" Plugin 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
 "Plugin 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
