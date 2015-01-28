@@ -173,7 +173,7 @@ vim +BundleInstall +qall
 
 notice "Configuring mongo-hacker"
 pushd $HOME/.dotfiles/mongo-hacker
-rm $HOME/.mongorc.js
+rm -f $HOME/.mongorc.js
 make
 popd
 
