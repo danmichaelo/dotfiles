@@ -152,7 +152,7 @@ else
 
 fi
 
-if [ ! -d $HOME/.dotfiles/.vim/bundle ]; then
+if [ ! -d $HOME/.dotfiles/.vim/bundle/Vundle.vim ]; then
 
  mkdir -p .vim/bundle 
  git clone git://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
