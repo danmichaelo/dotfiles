@@ -53,7 +53,7 @@ backup() {
 }
 
 install() {
-  local files=( $(ls -a) )
+  local files=( $(ls -a | grep '^\..*') )
   for file in "${files[@]}"; do
     in_array $file "${excluded[@]}"
     should_install=$?
