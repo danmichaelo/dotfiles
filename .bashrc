@@ -315,7 +315,7 @@ a load="showstats | grep 'Current Active'"
 alias apt-get="sudo apt-get"
 
 # update on one command
-alias update="sudo apt-get update -y && sudo apt-get upgrade -y"
+alias upgrade="sudo apt-get update -y && sudo apt-get upgrade -y"
 
 # VASP specific
 a cpu="grep 'Total CPU time'"
