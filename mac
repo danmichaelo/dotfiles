@@ -62,6 +62,7 @@ test -z "$SUBSHELL" && {
 
     # Homebrew
     path_prepend /usr/local/bin
+    path_prepend /usr/local/sbin
     path_prepend /usr/local/opt/coreutils/libexec/gnubin
 
     # Homebrew/Perlbrew
