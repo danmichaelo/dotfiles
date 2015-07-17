@@ -117,6 +117,9 @@ test -z "$SUBSHELL" && {
 # Load machine-specific things
 test -f $REAL_HOME/.dotfiles/$SHOSTNAME && . $REAL_HOME/.dotfiles/$SHOSTNAME
 
+# Load local (non-versioned) things
+test -f $REAL_HOME/.bashrc.local && . $REAL_HOME/.bashrc.local
+
 if [ -z "$SUBSHELL" ]; then
     path_prepend $REAL_HOME/bin
     path_append $REAL_HOME/scripts
