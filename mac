@@ -1,3 +1,4 @@
+# ;; -*- mode: Bash; -*-
 # vi:ft=sh
 
 SHELL=/usr/local/bin/bash
@@ -11,6 +12,8 @@ SHELL=/usr/local/bin/bash
 # (Keep this to a minimum to speed up e.g. MacVim startup)
 
 export LC_ALL="en_US.UTF-8"
+
+export NLTK_DATA=/Users/danmichael/nltk_data
 
 test -z "$SUBSHELL" && {
     # Don't add to subshells
@@ -77,7 +80,7 @@ test -z "$SUBSHELL" && {
     path_append "$HOME/rvm/bin"
 
     # JAVA
-    export JAVA_HOME="`/usr/libexec/java_home -v 1.7`"
+    export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
 
     # Android SDK
     path_append "$HOME/dev/adt-bundle-mac-x86_64-20140702/sdk/platform-tools"
@@ -90,8 +93,8 @@ test -z "$SUBSHELL" && {
     path_append "$M2"
 
     # Tomcat
-    export CATALINA_HOME="$HOME/dev/apache-tomcat-7.0.55"
-    $CATALINA_HOME/bin/setclasspath.sh
+    # export CATALINA_HOME="$HOME/dev/apache-tomcat-7.0.55"
+    # $CATALINA_HOME/bin/setclasspath.sh
     
     # Stardog
     export STARDOG_HOME=/Users/danmichael/dev/stardog-2.1.1
@@ -115,6 +118,9 @@ test -z "$INTERACTIVE" && {
 }
 # =========================== INTERACTIVE STUFF ================================
 
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
 # Aliases:
 #alias mysql=mysql5
 alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
@@ -129,6 +135,7 @@ alias acrobat="open -a 'Adobe Acrobat Pro'"
 alias acroread="open -a 'Adobe Acrobat Pro'"
 alias wget="wget --content-disposition" # filename from Content-Disposition
 alias grep="grep --color"
+alias dircolors=gdircolors
 
 # Build options {{{
 
@@ -261,7 +268,7 @@ test -z "$SUBSHELL" && {
     # QT env:
     export QTDIR=/opt/local/lib/qt3 # used by qtmake
 
-    export JENAROOT="$HOME/dev/apache-jena-2.12.0"
+    export JENAROOT="$HOME/dev/apache-jena-2.13.0"
     echo "$JENAROOT"
     path_append "$JENAROOT/bin"
 
