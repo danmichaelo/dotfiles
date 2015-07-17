@@ -52,6 +52,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-latex/vim-latex'
+Plugin 'scrooloose/nerdcommenter'
 "Plugin 'lervag/vim-latex'
 "Plugin 'tomtom/tbibtools'
 
