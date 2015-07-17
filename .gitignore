@@ -3,6 +3,7 @@
 ._*
 .Spotlight-V100
 .Trashes
+.idea
 ehthumbs.db
 Thumbs.db
 *~
@@ -16,3 +17,4 @@ vim/view/
 vim/.netrwhist
 vim/.session
 .vim/bundle/
+_ide_helper.php
