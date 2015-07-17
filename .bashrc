@@ -477,3 +477,8 @@ if [[ -s $HOME/.nvm/nvm.sh ]]; then . $HOME/.nvm/nvm.sh ; fi
 # RVM for Ruby:
 if [[ -s $HOME/.rvm/scripts/rvm ]]; then . $HOME/.rvm/scripts/rvm ; fi
 
+
+# added by travis gem
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
