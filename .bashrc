@@ -440,6 +440,12 @@ fi
 #
 # 
 
+# Python virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+mkdir -p $WORKON_HOME
+test -f /usr/local/bin/virtualenvwrapper.sh && {
+    . /usr/local/bin/virtualenvwrapper.sh
+}
 
 # Set preferred editor:
 export EDITOR=vim

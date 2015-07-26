@@ -276,8 +276,6 @@ test -z "$SUBSHELL" && {
     path_append "$HOME/dev/arcanist/bin"
 
     # Python virtualenvwrapper
-    export WORKON_HOME=~/.virtualenvs
-    . /usr/local/bin/virtualenvwrapper.sh
     # workon env2
 
     # Docker
