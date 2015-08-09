@@ -276,7 +276,7 @@ test -z "$SUBSHELL" && {
     path_append "$HOME/dev/arcanist/bin"
 
     # Python virtualenvwrapper
-    # workon env2
+    workon env1
 
     # Docker
     export DOCKER_HOST=tcp://192.168.59.103:2376
