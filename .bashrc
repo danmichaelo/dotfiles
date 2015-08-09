@@ -410,8 +410,8 @@ test -n "$SUBSHELL" && {
 
 # Source programmable bash completion for completion of hostnames, etc.:
 test -z "$SUBSHELL" && {
-    if [ -f /opt/local/etc/bash_completion ]; then 
-        source /opt/local/etc/bash_completion
+    if [ -f `brew --prefix`/etc/bash_completion ]; then
+        source `brew --prefix`/etc/bash_completion
     elif [ -f /etc/bash_completion ]; then 
         source /etc/bash_completion
     else
