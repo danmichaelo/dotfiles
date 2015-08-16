@@ -449,7 +449,7 @@ let g:neocomplete#enable_at_startup = 1
     " update the spellingfile variable. 
     " Usage: SetLang no
     " http://vimdoc.sourceforge.net/htmldoc/usr_41.html#41.7
-    function! dm:SetLang(newlang)
+    function! SetLang(newlang)
         " The special prefix 'a:' tells Vim that the variable is a function argument.
         let &spell = 1
         let &spl = a:newlang
