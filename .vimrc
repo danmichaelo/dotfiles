@@ -55,6 +55,7 @@ Plugin 'vim-latex/vim-latex'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'aquach/vim-mediawiki-editor'
+Plugin 'chikamichi/mediawiki.vim'
 "Plugin 'lervag/vim-latex'
 "Plugin 'tomtom/tbibtools'
 
