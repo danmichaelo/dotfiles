@@ -13,8 +13,8 @@ Thumbs.db
 *.swp
 *.pyc
 tags
-vim/view/
-vim/.netrwhist
-vim/.session
+.vim/view/
+.vim/.netrwhist
+.vim/.session
 .vim/bundle/
 _ide_helper.php
