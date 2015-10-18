@@ -83,10 +83,9 @@ test -z "$SUBSHELL" && {
     export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
 
     # Android SDK
-    path_append "$HOME/dev/adt-bundle-mac-x86_64-20140702/sdk/platform-tools"
-    path_append "$HOME/dev/adt-bundle-mac-x86_64-20140702/sdk/tools"
-    export ANDROID_HOME="$HOME/dev/adt-bundle-mac-x86_64-20140702/sdk"
-
+    path_append "/Users/danmichael/Library/Android/sdk/platform-tools"
+    path_append "/Users/danmichael/Library/Android/sdk/tools"
+    export ANDROID_HOME="/Users/danmichael/Library/Android/sdk"
     # Apache Maven
     export M2_HOME="$HOME/dev/apache-maven-3.2.3"
     export M2="$M2_HOME/bin"
@@ -149,8 +148,8 @@ export CXX=clang
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er 
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC.
 
-export MACOSX_DEPLOYMENT_TARGET=10.10
-export CMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/
+export MACOSX_DEPLOYMENT_TARGET=10.11
+export CMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
 export CFLAGS=-I/opt/local/include 
 export LDFLAGS=-L/opt/local/lib
 #export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
