@@ -12,6 +12,7 @@ SHELL=/usr/local/bin/bash
 # (Keep this to a minimum to speed up e.g. MacVim startup)
 
 export LC_ALL="en_US.UTF-8"
+#export CURL_CA_BUNDLE=/usr/local/etc/openssl/cacert.pem
 
 export NLTK_DATA=/Users/danmichael/nltk_data
 
@@ -40,20 +41,23 @@ test -z "$SUBSHELL" && {
     path_append MANPATH /opt/X11/share/man
     path_append MANPATH /opt/openmpi/share/man
 
-    path_append "$HOME/Documents/Studier/Master/scripts"
-    path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
-    path_append "$HOME/code/python/oppvasp/scripts"
-    path_append PYTHONPATH "$HOME/code/python/oppvasp/scripts"
-    path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
+    #path_append "$HOME/Documents/Studier/Master/scripts"
+    # path_append PYTHONPATH "$HOME/Documents/Studier/Master/scripts"
+    #path_append "$HOME/code/python/oppvasp/scripts"
+    #path_append PYTHONPATH "$HOME/code/python/oppvasp/scripts"
+    #path_append PYTHONPATH /opt/local/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages
 
     #path_append PYTHONPATH /usr/local/lib/python2.7/site-packages
     #path_append PYTHONPATH "$HOME/includes/python2.7"
     #path_append PYTHONPATH $HOME/code/python
-    path_append PYTHONPATH $HOME/lib/python
-    path_append PYTHONPATH $HOME/lib/python2.7/site-packages
-    path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
+    #path_append PYTHONPATH $HOME/lib/python
+    #path_append PYTHONPATH $HOME/lib/python2.7/site-packages
+    #path_append PYTHONPATH /opt/p4vasp/lib/python2.4/site-packages
 
     path_prepend PERL5LIB $HOME/lib/perl
+
+    PERL_MB_OPT="--install_base \"/Users/danmichael/perl5\""; export PERL_MB_OPT;
+    PERL_MM_OPT="INSTALL_BASE=/Users/danmichael/perl5"; export PERL_MM_OPT;
 
     # MacPorts
     # path_prepend /opt/local/sbin
@@ -106,6 +110,9 @@ test -z "$SUBSHELL" && {
     # GRADLE
     export GRADLE_HOME=/opt/local/share/java/gradle
 
+    export PATH=$PATH:/Users/danmichael/dev/pology-0.12/bin
+    alias sjekk_nn="posieve --skip-obsolete check-rules -slang:nn -slokalize"
+
     # Various
     path_append "$HOME/bin"
 
@@ -150,8 +157,9 @@ export CXX=clang
 
 export MACOSX_DEPLOYMENT_TARGET=10.11
 export CMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
-export CFLAGS=-I/opt/local/include 
-export LDFLAGS=-L/opt/local/lib
+
+# export CFLAGS=-I/opt/local/include 
+# export LDFLAGS=-L/opt/local/lib
 #export CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc' 
 #export LDFLAGS='-O3 -arch i386 -arch x86_64 -arch ppc -bind_at_load' 
 #export CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -arch ppc'
@@ -274,13 +282,23 @@ test -z "$SUBSHELL" && {
 
     path_append "$HOME/dev/arcanist/bin"
 
+    # Pyenv
+    if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+    if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+    # PYENV_ROOT="$HOME/.pyenv"
+
+
     # Python virtualenvwrapper
-    workon env1
+    # workon env1
 
     # Docker
     export DOCKER_HOST=tcp://192.168.59.103:2376
     export DOCKER_CERT_PATH=/Users/danmichael/.boot2docker/certs/boot2docker-vm
     export DOCKER_TLS_VERIFY=1
+
+    # NVm
+    export NVM_DIR=~/.nvm
+    . $(brew --prefix nvm)/nvm.sh
 
 }
 

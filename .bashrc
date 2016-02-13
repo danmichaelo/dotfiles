@@ -115,13 +115,13 @@ test -z "$SUBSHELL" && {
 #}
 
 # Python virtualenvwrapper, load before machine-specific things so they can set a default environment
-if [[ -z "$SUBSHELL" && -n "$INTERACTIVE" ]]; then
-    export WORKON_HOME=~/.virtualenvs
-    mkdir -p $WORKON_HOME
-    test -f /usr/local/bin/virtualenvwrapper.sh && {
-        . /usr/local/bin/virtualenvwrapper.sh
-    }
-fi
+# if [[ -z "$SUBSHELL" && -n "$INTERACTIVE" ]]; then
+#     export WORKON_HOME=~/.virtualenvs
+#     mkdir -p $WORKON_HOME
+#     test -f /usr/local/bin/virtualenvwrapper.sh && {
+#         . /usr/local/bin/virtualenvwrapper.sh
+#     }
+# fi
 
 # Load machine-specific things
 test -f $REAL_HOME/.dotfiles/$SHOSTNAME && . $REAL_HOME/.dotfiles/$SHOSTNAME
