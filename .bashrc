@@ -126,6 +126,9 @@ test -z "$SUBSHELL" && {
 # Load machine-specific things
 test -f $REAL_HOME/.dotfiles/$SHOSTNAME && . $REAL_HOME/.dotfiles/$SHOSTNAME
 
+# Load git-prompt
+test -f $REAL_HOME/.git-prompt.sh && . $REAL_HOME/.git-prompt.sh
+
 # Load local (non-versioned) things
 test -f $REAL_HOME/.bashrc.local && . $REAL_HOME/.bashrc.local
 
