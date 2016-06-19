@@ -3,6 +3,7 @@
 ._*
 .Spotlight-V100
 .Trashes
+.idea
 ehthumbs.db
 Thumbs.db
 *~
@@ -12,8 +13,9 @@ Thumbs.db
 *.swp
 *.pyc
 tags
-vim/view/
-vim/.netrwhist
-vim/.session
+.vim/view/
+.vim/.netrwhist
+.vim/.session
 .vim/bundle/
 .vim/.netrwhist
+_ide_helper.php

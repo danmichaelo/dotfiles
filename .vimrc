@@ -52,6 +52,12 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-latex/vim-latex'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'aquach/vim-mediawiki-editor'
+Plugin 'chikamichi/mediawiki.vim'
+Plugin 'davidhalter/jedi-vim'
+"Plugin 'vim-scripts/LargeFile'
 "Plugin 'lervag/vim-latex'
 "Plugin 'tomtom/tbibtools'
 
@@ -445,7 +451,7 @@ let g:neocomplete#enable_at_startup = 1
     " update the spellingfile variable. 
     " Usage: SetLang no
     " http://vimdoc.sourceforge.net/htmldoc/usr_41.html#41.7
-    function! dm:SetLang(newlang)
+    function! SetLang(newlang)
         " The special prefix 'a:' tells Vim that the variable is a function argument.
         let &spell = 1
         let &spl = a:newlang
@@ -593,29 +599,61 @@ if !exists(":DiffOrig")
     command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis \ | wincmd p | diffthis 
 endif
 
-" Protect large files from sourcing and other overhead.
-" Files become read only
+" Disable some stuff for large/huge files to keep Vim fast
 if !exists("my_auto_commands_loaded")
   let my_auto_commands_loaded = 1
-  " Large files are > 10M
-  " Set options:
-  " eventignore+=FileType (no syntax highlighting etc
-  " assumes FileType always on)
-  " noswapfile (save copy of file)
-  " bufhidden=unload (save memory when other file is viewed)
-  " buftype=nowritefile (is read-only)
-  " undolevels=-1 (no undo possible)
-  let g:LargeFile = 1024 * 1024 * 50
-  let g:loaded_LargeFile = 0
+  " We set the following options:
+  "  - eventignore+=FileType       : no syntax highlighting etc. (assumes FileType always on)
+  "  - noswapfile                  : skip swap
+  "  - undolevels=-1               : disable undo
+  " We could also set:
+  "  - buftype=nowritefile         : make file read-only
+
+  "let g:loaded_LargeFile = 0
   augroup LargeFile
-    autocmd BufReadPre * let f=expand("<afile>") | if getfsize(f) > g:LargeFile | let g:loaded_LargeFile = 1 | set eventignore+=FileType | setlocal noswapfile bufhidden=unload undolevels=-1 | else | set eventignore-=FileType | endif
+
+    " Ideally we would check number of lines instead of bytes, since gzipped
+    " files can be quite small and still heavy to handle, but we do not know
+    " the number of lines before BufWinEnter, which is too late.
+    autocmd BufReadPre *
+      \ let f=expand("<afile>") |
+      \ if getfsize(f) > 1024 * 1024 * 10 |
+      \   let g:loaded_LargeFile = 1 |
+      \   set eventignore+=FileType |
+      \   setlocal noswapfile bufhidden=unload undolevels=-1 |
+      \   syntax off |
+      \   call gitgutter#disable() |
+      \ else |
+      \   let g:loaded_LargeFile = 0 |
+      \   set eventignore-=FileType |
+      \ endif
+    " By counting lines instead of bytes we also handle gzipped files well
+    autocmd BufWinEnter *
+       \ if g:loaded_LargeFile |
+       \   echom "Note: Treating this file as a large file" |
+       \ endif
+    "autocmd BufWinEnter *
+    "    \ if line("$") > 1000000 |
+    "      \ echom "Treating this file as a large file since the number of lines is " . line("$") |
+    "      \ let g:loaded_LargeFile = 1 |
+    "      \ set eventignore+=FileType |
+    "      \ setlocal noswapfile undolevels=-1 |
+    "      \ syntax off |
+    "      \ call gitgutter#disable() |
+    "    \ else |
+    "      \ set eventignore-=FileType |
+    "    \ endif
+      \   echom "Treating this file as a large file" |
   augroup END
 endif
 
 " XML {{{
 
-  " Auto-fold if file is not large:
-  au BufNewFile,BufRead *.xml if !g:loaded_LargeFile | set ts=2 sts=2 sw=2 foldmethod=indent | endif
+  " Auto-fold unless files is too large:
+  au BufNewFile,BufRead *.xml if !g:loaded_LargeFile |
+    \ echom "Autofolding xml" |
+    \ set ts=2 sts=2 sw=2 foldmethod=indent |
+    \ endif
 
 " }}}
 

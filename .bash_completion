@@ -11,6 +11,7 @@
 
 complete -F _rsync -o nospace rsyncssh
 
+
 # Generated from 
 #  pip completion --bash >> ~/.bash_completion
 # pip bash completion start
@@ -23,11 +24,13 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
-if type real_dir >/dev/null 2>&1; then
-    source "$HOME/.bash_completion.d/10-aria2c"
-    source "$HOME/.bash_completion.d/10-git-completion.bash"
-	source "$HOME/.bash_completion.d/10-git-prompt.sh"
-    source "$HOME/.bash_completion.d/30-gitaliases"
-    typeset -fx __git_ps1 # export function to subshells
-    typeset -fx __gitdir # export function to subshells
-fi
+#if type real_dir >/dev/null 2>&1; then
+#    source "$HOME/.bash_completion.d/10-aria2c"
+#    source "$HOME/.bash_completion.d/10-git-completion.bash"
+#    source "$HOME/.bash_completion.d/10-git-prompt.sh"
+#    source "$HOME/.bash_completion.d/30-gitaliases"
+#    typeset -fx __git_ps1 # export function to subshells
+#    typeset -fx __gitdir # export function to subshells
+#fi
+
+

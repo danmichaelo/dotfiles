@@ -114,8 +114,23 @@ test -z "$SUBSHELL" && {
 #    umask 027   # turn off w for g, rwx for o (useful on shared computers)
 #}
 
+# Python virtualenvwrapper, load before machine-specific things so they can set a default environment
+# if [[ -z "$SUBSHELL" && -n "$INTERACTIVE" ]]; then
+#     export WORKON_HOME=~/.virtualenvs
+#     mkdir -p $WORKON_HOME
+#     test -f /usr/local/bin/virtualenvwrapper.sh && {
+#         . /usr/local/bin/virtualenvwrapper.sh
+#     }
+# fi
+
 # Load machine-specific things
 test -f $REAL_HOME/.dotfiles/$SHOSTNAME && . $REAL_HOME/.dotfiles/$SHOSTNAME
+
+# Load git-prompt
+test -f $REAL_HOME/.git-prompt.sh && . $REAL_HOME/.git-prompt.sh
+
+# Load local (non-versioned) things
+test -f $REAL_HOME/.bashrc.local && . $REAL_HOME/.bashrc.local
 
 if [ -z "$SUBSHELL" ]; then
     path_prepend $REAL_HOME/bin
@@ -269,6 +284,7 @@ a rsyncssh="rsync -e ssh --progress --compress --recursive --human-readable --ch
 a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-updates"
 
 a gs="git status"
+a gr="git rebase"
 a gd="git diff"
 a gc="git commit"
 a gch="git checkout"
@@ -398,8 +414,8 @@ test -n "$SUBSHELL" && {
 
 # Source programmable bash completion for completion of hostnames, etc.:
 test -z "$SUBSHELL" && {
-    if [ -f /opt/local/etc/bash_completion ]; then 
-        source /opt/local/etc/bash_completion
+    if hash brew 2>/dev/null; then
+        source `brew --prefix`/etc/bash_completion
     elif [ -f /etc/bash_completion ]; then 
         source /etc/bash_completion
     else
@@ -435,8 +451,7 @@ fi
 #
 # http://www.ibm.com/developerworks/linux/library/l-tip-prompt/
 #
-# 
-
+#
 
 # Set preferred editor:
 export EDITOR=vim
@@ -474,3 +489,8 @@ if [[ -s $HOME/.nvm/nvm.sh ]]; then . $HOME/.nvm/nvm.sh ; fi
 # RVM for Ruby:
 if [[ -s $HOME/.rvm/scripts/rvm ]]; then . $HOME/.rvm/scripts/rvm ; fi
 
+
+# added by travis gem
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

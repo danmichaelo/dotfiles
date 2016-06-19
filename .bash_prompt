@@ -1,55 +1,56 @@
 #!/bin/sh
 # Interaction prompt:
-# 
+#
 # export PS1="\w\$ "   		# Set default interaction prompt
 #
-# \[    This sequence should appear before a sequence of characters 
-#       that don't move the cursor (like color escape sequences). 
+# \[    This sequence should appear before a sequence of characters
+#       that don't move the cursor (like color escape sequences).
 #       This allows bash to calculate word wrapping correctly.
 # \]    This sequence should appear after a sequence of non-printing characters.
-# 
+#
 # \e[30m\]  Color: Black - regular
 # \t        the current time in 24-hour HH:MM:SS format
-# \[\e[m\]  Reset color 
+# \[\e[m\]  Reset color
 # \w        the current working directory
 
 export GIT_PS1_SHOWDIRTYSTATE=1 #... untagged(*) and staged(+) changes
 export GIT_PS1_SHOWSTASHSTATE=1 #... if something is stashed($)
 export GIT_PS1_SHOWUNTRACKEDFILES=1 #... untracked files(%)
 
-# Bash shell executes the content of the PROMPT_COMMAND just before displaying
-# the PS1 variable
-function setXtermTitle {
-    RET=$?
-	history -a			# Append to history
-	if [ "${TERM}" = "xterm" -o "${TERM}" = "xterm-color" ]; then 
-		if [ -n "${XTITLE}" ]; then 
-			echo -ne "\033]0;${XTITLE}\007"
-		else 
-			WDIR=`echo ${PWD} | sed -e "s@${HOME}@\~@"`
-			echo -ne "\033]0;${USER}@${SHOSTNAME}:${WDIR}\007" 
-		fi
-	fi
-	#echo -n "[$(date +%k:%M)]"
-    RED='\e[0;31m'
-    GREEN='\e[0;32m'
-    BLUE='\e[0;34m'
 
-    #return value visualisation
-    #RET_SMILEY=`if [[ $RET = 0 ]]; then echo -ne "\[$GREEN\];)"; else echo -ne "\[$RED\];("; fi;`
-    #
-    #RET_VALUE='$(echo $RET)' #Ret value not colorized - you can modify it.
-    
-    IPROMPT="\[\e[32m\]\t\[\e[0m\] "
+function updatePrompt {
+
+    # Styles
+    RED='\[\e[0;31m\]'
+    RED_UNDERLINE='\[\e[4;31m\]'
+    GREEN='\[\e[0;32m\]'
+    BLUE='\[\e[0;34m\]'
+    RESET='\[\e[0m\]'
+
+    # The current time in 24-hour HH:MM:SS format
+    PROMPT="${GREEN}\t${RESET} \W"
+
+    # Return value of last command
+    RET=$?
     if [[ $RET != 0 ]]; then
-        IPROMPT="$IPROMPT\[\e[4;31m\][$RET]\[\e[0m\] "
+        PROMPT="$PROMPT${RED_UNDERLINE}[$RET]${RESET} "
     fi
+
+    # Current Git repo
     if type "__git_ps1" > /dev/null 2>&1; then
-        IPROMPT="$IPROMPT\W$(__git_ps1 "\[\e[32m\](%s)\[\e[0m\]")"
+        PROMPT="$PROMPT$(__git_ps1 "${GREEN}(%s)${RESET}")"
     fi
-    if [[ $VIRTUAL_ENV != "" ]]; then
+
+    # Current virtualenv
+    # if [[ $VIRTUAL_ENV != "" ]]; then
+    #     # Strip out the path and just leave the env name
+    #     PROMPT="$PROMPT${BLUE}{${VIRTUAL_ENV##*/}}${RESET}"
+    # fi
+
+    # Current pyenv
+    if [[ $PYENV_VERSION != "" ]]; then
         # Strip out the path and just leave the env name
-        IPROMPT="$IPROMPT\[${BLUE}\]{${VIRTUAL_ENV##*/}}\[\e[0m\]"
+        PROMPT="$PROMPT${BLUE}{${PYENV_VERSION}}${RESET}"
     fi
 
     # http://superuser.com/a/313172
@@ -57,12 +58,22 @@ function setXtermTitle {
     # The format below will allow Terminal.app to open new
     # tabs in the same working directory, apparently reading
     # the information from the titlebar
-    IPROMPT="$IPROMPT\[\e]2;\u@\H \w\a\]"
+    PROMPT="$PROMPT\[\e]2;\u@\H \w\a\]"
 
+    if [ "${TERM}" = "xterm" -o "${TERM}" = "xterm-color" ]; then 
+        if [ -n "${XTITLE}" ]; then
+            echo -ne "\033]0;${XTITLE}\007"
+        else
+            WDIR=`echo ${PWD} | sed -e "s@${HOME}@\~@"`
+            echo -ne "\033]0;${USER}@${SHOSTNAME}:${WDIR}\007" 
+        fi
+    fi
 
-    PS1="$IPROMPT\$ "
+    PS1="$PROMPT\$ "
 }
-export -f setXtermTitle  # export function
+export -f updatePrompt  # export function
 
-export PROMPT_COMMAND='setXtermTitle'
-export PS2=" > "			# Set continuation interactive prompt
+# Bash shell executes this function just before displaying the PS1 variable
+export PROMPT_COMMAND='updatePrompt'
+export PS2=" > "            # Set continuation interactive prompt
+

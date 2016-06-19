@@ -108,7 +108,7 @@ exclude_non_dotfiles() {
 
 backupdir="$HOME/.dotfiles-backup/$(date "+%Y%m%d%H%M.%S")"
 dependencies=(git vim xmllint)
-excluded=(. .. .git .gitmodules)
+excluded=(. .. .git .gitmodules .DS_Store)
 
 #-----------------------------------------------------------------------------
 # Dependencies
@@ -120,7 +120,7 @@ not_met=0
 for need in "${dependencies[@]}"; do
   dep $need
   met=$?
-  not_met=$(echo "$not_met + $met" | bc)
+  not_met=$(($not_met + $met))
 done
 
 if [ $not_met -gt 0 ]; then
