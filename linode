@@ -3,3 +3,5 @@ export PATH=$PATH:/usr/local/virtuoso-opensource/bin/
 export JENAROOT=/opt/apache-jena-2.12.1
 export PATH=$JENAROOT/bin:$PATH
 
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64/
+

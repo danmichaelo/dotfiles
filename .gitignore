@@ -17,4 +17,5 @@ tags
 .vim/.netrwhist
 .vim/.session
 .vim/bundle/
+.vim/.netrwhist
 _ide_helper.php
