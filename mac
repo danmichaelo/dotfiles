@@ -75,6 +75,7 @@ test -z "$SUBSHELL" && {
     # Homebrew/Perlbrew
     # http://polymake.org/doku.php/howto/mac_homebrew
     source ~/perl5/perlbrew/etc/bashrc
+    path_append $HOME/perl5/bin
     export PERL5LIB=$HOME/perl5/lib/perl5:$HOME/perl5${PERL5LIB+:$PERL5LIB} 
 
     # TexLive
@@ -91,9 +92,9 @@ test -z "$SUBSHELL" && {
     path_append "/Users/danmichael/Library/Android/sdk/tools"
     export ANDROID_HOME="/Users/danmichael/Library/Android/sdk"
     # Apache Maven
-    export M2_HOME="$HOME/dev/apache-maven-3.2.3"
-    export M2="$M2_HOME/bin"
-    path_append "$M2"
+    #export M2_HOME="$HOME/dev/apache-maven-3.2.3"
+    #export M2="$M2_HOME/bin"
+    #path_append "$M2"
 
     # Tomcat
     # export CATALINA_HOME="$HOME/dev/apache-tomcat-7.0.55"
