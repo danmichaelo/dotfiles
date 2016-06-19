@@ -16,3 +16,4 @@ vim/view/
 vim/.netrwhist
 vim/.session
 .vim/bundle/
+.vim/.netrwhist
