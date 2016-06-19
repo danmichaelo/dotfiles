@@ -612,6 +612,8 @@ if !exists("my_auto_commands_loaded")
   "let g:loaded_LargeFile = 0
   augroup LargeFile
 
+    let g:loaded_LargeFile = 0
+
     " Ideally we would check number of lines instead of bytes, since gzipped
     " files can be quite small and still heavy to handle, but we do not know
     " the number of lines before BufWinEnter, which is too late.
@@ -624,10 +626,8 @@ if !exists("my_auto_commands_loaded")
       \   syntax off |
       \   call gitgutter#disable() |
       \ else |
-      \   let g:loaded_LargeFile = 0 |
       \   set eventignore-=FileType |
       \ endif
-    " By counting lines instead of bytes we also handle gzipped files well
     autocmd BufWinEnter *
        \ if g:loaded_LargeFile |
        \   echom "Note: Treating this file as a large file" |
