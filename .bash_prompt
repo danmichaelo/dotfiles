@@ -41,17 +41,24 @@ function updatePrompt {
         PROMPT="$PROMPT$(__git_ps1 "${GREEN}(%s)${RESET}")"
     fi
 
+    # Current pyenv
+    if hash pyenv > /dev/null 2>&1; then
+        PYVV=$(pyenv version)
+        # ${OS%% (*}   # Remove Pattern: remove anything that follows " ("
+        PROMPT="$PROMPT${BLUE}{${PYVV%% (*)}}${RESET}"
+    fi
+
     # Current virtualenv
     # if [[ $VIRTUAL_ENV != "" ]]; then
     #     # Strip out the path and just leave the env name
     #     PROMPT="$PROMPT${BLUE}{${VIRTUAL_ENV##*/}}${RESET}"
     # fi
 
-    # Current pyenv
-    if [[ $PYENV_VERSION != "" ]]; then
-        # Strip out the path and just leave the env name
-        PROMPT="$PROMPT${BLUE}{${PYENV_VERSION}}${RESET}"
-    fi
+    # # Current pyenv
+    # if [[ $PYENV_VERSION != "" ]]; then
+    #     # Strip out the path and just leave the env name
+    #     PROMPT="$PROMPT${BLUE}{${PYENV_VERSION}}${RESET}"
+    # fi
 
     # http://superuser.com/a/313172
     # \e]2; is the escape sequence to print things in the titlebar.
