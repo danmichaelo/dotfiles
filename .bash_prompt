@@ -20,6 +20,9 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1 #... untracked files(%)
 
 function updatePrompt {
 
+    # Save bash history in realtime
+    history -a
+
     # Styles
     RED='\[\e[0;31m\]'
     RED_UNDERLINE='\[\e[4;31m\]'
