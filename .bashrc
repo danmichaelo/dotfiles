@@ -80,7 +80,7 @@ test -z "$SUBSHELL" && {
         # If just one argument is given, 'PATH' is taken as the variable
         PATHVAR="$1" DIR="$2"
         test -z "$2" && PATHVAR="PATH" && DIR="$1"
-        test ! -d "$DIR" && return # if non-existent
+        # test ! -d "$DIR" && return # if non-existent
         if test -z "${!PATHVAR}"; then 
             # the path is empty
             export $PATHVAR="$DIR"
@@ -494,3 +494,6 @@ if [[ -s $HOME/.rvm/scripts/rvm ]]; then . $HOME/.rvm/scripts/rvm ; fi
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/danmichael/.travis/travis.sh ] && source /Users/danmichael/.travis/travis.sh
