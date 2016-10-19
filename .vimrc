@@ -47,17 +47,17 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " From github:
-Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-latex/vim-latex'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'aquach/vim-mediawiki-editor'
-Plugin 'chikamichi/mediawiki.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'mattn/emmet-vim'
+Plugin 'bling/vim-airline'           " Status bar
+Plugin 'airblade/vim-gitgutter'      " Git gutter
+"Plugin 'tpope/vim-fugitive'         " Git wrapper (cool, but didn't use it yet)
+"Plugin 'vim-scripts/taglist.vim'    " source code nav in side bar (didn't use it)
+Plugin 'vim-latex/vim-latex'         "
+Plugin 'scrooloose/nerdcommenter'    "
+Plugin 'aquach/vim-mediawiki-editor' " MediWiki editing
+Plugin 'chikamichi/mediawiki.vim'    " Syntax highlighting for MediaWiki
+Plugin 'jmcantrell/vim-virtualenv'   " Python virtualenv
+Plugin 'davidhalter/jedi-vim'        " Python autocompletion
+Plugin 'mattn/emmet-vim'             " dynamic html and css snippets
 "Plugin 'vim-scripts/LargeFile'
 "Plugin 'lervag/vim-latex'
 "Plugin 'tomtom/tbibtools'
