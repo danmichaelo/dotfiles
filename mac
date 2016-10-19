@@ -23,10 +23,11 @@ test -z "$SUBSHELL" && {
     path_append /Users/danmichael/pear/bin
     path_append /Users/danmichael/node_modules/.bin
     path_append /opt/local/libexec/perl5.18/sitebin
+    path_append $HOME/.git-semantic-commits
 
     # Run things on a per-repo basis:
-    path_prepend ./node_modules/.bin
-    path_prepend ./vendor/bin
+    path_prepend "./node_modules/.bin"
+    path_prepend "./vendor/bin"
 
     #path_append /opt/espresso/bin
     #path_append $HOME/source/python/ase/tools
@@ -288,7 +289,6 @@ test -z "$SUBSHELL" && {
     if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
     if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
     # PYENV_ROOT="$HOME/.pyenv"
-
 
     # Python virtualenvwrapper
     # workon env1
