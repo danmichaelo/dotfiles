@@ -285,11 +285,12 @@ a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-upda
 
 a gs="git status"
 a gr="git rebase"
+a grc="git rebase --continue"
 a gd="git diff"
 a gc="git commit"
 a gch="git checkout"
-a gl="git log"
-a gl2="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+a gl="git log --decorate --date=relative --graph --abbrev-commit"
+a glo="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 a gps="git push"
 a gpl="git pull"
 
