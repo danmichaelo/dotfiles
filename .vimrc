@@ -58,6 +58,7 @@ Plugin 'chikamichi/mediawiki.vim'    " Syntax highlighting for MediaWiki
 Plugin 'jmcantrell/vim-virtualenv'   " Python virtualenv
 Plugin 'davidhalter/jedi-vim'        " Python autocompletion
 Plugin 'mattn/emmet-vim'             " dynamic html and css snippets
+Plugin 'editorconfig/editorconfig-vim' " EditorConfig
 "Plugin 'vim-scripts/LargeFile'
 "Plugin 'lervag/vim-latex'
 "Plugin 'tomtom/tbibtools'
