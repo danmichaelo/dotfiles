@@ -401,14 +401,13 @@ test -z "$SUBSHELL" && {
 #export LC_ALL=C     # some programs only work with LC_ALL=C
 # LC_COLLATE: Influences sorting order.
 
-
 export UNAME="$(uname)"
 export ME="$(whoami)"
 #export HOME=~
 
 #source $HOME/.bash_functions      # Path functions
 
-echo -e "\033[0;31m $ME @ $(uname -npsr) \c"
+echo -e "\033[0;31m$ME @ $(uname -npsr) \c"
 test -n "$SUBSHELL" && {
     echo -e " [subshell] \c"
 }
@@ -436,35 +435,8 @@ if [ "$TERM" != "dumb" ]; then
     #eval `dircolors`
 fi
 
-#CCTBX:
-#if [ -f "/Users/danmichael/source/cctbx/cctbx_build/setpaths.sh" ]; then
-#   . "/Users/danmichael/source/cctbx/cctbx_build/setpaths.sh"
-#   export LIBTBX_BUILD="/Users/danmichael/source/cctbx/cctbx_build"
-#   path_append PYTHONPATH "/Users/danmichael/source/cctbx/cctbx_sources:/Users/danmichael/source/cctbx/cctbx_sources/clipper_adaptbx:/Users/danmichael/source/cctbx/cctbx_sources/boost_adaptbx:/Users/danmichael/source/cctbx/cctbx_sources/libtbx/pythonpath:/Users/danmichael/source/cctbx/cctbx_build/lib"
-
-#   path_prepend DYLD_LIBRARY_PATH "/Users/danmichael/source/cctbx/cctbx_build/lib"
-#fi
-
-#
-# This file is synced around and should only contain
-# non-machine-specific or system-specific commands
-#
-#
-# http://www.ibm.com/developerworks/linux/library/l-tip-prompt/
-#
-#
-
 # Set preferred editor:
 export EDITOR=vim
-
-#test -n "$INTERACTIVE" -a -n "$LOGIN" && {
-    # Interactive login shell. Let's say hello
-    #uname -npsr
-    #uptime
-    #echo "$ME @ $(uname -npsr)"
-#}
-
-#echo " done"
 
 if [ SHOSTNAME == "mac" ]; then
     # Set PATH for GUI apps as well on Mac:
@@ -484,17 +456,8 @@ alias ls="ls $LS_OPTIONS"
 export SUBSHELL=1
 echo -e "$NORMAL$RESET"
 
-# NVM for Node:
-if [[ -s $HOME/.nvm/nvm.sh ]]; then . $HOME/.nvm/nvm.sh ; fi
-
 # RVM for Ruby:
 if [[ -s $HOME/.rvm/scripts/rvm ]]; then . $HOME/.rvm/scripts/rvm ; fi
 
-
 # added by travis gem
 [ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# added by travis gem
-[ -f /Users/danmichael/.travis/travis.sh ] && source /Users/danmichael/.travis/travis.sh

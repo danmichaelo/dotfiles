@@ -59,6 +59,7 @@ Plugin 'jmcantrell/vim-virtualenv'   " Python virtualenv
 Plugin 'davidhalter/jedi-vim'        " Python autocompletion
 Plugin 'mattn/emmet-vim'             " dynamic html and css snippets
 Plugin 'editorconfig/editorconfig-vim' " EditorConfig
+Plugin 'ctrlpvim/ctrlp.vim'          " Fuzzy search
 "Plugin 'vim-scripts/LargeFile'
 "Plugin 'lervag/vim-latex'
 "Plugin 'tomtom/tbibtools'
@@ -92,6 +93,10 @@ let maplocalleader = ","
 
 " Use neocomplete
 let g:neocomplete#enable_at_startup = 1
+
+" Mediawiki config
+let g:mediawiki_editor_url = 'no.wikipedia.org'
+let g:mediawiki_editor_username = 'danmichaelo'
 
 " Basics {{{
     set encoding=utf-8
