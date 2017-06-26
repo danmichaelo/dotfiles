@@ -445,7 +445,7 @@ if [ SHOSTNAME == "mac" ]; then
 fi
 
 # Dir listing
-if [ "$(ls --color 2>/dev/null)" != "" ]; then
+if [ "$(ls --color / 2>/dev/null)" != "" ]; then
     export LS_OPTIONS="--color=auto" # GNU ls
 else
     export LS_OPTIONS="-G" # FreeBSD ls
