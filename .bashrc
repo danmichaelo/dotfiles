@@ -138,6 +138,10 @@ if [ -z "$SUBSHELL" ]; then
     path_append $REAL_HOME/synced/scripts
     path_append $REAL_HOME/opt/bin
     path_append $REAL_HOME/.composer/vendor/bin
+
+    # Run things on a per-repo basis if possible:
+    path_prepend "./node_modules/.bin"
+    path_prepend "./vendor/bin"
 fi
 
 test -z "$INTERACTIVE" && {

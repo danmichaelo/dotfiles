@@ -25,10 +25,6 @@ test -z "$SUBSHELL" && {
     path_append /opt/local/libexec/perl5.18/sitebin
     path_append $HOME/.git-semantic-commits
 
-    # Run things on a per-repo basis:
-    path_prepend "./node_modules/.bin"
-    path_prepend "./vendor/bin"
-
     #path_append /opt/espresso/bin
     #path_append $HOME/source/python/ase/tools
     #path_append /usr/local/cuda/bin
