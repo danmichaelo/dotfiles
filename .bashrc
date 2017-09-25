@@ -70,8 +70,8 @@ test -z "$SUBSHELL" && {
     export -f pls
 
     path_remove() {
-        NEWPATH=$(echo ${!1} | tr ':' '\n' | grep -v "$2" | paste -d: -s -)
-        export $1=$NEWPATH
+        NEWPATH=$(echo ${!1} | tr ':' '\n' | grep -v "^$2$" | paste -d: -s -)
+        export $1="$NEWPATH"
     }
     export -f path_remove 
 
@@ -85,7 +85,7 @@ test -z "$SUBSHELL" && {
             # the path is empty
             export $PATHVAR="$DIR"
         else
-            path_remove $PATHVAR $DIR
+            path_remove $PATHVAR "$DIR"
             export $PATHVAR="$DIR:${!PATHVAR}"
         fi 
     }
@@ -101,7 +101,7 @@ test -z "$SUBSHELL" && {
             # the path is empty
             export $PATHVAR="$DIR"
         else
-            path_remove $PATHVAR $DIR
+            path_remove $PATHVAR "$DIR"
             export $PATHVAR="${!PATHVAR}:$DIR"
         fi
     }
