@@ -20,8 +20,8 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1 #... untracked files(%)
 
 function updatePrompt {
 
-    # Save bash history in realtime
-    history -a
+    history -a   # Save bash history in realtime
+    # history -r   # Read history (could this slow things down if the history is long?)
 
     # Styles
     RED='\[\e[0;31m\]'
