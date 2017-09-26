@@ -443,6 +443,11 @@ test -z "$SUBSHELL" && {
 # Define window title:
 #export SHOSTNAME=`hostname -s`
 
+
+# Allow Ctrl-S for forward-search-history
+# http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
+stty -ixon
+
 if [ "$TERM" != "dumb" ]; then
     #dircolors
     eval `dircolors $REAL_HOME/.dir_colors`
