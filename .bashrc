@@ -297,6 +297,7 @@ a gl="git log --decorate --date=relative --graph --abbrev-commit"
 a glo="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 a gps="git push"
 a gpl="git pull"
+a gdw="git -c 'color.diff.old=red reverse' -c 'color.diff.new=green reverse' diff --color-words"
 
 a gun="git reset HEAD"
 a ga="git add"
