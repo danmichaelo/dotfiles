@@ -25,7 +25,7 @@ unalias -a
 
 REAL_HOME=$HOME
 test -n "$SUDO_USER" && {
-    REAL_HOME=/home/$SUDO_USER
+    REAL_HOME="`dirname $HOME`/$SUDO_USER"
 }
 export REAL_HOME
 
