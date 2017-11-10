@@ -396,11 +396,11 @@ shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH f
                                     # attempted on an empty line
 shopt -s extglob                    # allow for stuff like negative wildards
 
-test -z "$SUBSHELL" && {
+#test -z "$SUBSHELL" && {
     if [ -f $REAL_HOME/.bash_prompt ]; then
         source $REAL_HOME/.bash_prompt
     fi
-}
+#}
 
 # Avoid stack overflow on the execution of the three Fortran programs
 # ulimit -s 64000
@@ -473,11 +473,16 @@ fi
 LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
 alias ls="ls $LS_OPTIONS"
 
-export SUBSHELL=1
-echo -e "$NORMAL$RESET"
-
 # RVM for Ruby:
-if [[ -s $HOME/.rvm/scripts/rvm ]]; then . $HOME/.rvm/scripts/rvm ; fi
+test -z "$SUBSHELL" && {
+    echo " RVM INIT "
+    if [[ -s $REAL_HOME/.rvm/scripts/rvm ]]; then . $REAL_HOME/.rvm/scripts/rvm ; fi
+}
 
 # added by travis gem
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+test -z "$SUBSHELL" && {
+    [ -f $REAL_HOME/.travis/travis.sh ] && source $REAL_HOME/.travis/travis.sh
+}
+
+export SUBSHELL=1
+echo -e "$NORMAL$RESET"

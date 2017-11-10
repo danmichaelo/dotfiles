@@ -24,17 +24,23 @@ function updatePrompt {
     # history -r   # Read history (could this slow things down if the history is long?)
 
     # Styles
-    RED='\[\e[0;31m\]'
-    RED_UNDERLINE='\[\e[4;31m\]'
-    GREEN='\[\e[0;32m\]'
-    BLUE='\[\e[0;34m\]'
-    RESET='\[\e[0m\]'
+    local RED='\[\e[0;31m\]'
+    local RED_UNDERLINE='\[\e[4;31m\]'
+    local GREEN='\[\e[0;32m\]'
+    local BLUE='\[\e[0;34m\]'
+    local RESET='\[\e[0m\]'
+
+    local PROMPT=""
 
     # The current time in 24-hour HH:MM:SS format
-    PROMPT="${GREEN}\t${RESET} \W"
+    if [[ $UID -eq 0 ]]; then
+        PROMPT="${RED}\t${RESET} \W"
+    else
+        PROMPT="${GREEN}\t${RESET} \W"
+    fi
 
     # Return value of last command
-    RET=$?
+    local RET=$?
     if [[ $RET != 0 ]]; then
         PROMPT="$PROMPT${RED_UNDERLINE}[$RET]${RESET} "
     fi
@@ -44,24 +50,21 @@ function updatePrompt {
         PROMPT="$PROMPT$(__git_ps1 "${GREEN}(%s)${RESET}")"
     fi
 
-    # Current pyenv
+    # Current Python env
+    local PYVV=""
     if hash pyenv > /dev/null 2>&1; then
-        PYVV=$(pyenv version)
-        # ${OS%% (*}   # Remove Pattern: remove anything that follows " ("
-        PROMPT="$PROMPT${BLUE}{${PYVV%% (*)}}${RESET}"
+        if [[ "$HOME" == "$REAL_HOME" ]]; then
+            PYVV="$(pyenv version)"
+            PYVV="${PYVV%% (*)}@"  # ${OS%% (*}  # '%% (': Remove anything that follows ' ('
+        fi
     fi
-
-    # Current virtualenv
-    # if [[ $VIRTUAL_ENV != "" ]]; then
-    #     # Strip out the path and just leave the env name
-    #     PROMPT="$PROMPT${BLUE}{${VIRTUAL_ENV##*/}}${RESET}"
-    # fi
-
-    # # Current pyenv
-    # if [[ $PYENV_VERSION != "" ]]; then
-    #     # Strip out the path and just leave the env name
-    #     PROMPT="$PROMPT${BLUE}{${PYENV_VERSION}}${RESET}"
-    # fi
+    if [[ $VIRTUAL_ENV != "" ]]; then
+        PYVV="${PYVV}${VIRTUAL_ENV##*/}@"   # '##*/': Remove anything until the last '/'
+    fi
+    if [[ -n "$PYVV" ]]; then
+        PYVV="{${PYVV%@}}"  # Remove : suffix
+        PROMPT="${PROMPT}${BLUE}${PYVV}${RESET}"
+    fi
 
     # http://superuser.com/a/313172
     # \e]2; is the escape sequence to print things in the titlebar.
@@ -74,13 +77,14 @@ function updatePrompt {
         if [ -n "${XTITLE}" ]; then
             echo -ne "\033]0;${XTITLE}\007"
         else
-            WDIR=`echo ${PWD} | sed -e "s@${HOME}@\~@"`
+            local WDIR=`echo ${PWD} | sed -e "s@${HOME}@\~@"`
             echo -ne "\033]0;${USER}@${SHOSTNAME}:${WDIR}\007" 
         fi
     fi
 
     PS1="$PROMPT\$ "
 }
+
 export -f updatePrompt  # export function
 
 # Bash shell executes this function just before displaying the PS1 variable
