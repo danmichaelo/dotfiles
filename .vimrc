@@ -49,7 +49,7 @@ Plugin 'gmarik/Vundle.vim'
 " From github:
 Plugin 'bling/vim-airline'           " Status bar
 Plugin 'airblade/vim-gitgutter'      " Git gutter
-"Plugin 'tpope/vim-fugitive'         " Git wrapper (cool, but didn't use it yet)
+Plugin 'tpope/vim-fugitive'         " Git wrapper (cool, but didn't use it yet)
 "Plugin 'vim-scripts/taglist.vim'    " source code nav in side bar (didn't use it)
 Plugin 'vim-latex/vim-latex'         "
 Plugin 'scrooloose/nerdcommenter'    "
