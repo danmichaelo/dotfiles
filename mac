@@ -15,6 +15,7 @@ export LC_ALL="en_US.UTF-8"
 #export CURL_CA_BUNDLE=/usr/local/etc/openssl/cacert.pem
 
 export NLTK_DATA=/Users/danmichael/nltk_data
+export PYWIKIBOT2_DIR=/Users/danmichael/projects/wikipedia/pywikibot/core
 
 test -z "$SUBSHELL" && {
     # Don't add to subshells
