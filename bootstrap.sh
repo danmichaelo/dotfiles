@@ -53,11 +53,14 @@ backup() {
 }
 
 install() {
-  local files=( $(ls -a | grep '^\..*') )
+
+  local files=( $(\ls -a $1 ) )
   for file in "${files[@]}"; do
     in_array $file "${excluded[@]}"
     should_install=$?
     if [ $should_install -gt 0 ]; then
+      file="$1$file"
+      echo "$file"
 
       if [ -h "$HOME/$file" ]; then
         rm -rf "$HOME/$file" 2>/dev/null
@@ -108,7 +111,7 @@ exclude_non_dotfiles() {
 
 backupdir="$HOME/.dotfiles-backup/$(date "+%Y%m%d%H%M.%S")"
 dependencies=(git vim xmllint)
-excluded=(. .. .git .gitmodules .DS_Store)
+excluded=(. .. .git .gitmodules .DS_Store .config)
 
 #-----------------------------------------------------------------------------
 # Dependencies
@@ -157,17 +160,13 @@ if [ ! -d $HOME/.dotfiles/.vim/bundle/Vundle.vim ]; then
  mkdir -p .vim/bundle 
  git clone git://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
 
- install # link .dotfiles including .vim files
-
- vim +BundleInstall +qall
-
 fi
 
-exclude_non_dotfiles
-
-# Install
 notice "Linking"
-install
+install ".config/"
+exclude_non_dotfiles
+install "./"
+
 
 vim +BundleInstall +qall
 
