@@ -488,3 +488,17 @@ test -z "$SUBSHELL" && {
 
 export SUBSHELL=1
 echo -e "$NORMAL$RESET"
+
+
+cd_reminder() {
+    builtin cd "$@"
+   if [[ -e .cd-reminder ]]; then
+     echo -e "\e[93m━━╢ REMINDER ╟━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+     cat .cd-reminder
+     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+   fi
+}
+alias cd=cd_reminder
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
