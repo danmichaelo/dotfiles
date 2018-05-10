@@ -410,9 +410,9 @@ shopt -s extglob                    # allow for stuff like negative wildards
 # Play a welcome sound
 #(afplay -v 0.1 $HOME/Music/soundeffects/welcome.wav &)
 
-# LANG 
-# export LC_ALL=no_NO.UTF-8
-#export LANG=no
+# LANG
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 #export LC_ALL=C     # some programs only work with LC_ALL=C
 # LC_COLLATE: Influences sorting order.
 
@@ -451,7 +451,9 @@ stty -ixon
 
 if [ "$TERM" != "dumb" ]; then
     #dircolors
-    eval `dircolors $REAL_HOME/.dir_colors`
+    if hash dircolors 2>/dev/null; then
+        eval `dircolors $REAL_HOME/.dir_colors`
+    fi
     #eval `dircolors`
 fi
 
