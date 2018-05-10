@@ -164,6 +164,8 @@ let g:mediawiki_editor_username = 'danmichaelo'
       colorscheme desert   " looks OK with 16 colors
       "colorscheme Tomorrow
       set bg=dark
+    else
+      set bg=light
     endif
     highlight clear Search
     highlight Search term=underline cterm=underline guibg=Grey40 ctermfg=1 guifg=Red
