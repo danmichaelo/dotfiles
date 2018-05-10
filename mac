@@ -15,7 +15,7 @@ export LC_ALL="en_US.UTF-8"
 #export CURL_CA_BUNDLE=/usr/local/etc/openssl/cacert.pem
 
 export NLTK_DATA=/Users/danmichael/nltk_data
-export PYWIKIBOT2_DIR=/Users/danmichael/projects/wikipedia/pywikibot/core
+export PYWIKIBOT2_DIR=/Users/danmichael/projects/wp/pywikibot
 
 test -z "$SUBSHELL" && {
     # Don't add to subshells
@@ -84,7 +84,7 @@ test -z "$SUBSHELL" && {
     path_append "$HOME/rvm/bin"
 
     # JAVA
-    export JAVA_HOME="`/usr/libexec/java_home -v 1.8`"
+    export JAVA_HOME="`/usr/libexec/java_home -v 9.0`"
 
     # Android SDK
     path_append "/Users/danmichael/Library/Android/sdk/platform-tools"
@@ -155,8 +155,8 @@ export CXX=clang
 # For å linke mot originale systembibliotek, kan det noen ganger lønne seg å
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC
-export MACOSX_DEPLOYMENT_TARGET=10.11
-export CMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/
+export MACOSX_DEPLOYMENT_TARGET=10.13
+export CMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/
 
 # }}}
 
