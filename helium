@@ -1,5 +1,0 @@
-export JAVA_HOME=/usr/lib/jvm/java-7-oracle/jre/bin/java
-export JENAROOT=/opt/apache-jena-2.12.1
-export PATH=$JENAROOT/bin:$PATH
-export PATH=/opt/jena-fuseki-1.1.1:$PATH
-export FUSEKI_HOME=/opt/jena-fuseki-1.1.1

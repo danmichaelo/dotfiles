@@ -1,9 +1,0 @@
-#!/bin/sh
-
-path_append $REAL_HOME/.local/bin
-path_append PYTHONPATH $REAL_HOME/.local/lib/python2.7/site-packages
-
-function goto {
-  cd /data/project/$1
-}
-

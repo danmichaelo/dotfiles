@@ -1,5 +1,5 @@
 #!/bin/bash
-# vi:ft=sh
+# vi:ft=sh et sw=4 ts=4 ai
 #
 # This file is sourced on startup by all *interactive* bash shells that are
 # *not* login shells.  This file *should generate no output to stdout* or it
@@ -48,11 +48,8 @@ case "$0" in
     *)  unset LOGIN ;;
 esac
 
-if [ -f $REAL_HOME/.hostname ]; then
-    export SHOSTNAME=`cat $REAL_HOME/.hostname`
-else
-    export SHOSTNAME=`uname`
-fi
+export UNAME="$(uname)"
+export ME="$(whoami)"
 
 umask 002 # turn off w for o only
 
@@ -124,7 +121,12 @@ test -z "$SUBSHELL" && {
 # fi
 
 # Load machine-specific things
-test -f $REAL_HOME/.dotfiles/$SHOSTNAME && . $REAL_HOME/.dotfiles/$SHOSTNAME
+if [ "$UNAME" == "Darwin" ]; then
+    test -f $REAL_HOME/.dotfiles/mac && . $REAL_HOME/.dotfiles/mac
+fi
+
+# Load aliases
+test -f $REAL_HOME/.aliases && . $REAL_HOME/.aliases
 
 # Load git-prompt
 test -f $REAL_HOME/.git-prompt.sh && . $REAL_HOME/.git-prompt.sh
@@ -226,8 +228,6 @@ fi
 
 #echo -e "[H]\c"
 
-UNAME="$(uname)"
-ME="$(whoami)"
 
 # Useful reference: http://mywiki.wooledge.org/Bashism?action=show&redirect=bashism
 # http://www.linuxfromscratch.org/blfs/view/6.3/postlfs/profile.html
@@ -277,87 +277,12 @@ exists () {
 }
 
 # Find a file with a pattern in name:
-ff() { 
+ff() {
     find . -type f -iname '*'$*'*' ; 
 }
 
-# Aliases
-alias a=alias
-
-a rsyncssh="rsync -e ssh --progress --compress --recursive --human-readable --checksum --exclude=*.swp --exclude=WAVECAR --exclude=CHG"
-a rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-updates"
-
-a gs="git status"
-a gr="git rebase"
-a grc="git rebase --continue"
-a gd="git diff"
-a gc="git commit"
-a gch="git checkout"
-a gl="git log --decorate --date=relative --graph --abbrev-commit"
-a glo="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-a gps="git push"
-a gpl="git pull"
-a gdw="git -c 'color.diff.old=red reverse' -c 'color.diff.new=green reverse' diff --color-words"
-
-a gun="git reset HEAD"
-a ga="git add"
-
-a fme="finger | head -n 1; finger | grep $ME"
-a v=vim
-a m=less
-a h='history 20'
-a rm="rm -v"                # show which files we actually delete!
-a mv='mv -i'                # prompt before overwriting an existing file
-a cp='cp -i'                # prompt before overwriting an existing file
-a resource='source ~/.bashrc' # re-source, not resource :)
-a pl="ps -ef | grep $ME"
-a ip="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
-a localip="ipconfig getifaddr en1"
-a httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-a art="php artisan"
-
-a grep='GREP_COLOR="1;32" LANG=C grep --color=auto'
-
-a lsd="ls  | grep /"      # List dirs only
-a lsl="ls -F | grep @"      # List symbolic links only
-a lsx="ls -F -s | grep \*"  # List executables only
-a ll="ls -ltrh"
-a la="ls -A"
-
-# Play a sound, hollywood style :) Extremely irritating after a while
-#alias ls="(afplay -v 0.5 $HOME/Music/soundeffects/select9.wav &); ls"
-
-# Spring cleaning
-a vaspclean="rm slurm-* CHG CONTCAR EIGENVAL OSZICAR PCDAT XDATCAR vasprun.xml CHGCAR DOSCAR IBZKPT OUTCAR WAVECAR PROCAR  WAVEDER"
-
-# maui load (titan only?)
-a load="showstats | grep 'Current Active'"
-
-# Debian / Ubuntu and friends #
-alias apt-get="sudo apt-get"
-
-# update on one command
-alias upgrade="sudo apt-get update -y && sudo apt-get upgrade -y"
-
-# VASP specific
-a cpu="grep 'Total CPU time'"
-a elapsed="grep 'Elapsed Time  '"
-a fermi="grep 'FERMI ENERGY    '"
-
-# Server aliases
-a titan='ssh titan.uio.no'
-a uio='ssh login.uio.no'
-a njord='ssh njord.hpc.ntnu.no'
-a stallo='ssh stallo.uit.no'
-a hexagon='ssh hexagon.bccs.uib.no'
-a 18bg='ssh bergen@login.domeneshop.no'
-
-
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote(sys.argv[1])"'
-alias urldecode='python -c "import sys, urllib as ul; print ul.unquote(sys.argv[1])"'
-
-exists octave && 
-    a octave="octave -q"    # quiet startup
+# Load aliases from a separate file
+. ~/.aliases
 
 # ----------------------------------------------------------------------------------------
 # Shell settings
@@ -416,13 +341,11 @@ export LANG=en_US.UTF-8
 #export LC_ALL=C     # some programs only work with LC_ALL=C
 # LC_COLLATE: Influences sorting order.
 
-export UNAME="$(uname)"
-export ME="$(whoami)"
 #export HOME=~
 
 #source $HOME/.bash_functions      # Path functions
 
-echo -e "\033[0;31m$ME @ $(uname -npsr) \c"
+echo -e "\033[0;31m$ME @ $UNAME \c"
 test -n "$SUBSHELL" && {
     echo -e " [subshell] \c"
 }
@@ -441,9 +364,6 @@ test -z "$SUBSHELL" && {
 ###############################################################################
 # Shell behaviors
 
-# Define window title:
-#export SHOSTNAME=`hostname -s`
-
 
 # Allow Ctrl-S for forward-search-history
 # http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
@@ -460,20 +380,11 @@ fi
 # Set preferred editor:
 export EDITOR=vim
 
-if [ SHOSTNAME == "mac" ]; then
+if [ "$UNAME" == "Darwin" ]; then
     # Set PATH for GUI apps as well on Mac:
     launchctl setenv PATH $PATH
     # There's no need to reboot (though you will need to restart an app if you want it to pick up the changed environment.)
 fi
-
-# Dir listing
-if [ "$(ls --color / 2>/dev/null)" != "" ]; then
-    export LS_OPTIONS="--color=auto" # GNU ls
-else
-    export LS_OPTIONS="-G" # FreeBSD ls
-fi
-LS_OPTIONS="-F $LS_OPTIONS"  # show directories with a trailing '/', executable files with a trailing '*'
-alias ls="ls $LS_OPTIONS"
 
 # RVM for Ruby:
 test -z "$SUBSHELL" && {

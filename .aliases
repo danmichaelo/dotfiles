@@ -1,0 +1,73 @@
+#!/bin/bash
+# vi:ft=sh et sw=4 ts=4 ai
+
+# Safety measures
+alias rm="rm -v"                # show which files we actually delete!
+alias mv='mv -i'                # prompt before overwriting an existing file
+alias cp='cp -i'                # prompt before overwriting an existing file
+
+# Git
+alias gs="git status"
+alias gr="git rebase"
+alias grc="git rebase --continue"
+alias gd="git diff"
+alias gc="git commit"
+alias gch="git checkout"
+alias gl="git log --decorate --date=relative --graph --abbrev-commit"
+alias glo="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gps="git push"
+alias gpl="git pull"
+alias gdw="git -c 'color.diff.old=red reverse' -c 'color.diff.new=green reverse' diff --color-words"
+alias gun="git reset HEAD"
+alias ga="git add"
+
+# Rsync
+alias rsyncssh="rsync -e ssh --progress --compress --recursive --human-readable --checksum --exclude=*.swp --exclude=WAVECAR --exclude=CHG"
+alias rsyncsshpartial="rsyncssh --partial-dir=$REAL_HOME/.rsync-partial --delay-updates"
+
+# String manipulation
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote(sys.argv[1])"'
+alias urldecode='python -c "import sys, urllib as ul; print ul.unquote(sys.argv[1])"'
+
+# Misc
+alias art="php artisan"
+alias fme="finger | head -n 1; finger | grep $ME"
+alias v=vim
+alias m=less
+alias h='history 20'
+alias pl="ps -ef | grep $ME"
+alias ip-ext="curl -s http://checkip.dyndns.com/ | sed 's/[^0-9\.]//g'"
+alias ip-local="ipconfig getifaddr en1"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+
+# Dir listing and grep
+if [ "$UNAME" == "Darwin" ]; then
+    # FreeBSD
+    alias grep="grep --color"
+    alias ls="ls -F -G"
+else
+    # GNU
+    alias grep='GREP_COLOR="1;32" LANG=C grep --color=auto'
+    alias ls="ls -F --color=auto"
+fi
+alias lsd="ls  | grep /"      # List dirs only
+alias lsl="ls -F | grep @"      # List symbolic links only
+alias lsx="ls -F -s | grep \*"  # List executables only
+alias ll="ls -ltrh"
+alias la="ls -A"
+
+if [ "$UNAME" == "Darwin" ]; then
+    alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
+    alias vlc=/Applications/VLC.app/Contents/MacOS/VLC
+    alias pfo="open -a Path\ Finder"
+    alias bb=bbedit
+    alias math=/Applications/Mathematica.app/Contents/MacOS/MathKernel
+    alias mp=~/bin/mpost-pdf.pl
+    alias skim="open -a Skim.app"
+    alias tclsh="rlwrap tclsh"
+    alias acrobat="open -a 'Adobe Acrobat Pro'"
+    alias acroread="open -a 'Adobe Acrobat Pro'"
+    alias wget="wget --content-disposition" # filename from Content-Disposition
+    alias dircolors=gdircolors
+    alias subl="open -a 'Sublime Text'"
+fi

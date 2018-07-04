@@ -1,11 +1,10 @@
-# ;; -*- mode: Bash; -*-
-# vi:ft=sh
+# vi:ft=sh et sw=4 ts=4 ai
 
 SHELL=/usr/local/bin/bash
 
 ################################################################################
 # Mac-specific things
-# if [ "$UNAME" == Darwin ]; then
+# if [ "$(uname)" == Darwin ]; then
 ################################################################################
 
 # ========================= NON-INTERACTIVE STUFF ==============================
@@ -110,9 +109,6 @@ test -z "$SUBSHELL" && {
     # GRADLE
     export GRADLE_HOME=/opt/local/share/java/gradle
 
-    export PATH=$PATH:/Users/danmichael/dev/pology-0.12/bin
-    alias sjekk_nn="posieve --skip-obsolete check-rules -slang:nn -slokalize"
-
     # Various
     path_append "$HOME/bin"
 
@@ -127,22 +123,7 @@ test -z "$INTERACTIVE" && {
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-# Aliases:
-#alias mysql=mysql5
-alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g --remote-silent'
-alias vlc=/Applications/VLC.app/Contents/MacOS/VLC
-alias pfo="open -a Path\ Finder"
-alias math=/Applications/Mathematica.app/Contents/MacOS/MathKernel
-alias bb=bbedit
-alias mp=~/bin/mpost-pdf.pl
-alias skim="open -a Skim.app"
-alias tclsh="rlwrap tclsh"
-alias acrobat="open -a 'Adobe Acrobat Pro'"
-alias acroread="open -a 'Adobe Acrobat Pro'"
-alias wget="wget --content-disposition" # filename from Content-Disposition
-alias grep="grep --color"
-alias dircolors=gdircolors
-alias subl="open -a 'Sublime Text'"
+# Aliases: See ~/ .aliases
 
 # Build options {{{
 
