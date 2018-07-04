@@ -48,8 +48,8 @@ case "$0" in
     *)  unset LOGIN ;;
 esac
 
-export UNAME="$(uname)"
-export ME="$(whoami)"
+export ME=$( whoami )
+export UNAME=$( uname -s )
 
 umask 002 # turn off w for o only
 

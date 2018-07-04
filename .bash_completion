@@ -33,4 +33,7 @@ complete -o default -F _pip_completion pip
 #    typeset -fx __gitdir # export function to subshells
 #fi
 
+for bcfile in ~/.bash_completion.d/* ; do
+  . $bcfile
+done
 
