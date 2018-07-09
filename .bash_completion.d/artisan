@@ -1,7 +1,22 @@
-_artisan() 
+# vi:ft=sh
+# bash/zsh completion support for php artisan
+[ "$BASH_VERSION" ] || return
+
+_artisan()
 {
-	COMPREPLY=(`artisan list:forBash $COMP_LINE`)
-	return 0
+    local cur prev opts
+    _get_comp_words_by_ref cur prev
+
+    COMPREPLY=()
+
+    if [ $COMP_CWORD -eq 1 ]; then
+        COMPREPLY=($(artisan list:forBash $prev $cur))
+    elif [[ $COMP_CWORD -gt 1 ]]; then
+        _filedir '@(php)'
+        [ ${#COMPREPLY[@]} -eq 0 ] && _filedir
+        return 0
+    fi
+    return 0
 }
 complete -F _artisan artisan
 complete -F _artisan art
