@@ -30,6 +30,7 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote(sys.argv[1]
 alias urldecode='python -c "import sys, urllib as ul; print ul.unquote(sys.argv[1])"'
 
 # Misc
+alias py="python"
 alias artisan="php artisan"
 alias fme="finger | head -n 1; finger | grep $ME"
 alias v=vim

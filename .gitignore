@@ -19,3 +19,5 @@ tags
 .vim/bundle/
 .vim/.netrwhist
 _ide_helper.php
+.vscode
+.idea

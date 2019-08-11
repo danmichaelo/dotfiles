@@ -120,11 +120,6 @@ test -z "$SUBSHELL" && {
 #     }
 # fi
 
-# Load machine-specific things
-if [ "$UNAME" == "Darwin" ]; then
-    test -f $REAL_HOME/.dotfiles/mac && . $REAL_HOME/.dotfiles/mac
-fi
-
 # Load aliases
 test -f $REAL_HOME/.aliases && . $REAL_HOME/.aliases
 
@@ -137,7 +132,6 @@ test -f $REAL_HOME/.bashrc.local && . $REAL_HOME/.bashrc.local
 if [ -z "$SUBSHELL" ]; then
     path_prepend $REAL_HOME/bin
     path_append $REAL_HOME/scripts
-    path_append $REAL_HOME/synced/scripts
     path_append $REAL_HOME/opt/bin
     path_append $REAL_HOME/.composer/vendor/bin
 
@@ -403,13 +397,21 @@ echo -e "$NORMAL$RESET"
 
 cd_reminder() {
     builtin cd "$@"
-   if [[ -e .cd-reminder ]]; then
-     echo -e "\e[93m━━╢ REMINDER ╟━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-     cat .cd-reminder
-     echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
-   fi
+    if [[ -e .cd-reminder ]]; then
+        echo -e "\e[93m━━╢ REMINDER ╟━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        cat .cd-reminder
+        echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+    fi
+    if [[ -e .reminder ]]; then
+        echo -e "\e[93m━━╢ REMINDER ╟━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+        cat .reminder
+        echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\e[0m"
+    fi
 }
 alias cd=cd_reminder
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# added by travis gem
+[ -f /Users/danmichael/.travis/travis.sh ] && source /Users/danmichael/.travis/travis.sh
