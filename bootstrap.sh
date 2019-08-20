@@ -59,8 +59,7 @@ dep() {
 
 install() {
   # Usage: install {path} {name_pattern}
-  readarray -d '' files < <(find "$1" -mindepth 1 -maxdepth 1 -name "$2" -print0)
-  for filename in "${files[@]}"; do
+  find "$1" -mindepth 1 -maxdepth 1 -name "$2" -print0 | while read -d $'\0' filename; do
 
     # DEBUG: notice "INSTALL ${filename}?"
     if ! in_array $filename "${excluded[@]}"; then
@@ -112,8 +111,7 @@ in_array() {
 exclude_non_hidden() {
   # Add non-hidden files and folders to the 'excluded' array unless they are
   # in the 'included' array
-  readarray -d '' non_hidden < <(find . -mindepth 1  -maxdepth 1 -not -name ".*" -print0)
-  for filename in "${non_hidden[@]}"; do
+  find . -mindepth 1  -maxdepth 1 -not -name ".*" -print0 | while read -d $'\0' filename; do
     in_array $filename "${included[@]}" || excluded+=("$filename")
   done
 }
