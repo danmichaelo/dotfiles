@@ -190,7 +190,9 @@ fi
 
 
 notice "Linking"
+mkdir -p $HOME/.config
 install ./.config "*"
+mkdir -p $HOME/scripts
 install ./scripts "*"
 install . "*"
 
