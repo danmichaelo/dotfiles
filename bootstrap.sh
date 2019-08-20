@@ -59,7 +59,8 @@ dep() {
 
 install() {
   # Usage: install {path} {name_pattern}
-  find "$1" -mindepth 1 -maxdepth 1 -name "$2" -print0 | while read -d $'\0' filename; do
+  # We're using FD 3 for output from find, such that FD 0 is still stdin and can be used for ask_yes_or_no
+  while read -d $'\0' filename <&3; do
 
     # DEBUG: notice "INSTALL ${filename}?"
     if ! in_array $filename "${excluded[@]}"; then
@@ -76,14 +77,14 @@ install() {
       # Check if file exists and is a regular file
       if [ -f "${target_file}" ]; then
         if [[ "yes" == $(ask_yes_or_no "${target_file} is a regular file. Remove?") ]]; then
-            rm -f "${target_file}" 2>/dev/null
+          rm -f "${target_file}" 2>/dev/null
         fi
       fi
 
       # Check if file exists and is a directory
       if [ -d "${target_file}" ]; then
         if [[ "yes" == $(ask_yes_or_no "${target_file} is a directory. Remove?") ]]; then
-            rm -rf "${target_file}" 2>/dev/null
+          rm -rf "${target_file}" 2>/dev/null
         fi
       fi
 
@@ -95,7 +96,7 @@ install() {
         e_list "${filename}"
       fi
     fi
-  done
+  done 3< <(find "$1" -mindepth 1 -maxdepth 1 -name "$2" -print0)
 }
 
 in_array() {
@@ -112,7 +113,8 @@ exclude_non_hidden() {
   # Add non-hidden files and folders to the 'excluded' array unless they are
   # in the 'included' array
   find . -mindepth 1  -maxdepth 1 -not -name ".*" -print0 | while read -d $'\0' filename; do
-    in_array $filename "${included[@]}" || excluded+=("$filename")
+    # in_array $filename "${included[@]}" || 
+    excluded+=("$filename")
   done
 }
 
@@ -125,10 +127,10 @@ backupdir="$HOME/.dotfiles-backup/$(date "+%Y%m%d%H%M.%S")"
 dependencies=(git vim xmllint)
 
 # Files/folders not starting with '.' that should still be installed
-included=(./scripts)
+# included=()
 
 # Files/folders starting with '.' that should not be installed
-excluded=(./.git ./.gitmodules ./.DS_Store ./.config)
+excluded=(./.git ./.gitmodules ./.DS_Store ./.config ./scripts)
 exclude_non_hidden
 
 #-----------------------------------------------------------------------------
@@ -189,6 +191,7 @@ fi
 
 notice "Linking"
 install ./.config "*"
+install ./scripts "*"
 install . "*"
 
 vim +BundleInstall +qall
