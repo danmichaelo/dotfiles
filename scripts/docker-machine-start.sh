@@ -8,7 +8,7 @@ IFS=$'\n\t'
 
 # Remove Docker machine environment variables from .bashrc.local
 
-BASHRC=./.bashrc.local
+BASHRC=$HOME/.bashrc.local
 
 # in-place sed that works with BSD and GNU sed:
 
@@ -21,3 +21,7 @@ docker-machine start || true
 
 # Add Docker machine environment variables to .bashrc.local
 docker-machine env default | grep "DOCKER_" >> "${BASHRC}"
+
+# And load them in the current shell
+eval "$(docker-machine env default)"
+
