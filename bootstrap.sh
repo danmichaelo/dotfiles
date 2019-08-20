@@ -110,12 +110,11 @@ in_array() {
 }
 
 exclude_non_hidden() {
-  # Add non-hidden files and folders to the 'excluded' array unless they are
-  # in the 'included' array
-  find . -mindepth 1  -maxdepth 1 -not -name ".*" -print0 | while read -d $'\0' filename; do
+  # Add non-hidden files and folders to the 'excluded' array
+  while read -d $'\0' filename; do
     # in_array $filename "${included[@]}" || 
     excluded+=("$filename")
-  done
+  done < <(find . -mindepth 1  -maxdepth 1 -not -name ".*" -print0)
 }
 
 
@@ -130,7 +129,7 @@ dependencies=(git vim xmllint)
 # included=()
 
 # Files/folders starting with '.' that should not be installed
-excluded=(./.git ./.gitmodules ./.DS_Store ./.config ./scripts)
+excluded=(./.git ./.gitmodules ./.DS_Store ./.config)
 exclude_non_hidden
 
 #-----------------------------------------------------------------------------
