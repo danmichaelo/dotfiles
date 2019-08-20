@@ -75,14 +75,14 @@ install() {
 
       # Check if file exists and is a regular file
       if [ -f "${target_file}" ]; then
-        if [[ "yes" == $(ask_yes_or_no "$file is a regular file. Remove?") ]]; then
+        if [[ "yes" == $(ask_yes_or_no "${target_file} is a regular file. Remove?") ]]; then
             rm -f "${target_file}" 2>/dev/null
         fi
       fi
 
       # Check if file exists and is a directory
       if [ -d "${target_file}" ]; then
-        if [[ "yes" == $(ask_yes_or_no "$file is a directory. Remove?") ]]; then
+        if [[ "yes" == $(ask_yes_or_no "${target_file} is a directory. Remove?") ]]; then
             rm -rf "${target_file}" 2>/dev/null
         fi
       fi
