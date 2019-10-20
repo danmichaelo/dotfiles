@@ -1,4 +1,8 @@
 __git_complete gu _git_add
 __git_complete ga _git_add
 __git_complete gd _git_diff
-
+__git_complete gps _git_push
+__git_complete gpl _git_pull
+__git_complete gr _git_rebase
+__git_complete gl _git_log
+__git_complete gc _git_commit
