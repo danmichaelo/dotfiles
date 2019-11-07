@@ -314,6 +314,7 @@ shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH f
                                     # possible completions when completion is 
                                     # attempted on an empty line
 shopt -s extglob                    # allow for stuff like negative wildards
+shopt -s checkwinsize               # check window size after each command
 
 #test -z "$SUBSHELL" && {
     if [ -f $REAL_HOME/.bash_prompt ]; then
