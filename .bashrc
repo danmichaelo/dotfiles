@@ -57,7 +57,7 @@ umask 002 # turn off w for o only
 ################################################################################
 # Define some helper functions
 
-if [ -z "$SUBSHELL" ]; then
+if ! command -v command_exists 2>&1 2>/dev/null ; then
 
     command_exists () {
         if [[ "$(command -v $1 2>&1 2>/dev/null)" == "" ]]; then
