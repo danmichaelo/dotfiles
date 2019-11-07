@@ -29,11 +29,6 @@ test -n "$SUDO_USER" && {
 }
 export REAL_HOME
 
-test -z "$SUBSHELL" && {
-    # bring in system bashrc
-    test -r /etc/bashrc &&
-          . /etc/bashrc
-}
 
 
 # detect interactive shell
