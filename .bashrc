@@ -316,6 +316,9 @@ shopt -s no_empty_cmd_completion    # bash will not attempt to search the PATH f
 shopt -s extglob                    # allow for stuff like negative wildards
 shopt -s checkwinsize               # check window size after each command
 
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 #test -z "$SUBSHELL" && {
     if [ -f $REAL_HOME/.bash_prompt ]; then
         source $REAL_HOME/.bash_prompt
