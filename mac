@@ -124,8 +124,8 @@ export CXX=clang
 # For å linke mot originale systembibliotek, kan det noen ganger lønne seg å
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er
 # fat binary som inkluderer Intel 32 bit, Intel 64 bit og PowerPC
-export MACOSX_DEPLOYMENT_TARGET=$(xcrun --show-sdk-version)
-export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
+# export MACOSX_DEPLOYMENT_TARGET=$(xcrun --show-sdk-version)
+# export CMAKE_OSX_SYSROOT=$(xcrun --show-sdk-path)
 
 # }}}
 
