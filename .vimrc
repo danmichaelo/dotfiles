@@ -169,6 +169,10 @@ let g:mediawiki_editor_username = 'danmichaelo'
     endif
     highlight clear Search
     highlight Search term=underline cterm=underline guibg=Grey40 ctermfg=1 guifg=Red
+
+    " Highlight trailing whitespace
+    highlight ExtraWhitespace ctermbg=red guibg=red
+    match ExtraWhitespace /\s\+$/
 "" }}}
 
 " Statusline {{{
