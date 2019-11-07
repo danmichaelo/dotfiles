@@ -23,28 +23,32 @@
 
 unalias -a
 
+# Set a few useful environment variables for later use.
+# REAL_HOME is especially useful to have on Toolforge where we commonly 
+# become another user.
+
 REAL_HOME=$HOME
 test -n "$SUDO_USER" && {
     REAL_HOME="`dirname $HOME`/$SUDO_USER"
 }
 export REAL_HOME
 
+export ME=$( whoami )
+export UNAME=$( uname -s )
 
 
-# detect interactive shell
+# Detect if the shell is interactive
 case "$-" in
     *i*) export INTERACTIVE=yes ;;
     *)   unset INTERACTIVE ;;
 esac
 
-# detect login shell
+# Detect if the shell is a login shell
 case "$0" in
     -*) export LOGIN=yes ;;
     *)  unset LOGIN ;;
 esac
 
-export ME=$( whoami )
-export UNAME=$( uname -s )
 
 umask 002 # turn off w for o only
 
@@ -362,15 +366,14 @@ test -z "$SUBSHELL" && {
 # http://unix.stackexchange.com/questions/12107/how-to-unfreeze-after-accidentally-pressing-ctrl-s-in-a-terminal
 stty -ixon
 
+# Specify colors for use with ls
 if [ "$TERM" != "dumb" ]; then
-    #dircolors
-    if hash dircolors 2>/dev/null; then
+    if command -v dircolors 2>/dev/null; then
         eval `dircolors $REAL_HOME/.dir_colors`
     fi
-    #eval `dircolors`
 fi
 
-# Set preferred editor:
+# Set preferred editor
 export EDITOR=vim
 
 if [ "$UNAME" == "Darwin" ]; then
