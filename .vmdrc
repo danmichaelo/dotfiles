@@ -1,5 +1,5 @@
 
-set auto_path [concat "{$env(HOME)/vmd/plugins}" $auto_path] ;
+set auto_path [concat "{$env(HOME)/.vmd/plugins}" $auto_path] ;
 
 if { [llength [menu list]] == 0 } {
     puts " .vmdrc) Seems like we have no display"
@@ -43,7 +43,7 @@ if { [llength [menu list]] == 0 } {
     # Add menu for third party plugin 
     # vmd_install_extension draw_cubic_unitcell draw_cubic_unitcell "My Plugins/Trajectory path"
     vmd_install_extension crystallography_gui cryst_tk "Crystallography"
-    vmd_install_extension statusIndicator statusIndicator_tk "Status Indicator"
+    # vmd_install_extension statusIndicator statusIndicator_tk "Status Indicator"
 
     display rendermode GLSL
 

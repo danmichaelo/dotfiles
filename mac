@@ -1,4 +1,4 @@
-# vi:ft=sh et sw=4 ts=4 ai
+# vi:ft=sh et sw=4 ts=4 ai syntax=sh
 
 SHELL=/usr/local/bin/bash
 
@@ -57,14 +57,6 @@ test -z "$SUBSHELL" && {
     PERL_MB_OPT="--install_base \"/Users/danmichael/perl5\""; export PERL_MB_OPT;
     PERL_MM_OPT="INSTALL_BASE=/Users/danmichael/perl5"; export PERL_MM_OPT;
 
-    # MacPorts
-    # path_prepend /opt/local/sbin
-    # path_prepend /opt/local/bin
-    # path_prepend MANPATH /opt/local/share/man
-    #path_prepend DYLD_LIBRARY_PATH /opt/local/lib
-    #path_prepend LD_LIBRARY_PATH /opt/local/lib
-    #path_prepend /opt/local/lib
-
     # Homebrew
     path_prepend /usr/local/bin
     path_prepend /usr/local/sbin
@@ -78,9 +70,6 @@ test -z "$SUBSHELL" && {
 
     # TexLive
     path_append /usr/texbin
-
-    # RVM
-    path_append "$HOME/rvm/bin"
 
     # JAVA
     export JAVA_HOME="$(/usr/libexec/java_home)"
@@ -144,9 +133,7 @@ quit () {
     osascript -e "tell app \"$1\" to quit"
 }
 
-test -z "$SUBSHELL" && {
-
-    echo -e "{ mac }\c"
+if [ -z "$SUBSHELL" ]; then
 
     # Print a reminder to self
     # echo -e "[$CFLAGS]\c"
@@ -154,18 +141,4 @@ test -z "$SUBSHELL" && {
     export JENAROOT="$HOME/dev/apache-jena-2.13.0"
     path_append "$JENAROOT/bin"
 
-    # NVM
-    echo -e " [NVM]\c"
-    export NVM_DIR="$HOME/.nvm"
-    . "/usr/local/opt/nvm/nvm.sh"
-
-    # Pyenv (Note: Load NVM before Pyenv!)
-    echo -e " [Pyenv]\c"
-    if which pyenv > /dev/null; then
-        eval "$(pyenv init -)";
-    fi
-    if which pyenv-virtualenv-init > /dev/null; then
-        eval "$(pyenv virtualenv-init -)";
-    fi
-    # PYENV_ROOT="$HOME/.pyenv"
-}
+fi
