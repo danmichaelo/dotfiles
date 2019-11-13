@@ -26,7 +26,6 @@ unalias -a
 # Set a few useful environment variables for later use.
 # REAL_HOME is especially useful to have on Toolforge where we commonly
 # become another user.
-echo -e "[\c"
 
 
 REAL_HOME=$HOME
@@ -53,6 +52,10 @@ esac
 
 
 umask 002 # turn off w for o only
+
+if [ -n "$INTERACTIVE" ]; then
+    echo -e "[\c"
+fi
 
 ################################################################################
 # Define some helper functions
@@ -178,7 +181,10 @@ fi
 #         . /usr/local/bin/virtualenvwrapper.sh
 #     }
 # fi
-echo -e ".\c"
+
+if [ -n "$INTERACTIVE" ]; then
+     echo -e ".\c"
+fi
 
 # Load local (non-versioned) things
 test -f $REAL_HOME/.bashrc.local && . $REAL_HOME/.bashrc.local
