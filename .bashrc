@@ -63,12 +63,12 @@ fi
 if ! command -v command_exists 2>&1 >/dev/null ; then
 
     command_exists () {
-        if [[ "$(command -v $1 2>&1 >/dev/null)" == "" ]]; then
-            # command not found
-            return 1
-        else
+        if command -v $1 2>&1 >/dev/null; then
             # command found
             return 0
+        else
+            # command not found
+            return 1
         fi
     }
     export -f command_exists
