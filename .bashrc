@@ -314,7 +314,7 @@ export HISTFILE=~/.bash_eternal_history
 # HISTIGNORE="rm \*:rm -rf *:rm -r *"  # prevent accidental deletes
 # HISTSIZE=9999
 # unset HISTFILESIZE
-# HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth
 
 # Makes bash attempts to save all lines of a multiple-line
 # command in the same history entry:
