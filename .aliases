@@ -24,6 +24,8 @@ alias gr="git rebase"
 alias grc="git rebase --continue"
 alias gs="git status"
 alias gst='git stash'
+alias gstp='git stash pop'
+alias gstl='git stash list'
 alias gun="git reset HEAD"
 
 # Rsync
