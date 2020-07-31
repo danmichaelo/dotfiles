@@ -107,8 +107,8 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 # clang supports the -arch parameter, which macports gcc does not support
 # make scripts for mac may therefore expect -arch to be supported, so
 # defaulting to clang may be a good idea
-export CC=clang
-export CXX=clang
+# export CC=clang
+# export CXX=clang++
 
 # For å linke mot originale systembibliotek, kan det noen ganger lønne seg å
 # kompilere på samme måte som bibliotekene. Standarden i Snow Leopard er
