@@ -26,18 +26,15 @@ function updatePrompt {
     # Styles
     local RED='\[\e[0;31m\]'
     local RED_UNDERLINE='\[\e[4;31m\]'
-    local GREEN='\[\e[0;32m\]'
+    local GREEN='\[\e[38;5;122m\]'
+    local COL2='\[\e[48;5;235m\]\[\e[38;5;248m\]'
     local BLUE='\[\e[0;34m\]'
     local RESET='\[\e[0m\]'
 
     local PROMPT=""
 
     # The current time in 24-hour HH:MM:SS format
-    if [[ $UID -eq 0 ]]; then
-        PROMPT="${RED}\t${RESET} \W"
-    else
-        PROMPT="${GREEN}\t${RESET} \W"
-    fi
+    PROMPT="${GREEN}\t ${COL2}\u@\h${RESET} \W "
 
     # Return value of last command
     local RET=$?
