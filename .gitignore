@@ -17,6 +17,8 @@ tags
 .vim/.netrwhist
 .vim/.session
 .vim/bundle/
+.vim/plugged/
+.vim/autoload/plug.vim
 .vim/.netrwhist
 _ide_helper.php
 .vscode

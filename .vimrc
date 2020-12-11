@@ -37,44 +37,41 @@ autocmd!
 set nocompatible         " be iMproved, required
 filetype off             " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" Skip everything if we use (Neo)Vim from VS Code, to avoid delays
+if !exists('g:vscode')
 
-" Keep Plugin commands between vundle#begin/end.
+" Plugins
+call plug#begin('~/.vim/plugged')
+Plug 'bling/vim-airline'           " Status bar
+Plug 'airblade/vim-gitgutter'      " Git gutter
+Plug 'tpope/vim-fugitive'         " Git wrapper (cool, but didn't use it yet)
+"Plug 'vim-scripts/taglist.vim'    " source code nav in side bar (didn't use it)
+Plug 'vim-latex/vim-latex'         "
+Plug 'scrooloose/nerdcommenter'    "
+Plug 'aquach/vim-mediawiki-editor' " MediWiki editing
+Plug 'chikamichi/mediawiki.vim'    " Syntax highlighting for MediaWiki
+Plug 'jmcantrell/vim-virtualenv'   " Python virtualenv
+Plug 'davidhalter/jedi-vim'        " Python autocompletion
+Plug 'mattn/emmet-vim'             " dynamic html and css snippets
+Plug 'editorconfig/editorconfig-vim' " EditorConfig
+Plug 'ctrlpvim/ctrlp.vim'          " Fuzzy search
+"Plug 'vim-scripts/LargeFile'
+"Plug 'lervag/vim-latex'
+"Plug 'tomtom/tbibtools'
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" From github:
-Plugin 'bling/vim-airline'           " Status bar
-Plugin 'airblade/vim-gitgutter'      " Git gutter
-Plugin 'tpope/vim-fugitive'         " Git wrapper (cool, but didn't use it yet)
-"Plugin 'vim-scripts/taglist.vim'    " source code nav in side bar (didn't use it)
-Plugin 'vim-latex/vim-latex'         "
-Plugin 'scrooloose/nerdcommenter'    "
-Plugin 'aquach/vim-mediawiki-editor' " MediWiki editing
-Plugin 'chikamichi/mediawiki.vim'    " Syntax highlighting for MediaWiki
-Plugin 'jmcantrell/vim-virtualenv'   " Python virtualenv
-Plugin 'davidhalter/jedi-vim'        " Python autocompletion
-Plugin 'mattn/emmet-vim'             " dynamic html and css snippets
-Plugin 'editorconfig/editorconfig-vim' " EditorConfig
-Plugin 'ctrlpvim/ctrlp.vim'          " Fuzzy search
-"Plugin 'vim-scripts/LargeFile'
-"Plugin 'lervag/vim-latex'
-"Plugin 'tomtom/tbibtools'
-
-" Plugin 'git://git.wincent.com/command-t.git'
+" Plug 'git://git.wincent.com/command-t.git'
 " git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
+"Plug 'file:///home/gmarik/path/to/plugin'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+"Plug 'user/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()
+
+
 filetype plugin indent on    " required
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -712,3 +709,6 @@ function DoMyPrint(args)
   exec 'hardcopy '.a:args
   exec 'color '.colorsave
 endfunction
+
+endif  " if !exists('g:vscode')
+

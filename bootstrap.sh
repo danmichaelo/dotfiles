@@ -177,14 +177,15 @@ else
   git clone --recursive git://github.com/danmichaelo/dotfiles.git $HOME/.dotfiles
 
   pushd $HOME/.dotfiles
-
 fi
 
-if [ ! -d $HOME/.dotfiles/.vim/bundle/Vundle.vim ]; then
+if [[ -d $HOME/.dotfiles/.vim/bundle/ ]]; then
+  rm -rf $HOME/.dotfiles/.vim/bundle
+fi
 
- mkdir -p .vim/bundle
- git clone git://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
-
+if [[ ! -f $HOME/.dotfiles/.vim/autoload/plug.vim ]]; then
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 
@@ -195,7 +196,7 @@ mkdir -p $HOME/scripts
 install ./scripts "*"
 install . "*"
 
-vim +BundleInstall +qall
+vim +PlugInstall +qall
 
 notice "Configuring mongo-hacker"
 pushd $HOME/.dotfiles/mongo-hacker
