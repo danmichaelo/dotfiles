@@ -1,14 +1,16 @@
+Requirements Debian/Ubuntu:
 
-Use (don't run this without checking what the script does!)
+    sudo apt-get install git vim libxml2-utils build-essential
 
-	cd
-	bash < <( curl https://raw.github.com/danmichaelo/dotfiles/master/bootstrap.sh )
+Requirements Fedora/RedHat:
 
-If xmlint is missing
+    sudo dnf install git vim libxml2 make
 
-	apt-get install libxml2-utils
+Install:
 
-If ruby is missing
+    ./bootstrap.sh
+
+If ruby is needed:
 
 	\curl -L https://get.rvm.io | bash -s stable
 	source ~/.rvm/scripts/rvm
