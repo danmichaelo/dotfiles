@@ -1,3 +1,6 @@
 [submodule "mongo-hacker"]
 	path = mongo-hacker
 	url = git://github.com/TylerBrock/mongo-hacker.git
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git

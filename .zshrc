@@ -86,7 +86,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # -------------------------------------------------------
 # Antigen plugin manager
-source $ZSH/antigen.zsh
+source ~/.dotfiles/antigen.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
@@ -142,9 +142,11 @@ zstyle ':urlglobber' url-other-schema
 export PATH=$HOME/.poetry/bin:$PATH
 
 # Aliases
+alias gl="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias gs="git status"
 alias gst="git stash"
-#alias ga=git add
+alias gpl='git pull'
+alias gps='git push'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -172,6 +174,11 @@ setopt histignorealldups
 
 # https://github.com/robbyrussell/oh-my-zsh/issues/449
 setopt no_nomatch
+
+# prevent accidental overwriting
+setopt noclobber
+alias cp='cp -i'
+alias mv='mv -i'
 
 # Misc
 export PATH=$HOME/.dotfiles/scripts:$PATH
