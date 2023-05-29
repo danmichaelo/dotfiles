@@ -1,3 +1,4 @@
 if [ -f /local/lib/setupfiles/bash_login ] ; then
     . /local/lib/setupfiles/bash_login
 fi
+. "$HOME/.cargo/env"

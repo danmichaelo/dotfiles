@@ -8,7 +8,7 @@ RESTIC_TARGET_NAME="$1"
 
 . restic-base.sh $RESTIC_TARGET_NAME
 
-/usr/local/bin/restic \
+restic \
     --repo "${RESTIC_REPOSITORY}" \
     --password-file "${RESTIC_PASSWORD_FILE}" \
     "${@:2}"

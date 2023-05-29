@@ -448,3 +448,4 @@ fi
 
 export SUBSHELL=1
 echo -e "$NORMAL$RESET"
+. "$HOME/.cargo/env"
